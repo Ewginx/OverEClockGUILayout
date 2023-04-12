@@ -172,7 +172,7 @@ void ui_event_SettingsPasswordEdit(lv_event_t *e)
     }
 }
 
-//Dark mode event
+// Dark mode event
 void ui_event_DarkmodeSwitch(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -247,7 +247,7 @@ void ui_event_AlarmModalOkButton(lv_event_t *e)
     }
 }
 
-//Screen change on GESTURES
+// Screen change on GESTURES
 void ui_event_AlarmScreen(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -293,7 +293,7 @@ void ui_event_AnalogClockScreen(lv_event_t *e)
     }
 }
 
-//Screen change on Button
+// Screen change on Button
 void ui_event_DigitalClockSettingsBtn(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -323,7 +323,7 @@ void ui_event_SettingsHomeBtn(lv_event_t *e)
 }
 
 ///////////////////// SCREENS INIT////////////////////
-//SETTING SCREEN INIT
+// SETTING SCREEN INIT
 void ui_Settings_screen_init(void)
 {
     ui_SettingsScreen = lv_obj_create(NULL);
@@ -339,7 +339,7 @@ void ui_Settings_screen_init(void)
     lv_obj_set_style_bg_opa(ui_SettingsPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DarkmodeLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_DarkmodeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_size(ui_DarkmodeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_DarkmodeLabel, -148, -107);
     lv_obj_set_align(ui_DarkmodeLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DarkmodeLabel, "Dark Mode");
@@ -352,7 +352,7 @@ void ui_Settings_screen_init(void)
     lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
 
     ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT);/// 33
+    lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
     lv_obj_set_pos(ui_SettingsCityEdit, 75, -54);
     lv_obj_set_align(ui_SettingsCityEdit, LV_ALIGN_CENTER);
     lv_textarea_set_max_length(ui_SettingsCityEdit, 50);
@@ -360,14 +360,14 @@ void ui_Settings_screen_init(void)
     lv_textarea_set_one_line(ui_SettingsCityEdit, true);
 
     ui_SettingsCityLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_SettingsCityLabel, -151, -53);
     lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SettingsCityLabel, "City");
     lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsSSIDLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_SettingsSSIDLabel, -150, 4);
     lv_obj_set_align(ui_SettingsSSIDLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SettingsSSIDLabel, "WiFi SSID");
@@ -382,14 +382,14 @@ void ui_Settings_screen_init(void)
     lv_textarea_set_one_line(ui_SettingsSSIDEdit, true);
 
     ui_SettingsPasswordLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsPasswordLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_size(ui_SettingsPasswordLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_SettingsPasswordLabel, -145, 60);
     lv_obj_set_align(ui_SettingsPasswordLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SettingsPasswordLabel, "WiFi Password");
     lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsPasswordEdit = lv_textarea_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT);/// 33
+    lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT); /// 33
     lv_obj_set_pos(ui_SettingsPasswordEdit, 75, 59);
     lv_obj_set_align(ui_SettingsPasswordEdit, LV_ALIGN_CENTER);
     lv_textarea_set_max_length(ui_SettingsPasswordEdit, 50);
@@ -415,7 +415,7 @@ void ui_Settings_screen_init(void)
     lv_obj_add_event_cb(ui_SettingsHomeBtn, ui_event_SettingsHomeBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsKeyboard, ui_event_SettingsKeyboard, LV_EVENT_ALL, NULL);
 }
-//ALARM SCREEN INIT
+// ALARM SCREEN INIT
 void ui_Alarm_screen_init(void)
 {
     ui_AlarmScreen = lv_obj_create(NULL);
@@ -430,55 +430,41 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_style_bg_opa(ui_AlarmPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label1 = lv_label_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Label1, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label1, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label1, -97);
-    lv_obj_set_y(ui_Label1, -111);
+    lv_obj_set_size(ui_Label1, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label1, -97, -111);
     lv_obj_set_align(ui_Label1, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label1, "Alarm Clock Working Day");
 
     ui_Label2 = lv_label_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Label2, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label2, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label2, -95);
-    lv_obj_set_y(ui_Label2, -55);
+    lv_obj_set_size(ui_Label2, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label2, -95, -55);
     lv_obj_set_align(ui_Label2, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label2, "Alarm Clock Weekends");
 
     ui_Label3 = lv_label_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Label3, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label3, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label3, -103);
-    lv_obj_set_y(ui_Label3, 17);
+    lv_obj_set_size(ui_Label3, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label3, -103, 17);
     lv_obj_set_align(ui_Label3, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label3, "Alarm Clock One Off");
 
     ui_Switch1 = lv_switch_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Switch1, 50);
-    lv_obj_set_height(ui_Switch1, 25);
-    lv_obj_set_x(ui_Switch1, 152);
-    lv_obj_set_y(ui_Switch1, -111);
+    lv_obj_set_size(ui_Switch1, 50, 25);
+    lv_obj_set_pos(ui_Switch1, 152, -111);
     lv_obj_set_align(ui_Switch1, LV_ALIGN_CENTER);
 
     ui_Switch2 = lv_switch_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Switch2, 50);
-    lv_obj_set_height(ui_Switch2, 25);
-    lv_obj_set_x(ui_Switch2, 155);
-    lv_obj_set_y(ui_Switch2, -47);
+    lv_obj_set_size(ui_Switch2, 50, 25);
+    lv_obj_set_pos(ui_Switch2, 155, -47);
     lv_obj_set_align(ui_Switch2, LV_ALIGN_CENTER);
 
     ui_Switch3 = lv_switch_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Switch3, 50);
-    lv_obj_set_height(ui_Switch3, 25);
-    lv_obj_set_x(ui_Switch3, 154);
-    lv_obj_set_y(ui_Switch3, 22);
+    lv_obj_set_size(ui_Switch3, 50, 25);
+    lv_obj_set_pos(ui_Switch3, 154, 22);
     lv_obj_set_align(ui_Switch3, LV_ALIGN_CENTER);
 
     ui_Button6 = lv_btn_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Button6, 70);
-    lv_obj_set_height(ui_Button6, 41);
-    lv_obj_set_x(ui_Button6, 62);
-    lv_obj_set_y(ui_Button6, -111);
+    lv_obj_set_size(ui_Button6, 70, 41);
+    lv_obj_set_pos(ui_Button6, 62, -111);
     lv_obj_set_align(ui_Button6, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button6, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
     lv_obj_clear_flag(ui_Button6, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
@@ -486,18 +472,14 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_style_bg_opa(ui_Button6, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label6 = lv_label_create(ui_Button6);
-    lv_obj_set_width(ui_Label6, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label6, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label6, -1);
-    lv_obj_set_y(ui_Label6, 1);
+    lv_obj_set_size(ui_Label6, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label6, -1, 1);
     lv_obj_set_align(ui_Label6, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label6, "08:15");
 
     ui_Button1 = lv_btn_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Button1, 70);
-    lv_obj_set_height(ui_Button1, 41);
-    lv_obj_set_x(ui_Button1, 63);
-    lv_obj_set_y(ui_Button1, 18);
+    lv_obj_set_size(ui_Button1, 70, 41);
+    lv_obj_set_pos(ui_Button1, 63, 18);
     lv_obj_set_align(ui_Button1, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button1, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
     lv_obj_clear_flag(ui_Button1, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
@@ -505,18 +487,14 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_style_bg_opa(ui_Button1, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label7 = lv_label_create(ui_Button1);
-    lv_obj_set_width(ui_Label7, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label7, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label7, -1);
-    lv_obj_set_y(ui_Label7, 1);
+    lv_obj_set_size(ui_Label7, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label7, -1, 1);
     lv_obj_set_align(ui_Label7, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label7, "15:23");
 
     ui_Button4 = lv_btn_create(ui_AlarmPanel);
-    lv_obj_set_width(ui_Button4, 70);
-    lv_obj_set_height(ui_Button4, 41);
-    lv_obj_set_x(ui_Button4, 62);
-    lv_obj_set_y(ui_Button4, -47);
+    lv_obj_set_size(ui_Button4, 70, 41);
+    lv_obj_set_pos(ui_Button4, 62, -47);
     lv_obj_set_align(ui_Button4, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_Button4, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
     lv_obj_clear_flag(ui_Button4, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
@@ -524,16 +502,13 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_style_bg_opa(ui_Button4, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label8 = lv_label_create(ui_Button4);
-    lv_obj_set_width(ui_Label8, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label8, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label8, -1);
-    lv_obj_set_y(ui_Label8, 1);
+    lv_obj_set_size(ui_Label8, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_Label8, -1, 1);
     lv_obj_set_align(ui_Label8, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label8, "12:03");
 
     ui_AlarmModalPanel = lv_obj_create(ui_AlarmScreen);
-    lv_obj_set_width(ui_AlarmModalPanel, 321);
-    lv_obj_set_height(ui_AlarmModalPanel, 217);
+    lv_obj_set_size(ui_AlarmModalPanel, 321, 217);
     lv_obj_set_align(ui_AlarmModalPanel, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN);       /// Flags
     lv_obj_clear_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
@@ -541,49 +516,39 @@ void ui_Alarm_screen_init(void)
     ui_AlarmHourRoller = lv_roller_create(ui_AlarmModalPanel);
     lv_roller_set_options(ui_AlarmHourRoller,
                           "01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23", LV_ROLLER_MODE_INFINITE);
-    lv_obj_set_height(ui_AlarmHourRoller, 100);
-    lv_obj_set_width(ui_AlarmHourRoller, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_AlarmHourRoller, -34);
-    lv_obj_set_y(ui_AlarmHourRoller, -8);
+    lv_obj_set_size(ui_AlarmHourRoller, 100, LV_SIZE_CONTENT);
+    lv_obj_set_pos(ui_AlarmHourRoller, -34, -8);
     lv_obj_set_align(ui_AlarmHourRoller, LV_ALIGN_CENTER);
 
     ui_AlarmMinuteRoller = lv_roller_create(ui_AlarmModalPanel);
     lv_roller_set_options(ui_AlarmMinuteRoller,
                           "00\n01\n02\n03\n04\n05\n06\n07\n08\n09\n10\n11\n12\n13\n14\n15\n16\n17\n18\n19\n20\n21\n22\n23\n24\n25\n26\n27\n28\n29",
                           LV_ROLLER_MODE_INFINITE);
-    lv_obj_set_height(ui_AlarmMinuteRoller, 100);
-    lv_obj_set_width(ui_AlarmMinuteRoller, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_AlarmMinuteRoller, 27);
-    lv_obj_set_y(ui_AlarmMinuteRoller, -8);
+    lv_obj_set_size(ui_AlarmMinuteRoller, 100, LV_SIZE_CONTENT);
+    lv_obj_set_pos(ui_AlarmMinuteRoller, 27, -8);
     lv_obj_set_align(ui_AlarmMinuteRoller, LV_ALIGN_CENTER);
 
     ui_AlarmModalCancelButton = lv_btn_create(ui_AlarmModalPanel);
-    lv_obj_set_width(ui_AlarmModalCancelButton, 100);
-    lv_obj_set_height(ui_AlarmModalCancelButton, 50);
-    lv_obj_set_x(ui_AlarmModalCancelButton, -74);
-    lv_obj_set_y(ui_AlarmModalCancelButton, 74);
+    lv_obj_set_size(ui_AlarmModalCancelButton, 100, 50);
+    lv_obj_set_pos(ui_AlarmModalCancelButton, -74, 74);
     lv_obj_set_align(ui_AlarmModalCancelButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_AlarmModalCancelButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
     lv_obj_clear_flag(ui_AlarmModalCancelButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
     ui_Label15 = lv_label_create(ui_AlarmModalCancelButton);
-    lv_obj_set_width(ui_Label15, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label15, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_size(ui_Label15, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_align(ui_Label15, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label15, "Cancel");
 
     ui_AlarmModalOkButton = lv_btn_create(ui_AlarmModalPanel);
-    lv_obj_set_width(ui_AlarmModalOkButton, 119);
-    lv_obj_set_height(ui_AlarmModalOkButton, 47);
-    lv_obj_set_x(ui_AlarmModalOkButton, 76);
-    lv_obj_set_y(ui_AlarmModalOkButton, 72);
+    lv_obj_set_size(ui_AlarmModalOkButton, 119, 47);
+    lv_obj_set_pos(ui_AlarmModalOkButton, 76, 72);
     lv_obj_set_align(ui_AlarmModalOkButton, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_AlarmModalOkButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
     lv_obj_clear_flag(ui_AlarmModalOkButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
     ui_Label16 = lv_label_create(ui_AlarmModalOkButton);
-    lv_obj_set_width(ui_Label16, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label16, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_size(ui_Label16, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_align(ui_Label16, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label16, "OK");
 
@@ -598,7 +563,7 @@ static void set_value(void *indic, int32_t v)
 {
     lv_meter_set_indicator_end_value(ui_AnalogMeter, indic, v);
 }
-//ANALOG SCREEN INIT
+// ANALOG SCREEN INIT
 void ui_AnalogClock_screen_init(void)
 {
     ui_AnalogClock = lv_obj_create(NULL);
@@ -655,27 +620,23 @@ void ui_AnalogClock_screen_init(void)
     lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AnalogClock, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
 }
-//DIGITAL CLOCK SCREEN INIT
+// DIGITAL CLOCK SCREEN INIT
 void ui_DigitalClock_screen_init(void)
 {
     ui_DigitalClockScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_DigitalClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
     ui_DigitalClockPanel = lv_obj_create(ui_DigitalClockScreen);
-    lv_obj_set_width(ui_DigitalClockPanel, lv_pct(100));
-    lv_obj_set_height(ui_DigitalClockPanel, lv_pct(100));
-    lv_obj_set_x(ui_DigitalClockPanel, 1);
-    lv_obj_set_y(ui_DigitalClockPanel, 0);
+    lv_obj_set_size(ui_DigitalClockPanel, lv_pct(100), lv_pct(100));
+    lv_obj_set_pos(ui_DigitalClockPanel, 1, 0);
     lv_obj_set_style_bg_color(ui_DigitalClockPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_DigitalClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_align(ui_DigitalClockPanel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_DigitalClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_width(ui_DigitalClockLabel, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_DigitalClockLabel, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_DigitalClockLabel, 17);
-    lv_obj_set_y(ui_DigitalClockLabel, -20);
+    lv_obj_set_size(ui_DigitalClockLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_DigitalClockLabel, 17, -20);
     lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DigitalClockLabel, "12:30.");
 
@@ -683,28 +644,23 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_text_font(ui_DigitalClockLabel, &ui_font_Technology120, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSecondLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_width(ui_DigitalClockSecondLabel, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_DigitalClockSecondLabel, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_DigitalClockSecondLabel, 140);
-    lv_obj_set_y(ui_DigitalClockSecondLabel, 0);
+    lv_obj_set_size(ui_DigitalClockSecondLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_DigitalClockSecondLabel, 140, 0);
     lv_obj_set_align(ui_DigitalClockSecondLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DigitalClockSecondLabel, "13");
     lv_obj_set_style_text_align(ui_DigitalClockSecondLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockSecondLabel, &ui_font_Technology60, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockDateLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_width(ui_DigitalClockDateLabel, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_DigitalClockDateLabel, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_DigitalClockDateLabel, 4);
-    lv_obj_set_y(ui_DigitalClockDateLabel, 99);
+    lv_obj_set_size(ui_DigitalClockDateLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_DigitalClockDateLabel, 4, 99);
     lv_obj_set_align(ui_DigitalClockDateLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DigitalClockDateLabel, "4th, April 2023");
     lv_obj_set_style_text_align(ui_DigitalClockDateLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSettingsBtn = lv_btn_create(ui_DigitalClockPanel);
-    lv_obj_set_width(ui_DigitalClockSettingsBtn, 35);
-    lv_obj_set_height(ui_DigitalClockSettingsBtn, 35);
+    lv_obj_set_size(ui_DigitalClockSettingsBtn, 35, 35);
     lv_obj_set_align(ui_DigitalClockSettingsBtn, LV_ALIGN_TOP_LEFT);
     lv_obj_set_style_bg_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -722,10 +678,8 @@ void ui_Weather_screen_init(void)
     lv_obj_clear_flag(ui_Weather, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
     ui_WeatherPanel = lv_obj_create(ui_Weather);
-    lv_obj_set_width(ui_WeatherPanel, lv_pct(100));
-    lv_obj_set_height(ui_WeatherPanel, lv_pct(100));
-    lv_obj_set_x(ui_WeatherPanel, 1);
-    lv_obj_set_y(ui_WeatherPanel, 4);
+    lv_obj_set_size(ui_WeatherPanel, lv_pct(100), lv_pct(100));
+    lv_obj_set_pos(ui_WeatherPanel, 1, 4);
     lv_obj_set_align(ui_WeatherPanel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_WeatherPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
     lv_obj_set_style_bg_color(ui_WeatherPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -733,94 +687,72 @@ void ui_Weather_screen_init(void)
 
     ui_WeatherImage = lv_img_create(ui_WeatherPanel);
     lv_img_set_src(ui_WeatherImage, &ui_img_day_clear_png);
-    lv_obj_set_width(ui_WeatherImage, LV_SIZE_CONTENT);  /// 128
-    lv_obj_set_height(ui_WeatherImage, LV_SIZE_CONTENT); /// 128
-    lv_obj_set_x(ui_WeatherImage, -140);
-    lv_obj_set_y(ui_WeatherImage, -71);
+    lv_obj_set_size(ui_WeatherImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 128
+    lv_obj_set_pos(ui_WeatherImage, -140, -71);
     lv_obj_set_align(ui_WeatherImage, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_WeatherImage, LV_OBJ_FLAG_ADV_HITTEST);  /// Flags
     lv_obj_clear_flag(ui_WeatherImage, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
     ui_WeatherCity = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_WeatherCity, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_WeatherCity, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_WeatherCity, 0);
-    lv_obj_set_y(ui_WeatherCity, -126);
+    lv_obj_set_size(ui_WeatherCity, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherCity, 0, -126);
     lv_obj_set_align(ui_WeatherCity, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherCity, "London, GB");
     lv_obj_set_style_text_font(ui_WeatherCity, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTemperature = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_WeatherTemperature, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_WeatherTemperature, LV_SIZE_CONTENT); /// -623
-    lv_obj_set_x(ui_WeatherTemperature, -5);
-    lv_obj_set_y(ui_WeatherTemperature, -18);
+    lv_obj_set_size(ui_WeatherTemperature, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_WeatherTemperature, -5, -18);
     lv_obj_set_align(ui_WeatherTemperature, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherTemperature, "13°C");
     lv_obj_set_style_text_font(ui_WeatherTemperature, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherBriefing = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_WeatherBriefing, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_WeatherBriefing, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_WeatherBriefing, 1);
-    lv_obj_set_y(ui_WeatherBriefing, 39);
+    lv_obj_set_size(ui_WeatherBriefing, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_WeatherBriefing, 1, 39);
     lv_obj_set_align(ui_WeatherBriefing, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherBriefing, "Feels like 12°C. Scattered clouds. Light breeze");
 
     ui_Label4 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label4, LV_SIZE_CONTENT);  /// 121
-    lv_obj_set_height(ui_Label4, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label4, 72);
-    lv_obj_set_y(ui_Label4, -96);
+    lv_obj_set_size(ui_Label4, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
+    lv_obj_set_pos(ui_Label4, 72, -96);
     lv_obj_set_align(ui_Label4, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label4, " 3.1m/s WNW   Humidity: 62% Dew point: 6°C");
     lv_obj_set_style_text_font(ui_Label4, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label5 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label5, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label5, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label5, -12);
-    lv_obj_set_y(ui_Label5, 80);
+    lv_obj_set_size(ui_Label5, LV_SIZE_CONTENT,  LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_Label5, -12, 80);
     lv_obj_set_align(ui_Label5, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label5, "Morning       Afternoon      Evening       Night");
 
     ui_Label9 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label9, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label9, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label9, 125);
-    lv_obj_set_y(ui_Label9, 118);
+    lv_obj_set_size(ui_Label9, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_Label9, 125, 118);
     lv_obj_set_align(ui_Label9, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label9, "10°C");
 
     ui_Label10 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label10, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label10, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label10, -50);
-    lv_obj_set_y(ui_Label10, 118);
+    lv_obj_set_size(ui_Label10, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_Label10, -50, 118);
     lv_obj_set_align(ui_Label10, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label10, "10°C	");
 
     ui_Label11 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label11, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label11, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label11, 38);
-    lv_obj_set_y(ui_Label11, 118);
+    lv_obj_set_size(ui_Label11, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_Label11, 38, 118);
     lv_obj_set_align(ui_Label11, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label11, "10°C	");
 
     ui_Label12 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label12, LV_SIZE_CONTENT);  /// 1
-    lv_obj_set_height(ui_Label12, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label12, -141);
-    lv_obj_set_y(ui_Label12, 119);
+    lv_obj_set_size(ui_Label12, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_pos(ui_Label12, -141, 119);
     lv_obj_set_align(ui_Label12, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label12, "7°C	");
 
     ui_Label13 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_width(ui_Label13, LV_SIZE_CONTENT);  /// 121
-    lv_obj_set_height(ui_Label13, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_x(ui_Label13, 131);
-    lv_obj_set_y(ui_Label13, -70);
+    lv_obj_set_size(ui_Label13, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
+    lv_obj_set_pos(ui_Label13, 131, -70);
     lv_obj_set_align(ui_Label13, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_Label13, LV_LABEL_LONG_CLIP);
     lv_label_set_text(ui_Label13, "Visibility: 10.0km UV: 3");
