@@ -8,7 +8,7 @@
 
 ///////////////////// VARIABLES ////////////////////
 // Settings Screen Objects
-lv_obj_t *lastScreen;
+lv_obj_t *lastScreen = NULL;
 lv_obj_t *ui_SettingsScreen;
 lv_obj_t *ui_SettingsPanel;
 lv_obj_t *ui_DarkmodeLabel;
@@ -60,7 +60,7 @@ void ui_event_Button1(lv_event_t *e);
 void ui_event_Button6(lv_event_t *e);
 
 // Analog Clock Objects
-lv_obj_t *ui_AnalogClock;
+lv_obj_t *ui_AnalogClockScreen;
 lv_obj_t *ui_AnalogPanel;
 lv_obj_t *ui_AnalogSettingsBtn;
 lv_obj_t *ui_AnalogMeter;
@@ -249,7 +249,7 @@ void ui_event_AlarmScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        _ui_screen_change(ui_AnalogClock, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        _ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
 }
 void ui_event_DigitalClockScreen(lv_event_t *e)
@@ -263,7 +263,7 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        _ui_screen_change(ui_AnalogClock, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+        _ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 void ui_event_Weather(lv_event_t *e)
@@ -564,10 +564,10 @@ static void set_value(void *indic, int32_t v)
 // ANALOG SCREEN INIT
 void ui_AnalogClock_screen_init(void)
 {
-    ui_AnalogClock = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_AnalogClock, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+    ui_AnalogClockScreen = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_AnalogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-    ui_AnalogPanel = lv_obj_create(ui_AnalogClock);
+    ui_AnalogPanel = lv_obj_create(ui_AnalogClockScreen);
     lv_obj_set_size(ui_AnalogPanel, lv_pct(100), lv_pct(100));
     lv_obj_set_align(ui_AnalogPanel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_AnalogPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
@@ -615,8 +615,8 @@ void ui_AnalogClock_screen_init(void)
     lv_anim_set_values(&a, 0, 60);
     lv_anim_start(&a);
 
-    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClock);
-    lv_obj_add_event_cb(ui_AnalogClock, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClockScreen);
+    lv_obj_add_event_cb(ui_AnalogClockScreen, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
 }
 // DIGITAL CLOCK SCREEN INIT
 void ui_DigitalClock_screen_init(void)

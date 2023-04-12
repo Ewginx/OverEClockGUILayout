@@ -66,7 +66,7 @@ void ui_event_AlarmScreen(lv_event_t * e);
 
 
 // Analog Clock Objects
-extern lv_obj_t * ui_AnalogClock;
+extern lv_obj_t * ui_AnalogClockScreen;
 extern lv_obj_t * ui_AnalogPanel;
 extern lv_obj_t * ui_AnalogSettingsBtn;
 extern lv_obj_t * ui_AnalogMeter;
