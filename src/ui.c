@@ -404,6 +404,7 @@ void ui_Settings_screen_init(void)
 
     ui_SettingsHomeBtn = lv_btn_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsHomeBtn, 35, 35);
+    lv_obj_set_pos(ui_SettingsHomeBtn, 195, -130);
     lv_obj_set_align(ui_SettingsHomeBtn, LV_ALIGN_CENTER);
 
     lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
@@ -575,8 +576,9 @@ void ui_AnalogClock_screen_init(void)
     lv_obj_set_style_bg_opa(ui_AnalogPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AnalogSettingsBtn = lv_btn_create(ui_AnalogPanel);
-    lv_obj_set_size(ui_AnalogSettingsBtn, 30, 30);
-    lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_size(ui_AnalogSettingsBtn, 35, 35);
+    lv_obj_set_pos(ui_AnalogSettingsBtn, 195, -130);
+    lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_CENTER);
     lv_obj_set_style_bg_opa(ui_AnalogSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AnalogSettingsLabel = lv_label_create(ui_AnalogSettingsBtn);
@@ -659,7 +661,8 @@ void ui_DigitalClock_screen_init(void)
 
     ui_DigitalClockSettingsBtn = lv_btn_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockSettingsBtn, 35, 35);
-    lv_obj_set_align(ui_DigitalClockSettingsBtn, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_pos(ui_DigitalClockSettingsBtn, 195, -130);
+    lv_obj_set_align(ui_DigitalClockSettingsBtn, LV_ALIGN_CENTER);
     lv_obj_set_style_bg_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSettingsLabel = lv_label_create(ui_DigitalClockSettingsBtn);
