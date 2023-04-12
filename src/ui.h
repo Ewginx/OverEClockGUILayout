@@ -26,6 +26,7 @@ extern lv_obj_t * ui_SettingsPasswordLabel;
 extern lv_obj_t * ui_SettingsPasswordEdit;
 extern lv_obj_t * ui_SettingsKeyboard;
 extern lv_obj_t * ui_SettingsHomeBtn;
+extern lv_obj_t * ui_SettingsHomeBtnLabel;
 //Settings Screen Events
 void ui_event_SettingsPasswordEdit(lv_event_t * e);
 void ui_event_SettingsSSIDEdit(lv_event_t * e);
@@ -56,6 +57,8 @@ extern lv_obj_t * ui_AlarmModalCancelButton;
 extern lv_obj_t * ui_Label15;
 extern lv_obj_t * ui_AlarmModalOkButton;
 extern lv_obj_t * ui_Label16;
+extern lv_obj_t * ui_AlarmSettingsBtn;
+extern lv_obj_t * ui_AlarmSettingsBtnLabel;
 // Alarm Screen Events
 void ui_event_AlarmModalOkButton(lv_event_t * e);
 void ui_event_AlarmModalCancelButton(lv_event_t * e);
@@ -82,7 +85,7 @@ extern lv_obj_t * ui_DigitalClockLabel;
 extern lv_obj_t * ui_DigitalClockSecondLabel;
 extern lv_obj_t * ui_DigitalClockDateLabel;
 extern lv_obj_t * ui_DigitalClockSettingsBtn;
-extern lv_obj_t * ui_DigitalClockSettingsLabel;
+extern lv_obj_t * ui_DigitalClockSettingsBtnLabel;
 // Digital Clock Events
 void ui_event_DigitalClockScreen(lv_event_t * e);
 void ui_event_DigitalClockSettingsBtn(lv_event_t * e);

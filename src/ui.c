@@ -21,6 +21,7 @@ lv_obj_t *ui_SettingsPasswordLabel;
 lv_obj_t *ui_SettingsPasswordEdit;
 lv_obj_t *ui_SettingsKeyboard;
 lv_obj_t *ui_SettingsHomeBtn;
+lv_obj_t *ui_SettingsHomeBtnLabel;
 ;
 // Settings Screen Events
 void ui_event_SettingsPasswordEdit(lv_event_t *e);
@@ -51,6 +52,8 @@ lv_obj_t *ui_AlarmModalCancelButton;
 lv_obj_t *ui_Label15;
 lv_obj_t *ui_AlarmModalOkButton;
 lv_obj_t *ui_Label16;
+lv_obj_t * ui_AlarmSettingsBtn;
+lv_obj_t * ui_AlarmSettingsBtnLabel;
 // Alarm Screen Events
 void ui_event_AlarmModalOkButton(lv_event_t *e);
 void ui_event_AlarmModalCancelButton(lv_event_t *e);
@@ -73,7 +76,7 @@ lv_obj_t *ui_DigitalClockLabel;
 lv_obj_t *ui_DigitalClockSecondLabel;
 lv_obj_t *ui_DigitalClockDateLabel;
 lv_obj_t *ui_DigitalClockSettingsBtn;
-lv_obj_t *ui_DigitalClockSettingsLabel;
+lv_obj_t *ui_DigitalClockSettingsBtnLabel;
 // Digital Clock Events
 void ui_event_DigitalClockScreen(lv_event_t *e);
 void ui_event_DigitalClockSettingsBtn(lv_event_t *e);
@@ -180,8 +183,10 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
             lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_CYAN), lv_palette_main(LV_PALETTE_NONE),
                                                       false, LV_FONT_DEFAULT);
             lv_disp_set_theme(dispp, theme);
-            lv_obj_set_style_text_color(ui_DigitalClockSettingsLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_DigitalClockSettingsBtnLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_color(ui_AnalogSettingsLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_AnalogSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
         else
         {
@@ -189,7 +194,7 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
             lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_CYAN), lv_palette_main(LV_PALETTE_NONE),
                                                       true, LV_FONT_DEFAULT);
             lv_disp_set_theme(dispp, theme);
-            lv_obj_set_style_text_color(ui_DigitalClockSettingsLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_DigitalClockSettingsBtnLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_text_color(ui_AnalogSettingsLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
@@ -241,7 +246,16 @@ void ui_event_AlarmModalOkButton(lv_event_t *e)
         _ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
     }
 }
-
+void ui_event_AlarmSettingsBtn(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    if (event_code == LV_EVENT_CLICKED)
+    {
+        lastScreen = lv_event_get_user_data(e);
+        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+    }
+}
 // Screen change on GESTURES
 void ui_event_AlarmScreen(lv_event_t *e)
 {
@@ -407,6 +421,11 @@ void ui_Settings_screen_init(void)
     lv_obj_set_pos(ui_SettingsHomeBtn, 195, -130);
     lv_obj_set_align(ui_SettingsHomeBtn, LV_ALIGN_CENTER);
 
+    ui_SettingsHomeBtnLabel = lv_label_create(ui_SettingsHomeBtn);
+    lv_obj_set_align(ui_SettingsHomeBtnLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsHomeBtnLabel, LV_SYMBOL_HOME);
+    lv_obj_set_style_text_align(ui_SettingsHomeBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
@@ -551,12 +570,23 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_align(ui_Label16, LV_ALIGN_CENTER);
     lv_label_set_text(ui_Label16, "OK");
 
+    ui_AlarmSettingsBtn = lv_btn_create(ui_AlarmPanel);
+    lv_obj_set_size(ui_AlarmSettingsBtn, 35, 35);
+    lv_obj_set_pos(ui_AlarmSettingsBtn, 195, -130);
+    lv_obj_set_align(ui_AlarmSettingsBtn, LV_ALIGN_CENTER);
+    lv_obj_set_style_bg_opa(ui_AlarmSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_AlarmSettingsBtnLabel = lv_label_create(ui_AlarmSettingsBtn);
+    lv_obj_set_align(ui_AlarmSettingsBtnLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_AlarmSettingsBtnLabel, LV_SYMBOL_SETTINGS);
+    lv_obj_set_style_text_align(ui_AlarmSettingsBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_Button6, ui_event_Button6, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button1, ui_event_Button1, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button4, ui_event_Button4, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmScreen, ui_event_AlarmScreen, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_AlarmSettingsBtn, ui_event_AlarmSettingsBtn, LV_EVENT_ALL, ui_AlarmScreen);
 }
 static void set_value(void *indic, int32_t v)
 {
@@ -665,10 +695,10 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_align(ui_DigitalClockSettingsBtn, LV_ALIGN_CENTER);
     lv_obj_set_style_bg_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_DigitalClockSettingsLabel = lv_label_create(ui_DigitalClockSettingsBtn);
-    lv_obj_set_align(ui_DigitalClockSettingsLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_DigitalClockSettingsLabel, LV_SYMBOL_SETTINGS);
-    lv_obj_set_style_text_align(ui_DigitalClockSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_DigitalClockSettingsBtnLabel = lv_label_create(ui_DigitalClockSettingsBtn);
+    lv_obj_set_align(ui_DigitalClockSettingsBtnLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_DigitalClockSettingsBtnLabel, LV_SYMBOL_SETTINGS);
+    lv_obj_set_style_text_align(ui_DigitalClockSettingsBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL,  NULL);
     lv_obj_add_event_cb(ui_DigitalClockSettingsBtn, ui_event_DigitalClockSettingsBtn, LV_EVENT_ALL, ui_DigitalClockScreen);
