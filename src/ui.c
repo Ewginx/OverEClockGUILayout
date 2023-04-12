@@ -8,6 +8,7 @@
 
 ///////////////////// VARIABLES ////////////////////
 // Settings Screen Objects
+lv_obj_t *lastScreen;
 lv_obj_t *ui_SettingsScreen;
 lv_obj_t *ui_SettingsPanel;
 lv_obj_t *ui_DarkmodeLabel;
@@ -51,18 +52,12 @@ lv_obj_t *ui_Label15;
 lv_obj_t *ui_AlarmModalOkButton;
 lv_obj_t *ui_Label16;
 // Alarm Screen Events
-void ui_event_Label1(lv_event_t *e);
 void ui_event_AlarmModalOkButton(lv_event_t *e);
 void ui_event_AlarmModalCancelButton(lv_event_t *e);
 void ui_event_AlarmScreen(lv_event_t *e);
-void ui_event_Label8(lv_event_t *e);
 void ui_event_Button4(lv_event_t *e);
-void ui_event_Label7(lv_event_t *e);
 void ui_event_Button1(lv_event_t *e);
-void ui_event_Label6(lv_event_t *e);
 void ui_event_Button6(lv_event_t *e);
-void ui_event_Label3(lv_event_t *e);
-void ui_event_Label2(lv_event_t *e);
 
 // Analog Clock Objects
 lv_obj_t *ui_AnalogClock;
@@ -264,6 +259,7 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
         _ui_screen_change(ui_Weather, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
@@ -300,6 +296,7 @@ void ui_event_DigitalClockSettingsBtn(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
+        lastScreen = lv_event_get_user_data(e);
         _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
@@ -309,6 +306,7 @@ void ui_event_AnalogSettingsBtn(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
+        lastScreen = lv_event_get_user_data(e);
         _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
@@ -318,7 +316,7 @@ void ui_event_SettingsHomeBtn(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        _ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        _ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 
@@ -349,7 +347,6 @@ void ui_Settings_screen_init(void)
     lv_obj_set_size(ui_DarkmodeSwitch, 50, 25);
     lv_obj_set_pos(ui_DarkmodeSwitch, -16, -107);
     lv_obj_set_align(ui_DarkmodeSwitch, LV_ALIGN_CENTER);
-    lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
 
     ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
@@ -409,6 +406,7 @@ void ui_Settings_screen_init(void)
     lv_obj_set_size(ui_SettingsHomeBtn, 35, 35);
     lv_obj_set_align(ui_SettingsHomeBtn, LV_ALIGN_CENTER);
 
+    lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
@@ -617,7 +615,7 @@ void ui_AnalogClock_screen_init(void)
     lv_anim_set_values(&a, 0, 60);
     lv_anim_start(&a);
 
-    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClock);
     lv_obj_add_event_cb(ui_AnalogClock, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
 }
 // DIGITAL CLOCK SCREEN INIT
@@ -669,8 +667,8 @@ void ui_DigitalClock_screen_init(void)
     lv_label_set_text(ui_DigitalClockSettingsLabel, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_DigitalClockSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_DigitalClockSettingsBtn, ui_event_DigitalClockSettingsBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL,  NULL);
+    lv_obj_add_event_cb(ui_DigitalClockSettingsBtn, ui_event_DigitalClockSettingsBtn, LV_EVENT_ALL, ui_DigitalClockScreen);
 }
 void ui_Weather_screen_init(void)
 {
