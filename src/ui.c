@@ -22,7 +22,8 @@ lv_obj_t *ui_SettingsPasswordEdit;
 lv_obj_t *ui_SettingsKeyboard;
 lv_obj_t *ui_SettingsHomeBtn;
 lv_obj_t *ui_SettingsHomeBtnLabel;
-;
+lv_obj_t * ui_SettingsAPLabel;
+lv_obj_t * ui_SettingsIPLabel;
 // Settings Screen Events
 void ui_event_SettingsPasswordEdit(lv_event_t *e);
 void ui_event_SettingsSSIDEdit(lv_event_t *e);
@@ -386,9 +387,9 @@ void ui_Settings_screen_init(void)
     lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_SettingsCityLabel, -151, -53);
     lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsCityLabel, "City and\n country code");
+    lv_label_set_text(ui_SettingsCityLabel, "City and\ncountry code");
     lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_ALIGN_CENTER, LV_PART_MAIN);
+    lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsSSIDLabel = lv_label_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
@@ -420,6 +421,20 @@ void ui_Settings_screen_init(void)
     lv_textarea_set_placeholder_text(ui_SettingsPasswordEdit, "WiFi Password");
     lv_textarea_set_one_line(ui_SettingsPasswordEdit, true);
     lv_textarea_set_password_mode(ui_SettingsPasswordEdit, true);
+
+    ui_SettingsAPLabel = lv_label_create(ui_SettingsPanel);
+    lv_obj_set_size(ui_SettingsAPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_SettingsAPLabel, -70, 115);
+    lv_obj_set_align(ui_SettingsAPLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsAPLabel, "AccessPoint IP:");
+    lv_obj_set_style_text_font(ui_SettingsAPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_SettingsIPLabel= lv_label_create(ui_SettingsPanel);
+    lv_obj_set_size(ui_SettingsIPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_SettingsIPLabel, 60, 115);
+    lv_obj_set_align(ui_SettingsIPLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
+    lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsKeyboard = lv_keyboard_create(ui_SettingsScreen);
     lv_obj_set_size(ui_SettingsKeyboard, lv_pct(100), 150);

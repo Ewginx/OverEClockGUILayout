@@ -27,6 +27,8 @@ extern lv_obj_t * ui_SettingsPasswordEdit;
 extern lv_obj_t * ui_SettingsKeyboard;
 extern lv_obj_t * ui_SettingsHomeBtn;
 extern lv_obj_t * ui_SettingsHomeBtnLabel;
+extern lv_obj_t * ui_SettingsAPLabel;
+extern lv_obj_t * ui_SettingsIPLabel;
 //Settings Screen Events
 void ui_event_SettingsPasswordEdit(lv_event_t * e);
 void ui_event_SettingsSSIDEdit(lv_event_t * e);
