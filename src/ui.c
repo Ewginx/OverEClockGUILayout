@@ -148,8 +148,8 @@ void ui_event_SettingsSSIDEdit(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_FOCUSED || event_code == LV_EVENT_CLICKED)
     {
-        _ui_flag_modify(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
         _ui_keyboard_set_target(ui_SettingsKeyboard, ui_SettingsSSIDEdit);
+        _ui_flag_modify(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
         _ui_basic_set_property(ui_SettingsPanel, _UI_BASIC_PROPERTY_HEIGHT, 160);
     }
     if (event_code == LV_EVENT_DEFOCUSED)
@@ -159,7 +159,7 @@ void ui_event_SettingsSSIDEdit(lv_event_t *e)
     }
     if (event_code == LV_EVENT_READY)
     {
-        lv_textarea_set_text(ui_SettingsCityEdit, "ABOBA");
+        lv_textarea_set_text(ui_SettingsSSIDEdit, "ABOBA");
     }
 }
 void ui_event_SettingsPasswordEdit(lv_event_t *e)
@@ -179,7 +179,7 @@ void ui_event_SettingsPasswordEdit(lv_event_t *e)
     }
     if (event_code == LV_EVENT_READY)
     {
-        lv_textarea_set_text(ui_SettingsCityEdit, "ABOBA");
+        lv_textarea_set_text(ui_SettingsPasswordEdit, "ABOBA");
     }
 }
 
@@ -441,8 +441,6 @@ void ui_Settings_screen_init(void)
     lv_obj_set_pos(ui_SettingsKeyboard, 1, 80);
     lv_obj_set_align(ui_SettingsKeyboard, LV_ALIGN_CENTER);
     lv_obj_add_flag(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN); /// Flags
-    lv_obj_set_scrollbar_mode(ui_SettingsKeyboard, LV_SCROLLBAR_MODE_ACTIVE);
-    lv_obj_set_scroll_dir(ui_SettingsKeyboard, LV_DIR_VER);
 
     ui_SettingsHomeBtn = lv_btn_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsHomeBtn, 35, 35);
