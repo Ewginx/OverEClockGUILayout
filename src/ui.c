@@ -136,6 +136,10 @@ void ui_event_SettingsCityEdit(lv_event_t *e)
         _ui_flag_modify(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
         _ui_basic_set_property(ui_SettingsPanel, _UI_BASIC_PROPERTY_HEIGHT, 320);
     }
+    if (event_code == LV_EVENT_READY)
+    {
+        lv_textarea_set_text(ui_SettingsCityEdit, "ABOBA");
+    }
 }
 void ui_event_SettingsSSIDEdit(lv_event_t *e)
 {
@@ -152,6 +156,10 @@ void ui_event_SettingsSSIDEdit(lv_event_t *e)
         _ui_flag_modify(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
         _ui_basic_set_property(ui_SettingsPanel, _UI_BASIC_PROPERTY_HEIGHT, 320);
     }
+    if (event_code == LV_EVENT_READY)
+    {
+        lv_textarea_set_text(ui_SettingsCityEdit, "ABOBA");
+    }
 }
 void ui_event_SettingsPasswordEdit(lv_event_t *e)
 {
@@ -167,6 +175,10 @@ void ui_event_SettingsPasswordEdit(lv_event_t *e)
     {
         _ui_flag_modify(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
         _ui_basic_set_property(ui_SettingsPanel, _UI_BASIC_PROPERTY_HEIGHT, 320);
+    }
+    if (event_code == LV_EVENT_READY)
+    {
+        lv_textarea_set_text(ui_SettingsCityEdit, "ABOBA");
     }
 }
 
@@ -345,48 +357,49 @@ void ui_Settings_screen_init(void)
 
     ui_SettingsPanel = lv_obj_create(ui_SettingsScreen);
     lv_obj_set_size(ui_SettingsPanel, lv_pct(100), lv_pct(100));
-    lv_obj_set_scrollbar_mode(ui_SettingsPanel, LV_SCROLLBAR_MODE_ON);
+    lv_obj_set_scrollbar_mode(ui_SettingsPanel, LV_SCROLLBAR_MODE_AUTO);
     lv_obj_set_scroll_dir(ui_SettingsPanel, LV_DIR_VER);
     lv_obj_set_style_bg_color(ui_SettingsPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_SettingsPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DarkmodeLabel = lv_label_create(ui_SettingsPanel);
     lv_obj_set_size(ui_DarkmodeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_DarkmodeLabel, -148, -107);
+    lv_obj_set_pos(ui_DarkmodeLabel, -150, -110);
     lv_obj_set_align(ui_DarkmodeLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DarkmodeLabel, "Dark Mode");
-    lv_obj_set_style_text_font(ui_DarkmodeLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_DarkmodeLabel, &lv_font_montserrat_18, LV_PART_MAIN);
 
     ui_DarkmodeSwitch = lv_switch_create(ui_SettingsPanel);
     lv_obj_set_size(ui_DarkmodeSwitch, 50, 25);
-    lv_obj_set_pos(ui_DarkmodeSwitch, -16, -107);
+    lv_obj_set_pos(ui_DarkmodeSwitch, -20, -110);
     lv_obj_set_align(ui_DarkmodeSwitch, LV_ALIGN_CENTER);
 
     ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
-    lv_obj_set_pos(ui_SettingsCityEdit, 75, -54);
+    lv_obj_set_pos(ui_SettingsCityEdit, 75, -55);
     lv_obj_set_align(ui_SettingsCityEdit, LV_ALIGN_CENTER);
-    lv_textarea_set_max_length(ui_SettingsCityEdit, 50);
-    lv_textarea_set_placeholder_text(ui_SettingsCityEdit, "City for weather");
+    lv_textarea_set_max_length(ui_SettingsCityEdit, 100);
+    lv_textarea_set_placeholder_text(ui_SettingsCityEdit, "City, country code ISO-81118");
     lv_textarea_set_one_line(ui_SettingsCityEdit, true);
 
     ui_SettingsCityLabel = lv_label_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_SettingsCityLabel, -151, -53);
     lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsCityLabel, "City");
-    lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_label_set_text(ui_SettingsCityLabel, "City and\n country code");
+    lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_ALIGN_CENTER, LV_PART_MAIN);
 
     ui_SettingsSSIDLabel = lv_label_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsSSIDLabel, -150, 4);
+    lv_obj_set_pos(ui_SettingsSSIDLabel, -150, 5);
     lv_obj_set_align(ui_SettingsSSIDLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SettingsSSIDLabel, "WiFi SSID");
-    lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsSSIDEdit = lv_textarea_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsSSIDEdit, 250, LV_SIZE_CONTENT);
-    lv_obj_set_pos(ui_SettingsSSIDEdit, 75, 3);
+    lv_obj_set_pos(ui_SettingsSSIDEdit, 75, 5);
     lv_obj_set_align(ui_SettingsSSIDEdit, LV_ALIGN_CENTER);
     lv_textarea_set_max_length(ui_SettingsSSIDEdit, 50);
     lv_textarea_set_placeholder_text(ui_SettingsSSIDEdit, "WiFi SSID");
@@ -394,16 +407,16 @@ void ui_Settings_screen_init(void)
 
     ui_SettingsPasswordLabel = lv_label_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsPasswordLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsPasswordLabel, -145, 60);
+    lv_obj_set_pos(ui_SettingsPasswordLabel, -145, 65);
     lv_obj_set_align(ui_SettingsPasswordLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_SettingsPasswordLabel, "WiFi Password");
-    lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_SettingsPasswordEdit = lv_textarea_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT); /// 33
-    lv_obj_set_pos(ui_SettingsPasswordEdit, 75, 59);
+    lv_obj_set_pos(ui_SettingsPasswordEdit, 75, 65);
     lv_obj_set_align(ui_SettingsPasswordEdit, LV_ALIGN_CENTER);
-    lv_textarea_set_max_length(ui_SettingsPasswordEdit, 50);
+    lv_textarea_set_max_length(ui_SettingsPasswordEdit, 100);
     lv_textarea_set_placeholder_text(ui_SettingsPasswordEdit, "WiFi Password");
     lv_textarea_set_one_line(ui_SettingsPasswordEdit, true);
     lv_textarea_set_password_mode(ui_SettingsPasswordEdit, true);
