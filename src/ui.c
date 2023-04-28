@@ -655,7 +655,7 @@ void ui_AnalogClock_screen_init(void)
     lv_anim_set_values(&a, 0, 60);
     lv_anim_start(&a);
 
-    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClockScreen);
     lv_obj_add_event_cb(ui_AnalogClockScreen, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
 }
 // DIGITAL CLOCK SCREEN INIT
