@@ -74,6 +74,7 @@ lv_obj_t *ui_AnalogSettingsLabel;
 lv_obj_t *ui_DigitalClockScreen;
 lv_obj_t *ui_DigitalClockPanel;
 lv_obj_t *ui_DigitalClockLabel;
+lv_obj_t *ui_DigitalClockBatteryLbl;
 lv_obj_t *ui_DigitalClockSecondLabel;
 lv_obj_t *ui_DigitalClockDateLabel;
 lv_obj_t *ui_DigitalClockSettingsBtn;
@@ -671,6 +672,12 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_bg_opa(ui_DigitalClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_align(ui_DigitalClockPanel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_DigitalClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+
+    ui_DigitalClockBatteryLbl = lv_label_create(ui_DigitalClockPanel);
+    lv_obj_set_pos(ui_DigitalClockBatteryLbl, 120,-130);
+    lv_obj_set_align(ui_DigitalClockBatteryLbl, LV_ALIGN_CENTER);
+    lv_obj_set_size(ui_DigitalClockBatteryLbl, 40,20);
+    lv_label_set_text(ui_DigitalClockBatteryLbl, LV_SYMBOL_BATTERY_2);
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1

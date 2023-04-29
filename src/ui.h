@@ -84,6 +84,7 @@ void ui_event_AnalogSettingsBtn(lv_event_t * e);
 extern lv_obj_t * ui_DigitalClockScreen;
 extern lv_obj_t * ui_DigitalClockPanel;
 extern lv_obj_t * ui_DigitalClockLabel;
+extern lv_obj_t *ui_DigitalClockBatteryLbl;
 extern lv_obj_t * ui_DigitalClockSecondLabel;
 extern lv_obj_t * ui_DigitalClockDateLabel;
 extern lv_obj_t * ui_DigitalClockSettingsBtn;
