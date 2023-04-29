@@ -609,15 +609,15 @@ void ui_AnalogClock_screen_init(void)
 
     ui_AnalogPanel = lv_obj_create(ui_AnalogClockScreen);
     lv_obj_set_size(ui_AnalogPanel, lv_pct(100), lv_pct(100));
-    lv_obj_set_align(ui_AnalogPanel, LV_ALIGN_CENTER);
+    lv_obj_set_align(ui_AnalogPanel, LV_ALIGN_TOP_LEFT);
     lv_obj_clear_flag(ui_AnalogPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
     lv_obj_set_style_bg_color(ui_AnalogPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_AnalogPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AnalogSettingsBtn = lv_btn_create(ui_AnalogPanel);
     lv_obj_set_size(ui_AnalogSettingsBtn, 35, 35);
-    lv_obj_set_pos(ui_AnalogSettingsBtn, 195, -130);
-    lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_CENTER);
+    lv_obj_set_pos(ui_AnalogSettingsBtn, 401, -6);
+    lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_TOP_LEFT);
     lv_obj_set_style_bg_opa(ui_AnalogSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AnalogSettingsLabel = lv_label_create(ui_AnalogSettingsBtn);
@@ -626,16 +626,16 @@ void ui_AnalogClock_screen_init(void)
     lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AnalogMeter = lv_meter_create(ui_AnalogPanel);
-    lv_obj_set_size(ui_AnalogMeter, 300, 300);
+    lv_obj_set_size(ui_AnalogMeter, 315, 315);
     lv_obj_center(ui_AnalogMeter);
 
     lv_meter_scale_t *scale_min = lv_meter_add_scale(ui_AnalogMeter);
     lv_meter_set_scale_ticks(ui_AnalogMeter, scale_min, 61, 1, 10, lv_palette_main(LV_PALETTE_GREY));
     lv_meter_set_scale_range(ui_AnalogMeter, scale_min, 0, 60, 360, 270);
-
+    
     lv_meter_scale_t *scale_hour = lv_meter_add_scale(ui_AnalogMeter);
     lv_meter_set_scale_ticks(ui_AnalogMeter, scale_hour, 12, 0, 0, lv_palette_main(LV_PALETTE_GREY));
-    lv_meter_set_scale_major_ticks(ui_AnalogMeter, scale_hour, 1, 2, 20, lv_color_black(), 10);
+    lv_meter_set_scale_major_ticks(ui_AnalogMeter, scale_hour, 1, 2, 20, lv_color_white(), 13);
     lv_meter_set_scale_range(ui_AnalogMeter, scale_hour, 1, 12, 330, 300);
     LV_IMG_DECLARE(img_hand)
 
@@ -652,7 +652,7 @@ void ui_AnalogClock_screen_init(void)
     lv_anim_start(&a);
 
     lv_anim_set_var(&a, indic_hour);
-    lv_anim_set_time(&a, 120000); /*24 sec for 1 turn of the hour hand*/
+    lv_anim_set_time(&a, 3600000); /*24 sec for 1 turn of the hour hand*/
     lv_anim_set_values(&a, 0, 60);
     lv_anim_start(&a);
 
