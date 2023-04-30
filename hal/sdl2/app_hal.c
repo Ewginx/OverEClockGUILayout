@@ -22,7 +22,9 @@ int second;
 struct tm *tm_struct;
 time_t now;
 int16_t angle;
-struct timeval tv;
+
+char time_string[6];
+char second_string[2];
 /**
  * A task to measure the elapsed time for LittlevGL
  * @param data unused
@@ -103,9 +105,12 @@ void hal_loop(void)
             lv_img_set_angle(ui_ImageArmMinute, angle);
             angle = hour*300+(int)minute/2*10;
             lv_img_set_angle(ui_ImageArmHour, angle);
-            gettimeofday(&tv,NULL);
             printf ("Time: %i:%i:%i \n", hour, minute, second);
             fflush(stdout);
+            sprintf(time_string, "%02i:%02i.",hour, minute);
+            lv_label_set_text(ui_DigitalClockLabel, time_string);
+            sprintf(second_string, "%02i", second);
+            lv_label_set_text(ui_DigitalClockSecondLabel, second_string);
         }
     }
 }
