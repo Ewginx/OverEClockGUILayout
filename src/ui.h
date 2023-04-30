@@ -74,12 +74,11 @@ void ui_event_AlarmScreen(lv_event_t * e);
 extern lv_obj_t * ui_AnalogClockScreen;
 extern lv_obj_t * ui_AnalogPanel;
 extern lv_obj_t * ui_AnalogSettingsBtn;
-// extern lv_obj_t * ui_AnalogMeter;
 extern lv_obj_t * ui_AnalogSettingsLabel;
-extern lv_obj_t *ui_ImageWatchface;
-extern lv_obj_t *ui_ImageArmHour;
-extern lv_obj_t *ui_ImageArmMinute;
-extern lv_obj_t *ui_ImageArmSecond;
+extern lv_obj_t * ui_ImageWatchface;
+extern lv_obj_t * ui_ImageArmHour;
+extern lv_obj_t * ui_ImageArmMinute;
+extern lv_obj_t * ui_ImageArmSecond;
 // Analog Clock Events
 void ui_event_AnalogClockScreen(lv_event_t * e);
 void ui_event_AnalogSettingsBtn(lv_event_t * e);
