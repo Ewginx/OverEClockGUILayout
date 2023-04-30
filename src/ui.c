@@ -67,8 +67,12 @@ void ui_event_Button6(lv_event_t *e);
 lv_obj_t *ui_AnalogClockScreen;
 lv_obj_t *ui_AnalogPanel;
 lv_obj_t *ui_AnalogSettingsBtn;
-lv_obj_t *ui_AnalogMeter;
+// lv_obj_t *ui_AnalogMeter;
 lv_obj_t *ui_AnalogSettingsLabel;
+lv_obj_t *ui_ImageWatchface;
+lv_obj_t *ui_ImageArmHour;
+lv_obj_t *ui_ImageArmMinute;
+lv_obj_t *ui_ImageArmSecond;
 
 // Digital Clock Objects
 lv_obj_t *ui_DigitalClockScreen;
@@ -597,13 +601,14 @@ void ui_Alarm_screen_init(void)
     lv_obj_add_event_cb(ui_AlarmScreen, ui_event_AlarmScreen, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmSettingsBtn, ui_event_AlarmSettingsBtn, LV_EVENT_ALL, ui_AlarmScreen);
 }
-static void set_value(void *indic, int32_t v)
-{
-    lv_meter_set_indicator_end_value(ui_AnalogMeter, indic, v);
-}
+// static void set_value(void *indic, int32_t v)
+// {
+//     lv_meter_set_indicator_end_value(ui_AnalogMeter, indic, v);
+// }
 // ANALOG SCREEN INIT
 void ui_AnalogClock_screen_init(void)
 {
+    // TODO refactor analog clock, change Gauge to Image handling
     ui_AnalogClockScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_AnalogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
@@ -625,36 +630,79 @@ void ui_AnalogClock_screen_init(void)
     lv_label_set_text(ui_AnalogSettingsLabel, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_AnalogMeter = lv_meter_create(ui_AnalogPanel);
-    lv_obj_set_size(ui_AnalogMeter, 315, 315);
-    lv_obj_center(ui_AnalogMeter);
+    // ui_AnalogMeter = lv_meter_create(ui_AnalogPanel);
+    // lv_obj_set_size(ui_AnalogMeter, 315, 315);
+    // lv_obj_center(ui_AnalogMeter);
 
-    lv_meter_scale_t *scale_min = lv_meter_add_scale(ui_AnalogMeter);
-    lv_meter_set_scale_ticks(ui_AnalogMeter, scale_min, 61, 1, 10, lv_palette_main(LV_PALETTE_GREY));
-    lv_meter_set_scale_range(ui_AnalogMeter, scale_min, 0, 60, 360, 270);
+    // lv_meter_scale_t *scale_min = lv_meter_add_scale(ui_AnalogMeter);
+    // lv_meter_set_scale_ticks(ui_AnalogMeter, scale_min, 61, 1, 10, lv_palette_main(LV_PALETTE_GREY));
+    // lv_meter_set_scale_range(ui_AnalogMeter, scale_min, 0, 60, 360, 270);
     
-    lv_meter_scale_t *scale_hour = lv_meter_add_scale(ui_AnalogMeter);
-    lv_meter_set_scale_ticks(ui_AnalogMeter, scale_hour, 12, 0, 0, lv_palette_main(LV_PALETTE_GREY));
-    lv_meter_set_scale_major_ticks(ui_AnalogMeter, scale_hour, 1, 2, 20, lv_color_white(), 13);
-    lv_meter_set_scale_range(ui_AnalogMeter, scale_hour, 1, 12, 330, 300);
-    LV_IMG_DECLARE(img_hand)
+    // lv_meter_scale_t *scale_hour = lv_meter_add_scale(ui_AnalogMeter);
+    // lv_meter_set_scale_ticks(ui_AnalogMeter, scale_hour, 12, 0, 0, lv_palette_main(LV_PALETTE_GREY));
+    // lv_meter_set_scale_major_ticks(ui_AnalogMeter, scale_hour, 1, 2, 20, lv_color_white(), 13);
+    // lv_meter_set_scale_range(ui_AnalogMeter, scale_hour, 1, 12, 330, 300);
+    // LV_IMG_DECLARE(img_hand)
 
-    lv_meter_indicator_t *indic_min = lv_meter_add_needle_img(ui_AnalogMeter, scale_min, &img_hand, 5, 5);
-    lv_meter_indicator_t *indic_hour = lv_meter_add_needle_img(ui_AnalogMeter, scale_min, &img_hand, 5, 5);
+    // lv_meter_indicator_t *indic_min = lv_meter_add_needle_img(ui_AnalogMeter, scale_min, &img_hand, 5, 5);
+    // lv_meter_indicator_t *indic_hour = lv_meter_add_needle_img(ui_AnalogMeter, scale_min, &img_hand, 5, 5);
 
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_exec_cb(&a, set_value);
-    lv_anim_set_values(&a, 0, 60);
-    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
-    lv_anim_set_time(&a, 60000); /*2 sec for 1 turn of the minute hand (1 hour)*/
-    lv_anim_set_var(&a, indic_min);
-    lv_anim_start(&a);
+    // lv_anim_t a;
+    // lv_anim_init(&a);
+    // lv_anim_set_exec_cb(&a, set_value);
+    // lv_anim_set_values(&a, 0, 60);
+    // lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    // lv_anim_set_time(&a, 60000); /*2 sec for 1 turn of the minute hand (1 hour)*/
+    // lv_anim_set_var(&a, indic_min);
+    // lv_anim_start(&a);
 
-    lv_anim_set_var(&a, indic_hour);
-    lv_anim_set_time(&a, 3600000); /*24 sec for 1 turn of the hour hand*/
-    lv_anim_set_values(&a, 0, 60);
-    lv_anim_start(&a);
+    // lv_anim_set_var(&a, indic_hour);
+    // lv_anim_set_time(&a, 3600000); /*24 sec for 1 turn of the hour hand*/
+    // lv_anim_set_values(&a, 0, 60);
+    // lv_anim_start(&a);
+    ui_ImageWatchface = lv_img_create(ui_AnalogClockScreen);
+    lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);
+    lv_obj_set_width( ui_ImageWatchface, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_height( ui_ImageWatchface, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_align( ui_ImageWatchface, LV_ALIGN_CENTER );
+    lv_obj_add_flag( ui_ImageWatchface, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+    lv_obj_clear_flag( ui_ImageWatchface, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+    ui_ImageArmHour = lv_img_create(ui_AnalogClockScreen);
+    lv_img_set_src(ui_ImageArmHour, &ui_img_armhour_png);
+    lv_obj_set_width( ui_ImageArmHour, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_height( ui_ImageArmHour, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_x( ui_ImageArmHour, 0 );
+    lv_obj_set_y( ui_ImageArmHour, -35 );
+    lv_obj_set_align( ui_ImageArmHour, LV_ALIGN_CENTER );
+    lv_obj_add_flag( ui_ImageArmHour, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+    lv_obj_clear_flag( ui_ImageArmHour, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    lv_img_set_pivot(ui_ImageArmHour,9,77);
+    lv_img_set_angle(ui_ImageArmHour,450);
+
+    ui_ImageArmMinute = lv_img_create(ui_AnalogClockScreen);
+    lv_img_set_src(ui_ImageArmMinute, &ui_img_armminute_png);
+    lv_obj_set_width( ui_ImageArmMinute, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_height( ui_ImageArmMinute, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_x( ui_ImageArmMinute, 0 );
+    lv_obj_set_y( ui_ImageArmMinute, -49 );
+    lv_obj_set_align( ui_ImageArmMinute, LV_ALIGN_CENTER );
+    lv_obj_add_flag( ui_ImageArmMinute, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+    lv_obj_clear_flag( ui_ImageArmMinute, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    lv_img_set_pivot(ui_ImageArmMinute,9,105);
+    lv_img_set_angle(ui_ImageArmMinute,1800);
+
+    ui_ImageArmSecond = lv_img_create(ui_AnalogClockScreen);
+    lv_img_set_src(ui_ImageArmSecond, &ui_img_armsecond_png);
+    lv_obj_set_width( ui_ImageArmSecond, LV_SIZE_CONTENT);  /// 1
+    lv_obj_set_height( ui_ImageArmSecond, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_x( ui_ImageArmSecond, 0 );
+    lv_obj_set_y( ui_ImageArmSecond, -47 );
+    lv_obj_set_align( ui_ImageArmSecond, LV_ALIGN_CENTER );
+    lv_obj_add_flag( ui_ImageArmSecond, LV_OBJ_FLAG_ADV_HITTEST );   /// Flags
+    lv_obj_clear_flag( ui_ImageArmSecond, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+    lv_img_set_pivot(ui_ImageArmSecond,5,115);
+    lv_img_set_angle(ui_ImageArmSecond,3150);
 
     lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClockScreen);
     lv_obj_add_event_cb(ui_AnalogClockScreen, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);

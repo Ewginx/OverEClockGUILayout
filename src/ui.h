@@ -74,8 +74,12 @@ void ui_event_AlarmScreen(lv_event_t * e);
 extern lv_obj_t * ui_AnalogClockScreen;
 extern lv_obj_t * ui_AnalogPanel;
 extern lv_obj_t * ui_AnalogSettingsBtn;
-extern lv_obj_t * ui_AnalogMeter;
+// extern lv_obj_t * ui_AnalogMeter;
 extern lv_obj_t * ui_AnalogSettingsLabel;
+extern lv_obj_t *ui_ImageWatchface;
+extern lv_obj_t *ui_ImageArmHour;
+extern lv_obj_t *ui_ImageArmMinute;
+extern lv_obj_t *ui_ImageArmSecond;
 // Analog Clock Events
 void ui_event_AnalogClockScreen(lv_event_t * e);
 void ui_event_AnalogSettingsBtn(lv_event_t * e);
@@ -110,13 +114,18 @@ extern lv_obj_t * ui_Label13;
 // Weather Clock Events
 void ui_event_Weather(lv_event_t * e);
 
+LV_IMG_DECLARE(ui_img_watchface240_png); 
+LV_IMG_DECLARE(ui_img_armhour_png);
+LV_IMG_DECLARE(ui_img_armminute_png);
+LV_IMG_DECLARE(ui_img_armsecond_png);
+LV_IMG_DECLARE(ui_img_day_rain_png);
+LV_IMG_DECLARE(ui_img_day_clear_png);
 
-LV_IMG_DECLARE(ui_img_day_rain_png);    // assets\day_rain.png
-LV_IMG_DECLARE(ui_img_day_clear_png);    // assets\day_clear.png
 
 
 LV_FONT_DECLARE(ui_font_Technology120);
 LV_FONT_DECLARE(ui_font_Technology60);
+
 
 void ui_init(void);
 
