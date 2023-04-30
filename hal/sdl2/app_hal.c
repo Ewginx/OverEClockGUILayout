@@ -6,8 +6,23 @@
 #include "indev/mousewheel.h"
 #include "indev/keyboard.h"
 #include "sdl/sdl.h"
+#include "ui.h"
+#include <stdio.h>
+#include <time.h>
+#include<sys/time.h>
 
+#define ONE_MINUTE_MS (60 * 1000)
+#define ONE_HOUR_MS (60 * 60 * 1000)
+#define TWELVE_HOUR_MS (12 * 60 * 60 * 1000)
 
+Uint64 timeout;
+int hour;
+int minute;
+int second;
+struct tm *tm_struct;
+time_t now;
+int16_t angle;
+struct timeval tv;
 /**
  * A task to measure the elapsed time for LittlevGL
  * @param data unused
@@ -65,6 +80,8 @@ void hal_setup(void)
      * You have to call 'lv_tick_inc()' in periodically to inform LittelvGL about how much time were elapsed
      * Create an SDL thread to do this*/
     SDL_CreateThread(tick_thread, "tick", NULL);
+    timeout = SDL_GetTicks64();
+
 }
 
 void hal_loop(void)
@@ -72,5 +89,25 @@ void hal_loop(void)
     while(1) {
         SDL_Delay(5);
         lv_task_handler();
+        if(SDL_GetTicks64() - timeout > 1000)
+        {
+            timeout = SDL_GetTicks64();
+            now = time(NULL);
+            tm_struct= localtime(&now);
+            hour = tm_struct->tm_hour;
+            minute = tm_struct->tm_min;
+            second = tm_struct->tm_sec;
+            angle = second*60;
+            lv_img_set_angle(ui_ImageArmSecond, angle);
+            angle = minute*60;
+            lv_img_set_angle(ui_ImageArmMinute, angle);
+            angle = hour*300+(int)minute/2*10;
+            printf ("Hour angle: %i \n", angle);
+            lv_img_set_angle(ui_ImageArmHour, angle);
+            gettimeofday(&tv,NULL);
+            printf ("Time: %i:%i:%i \n", hour, minute, second);
+            printf ("Time: %i \n", tv);
+            fflush(stdout);
+        }
     }
 }
