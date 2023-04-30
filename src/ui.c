@@ -705,20 +705,18 @@ void ui_DigitalClock_screen_init(void)
     lv_label_set_text(ui_DigitalClockBatteryLbl, LV_SYMBOL_BATTERY_2);
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_size(ui_DigitalClockLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_DigitalClockLabel, 105, 75);
+    lv_obj_set_size(ui_DigitalClockLabel, 270, 100); /// 1
+    lv_obj_set_pos(ui_DigitalClockLabel, 90, 75);
     lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_DigitalClockLabel, "12:30.");
 
-    lv_obj_set_style_text_align(ui_DigitalClockLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_align(ui_DigitalClockLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockLabel, &ui_font_Technology120, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSecondLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_size(ui_DigitalClockSecondLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_DigitalClockSecondLabel, 318, 124);
-    lv_obj_set_align(ui_DigitalClockSecondLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_DigitalClockSecondLabel, "13");
-    lv_obj_set_style_text_align(ui_DigitalClockSecondLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_size(ui_DigitalClockSecondLabel, 60, 50); /// 1
+    lv_obj_align_to(ui_DigitalClockSecondLabel, ui_DigitalClockLabel, LV_ALIGN_BOTTOM_RIGHT, 45, 0);
+    
+    lv_obj_set_style_text_align(ui_DigitalClockSecondLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockSecondLabel, &ui_font_Technology60, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockDateLabel = lv_label_create(ui_DigitalClockPanel);
