@@ -102,11 +102,9 @@ void hal_loop(void)
             angle = minute*60;
             lv_img_set_angle(ui_ImageArmMinute, angle);
             angle = hour*300+(int)minute/2*10;
-            printf ("Hour angle: %i \n", angle);
             lv_img_set_angle(ui_ImageArmHour, angle);
             gettimeofday(&tv,NULL);
             printf ("Time: %i:%i:%i \n", hour, minute, second);
-            printf ("Time: %i \n", tv);
             fflush(stdout);
         }
     }
