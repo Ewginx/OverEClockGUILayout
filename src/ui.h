@@ -98,7 +98,7 @@ void ui_event_DigitalClockScreen(lv_event_t * e);
 void ui_event_DigitalClockSettingsBtn(lv_event_t * e);
 
 // Weather Clock Objects
-extern lv_obj_t * ui_Weather;
+extern lv_obj_t * ui_WeatherScreen;
 extern lv_obj_t * ui_WeatherPanel;
 extern lv_obj_t * ui_WeatherImage;
 extern lv_obj_t * ui_WeatherCity;

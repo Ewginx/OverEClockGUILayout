@@ -87,7 +87,7 @@ void ui_event_DigitalClockScreen(lv_event_t *e);
 void ui_event_DigitalClockSettingsBtn(lv_event_t *e);
 
 // Weather Objects
-lv_obj_t *ui_Weather;
+lv_obj_t *ui_WeatherScreen;
 lv_obj_t *ui_WeatherPanel;
 lv_obj_t *ui_WeatherImage;
 lv_obj_t *ui_WeatherCity;
@@ -278,7 +278,7 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        _ui_screen_change(ui_Weather, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        _ui_screen_change(ui_WeatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
         
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
@@ -745,10 +745,10 @@ void ui_DigitalClock_screen_init(void)
 }
 void ui_Weather_screen_init(void)
 {
-    ui_Weather = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_Weather, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+    ui_WeatherScreen = lv_obj_create(NULL);
+    lv_obj_clear_flag(ui_WeatherScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-    ui_WeatherPanel = lv_obj_create(ui_Weather);
+    ui_WeatherPanel = lv_obj_create(ui_WeatherScreen);
     lv_obj_set_size(ui_WeatherPanel, lv_pct(100), lv_pct(100));
     lv_obj_set_pos(ui_WeatherPanel, 1, 4);
     lv_obj_set_align(ui_WeatherPanel, LV_ALIGN_CENTER);
@@ -855,8 +855,8 @@ void ui_Weather_screen_init(void)
     lv_label_set_text(ui_WeatherSettingsBtnLbl, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_WeatherSettingsBtnLbl, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_Weather, ui_event_Weather, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb( ui_WeatherSettingsBtn, ui_event_WeatherSettingsBtn, LV_EVENT_ALL, ui_Weather);
+    lv_obj_add_event_cb(ui_WeatherScreen, ui_event_Weather, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb( ui_WeatherSettingsBtn, ui_event_WeatherSettingsBtn, LV_EVENT_ALL, ui_WeatherScreen);
 }
 
 void ui_init(void)
