@@ -93,13 +93,17 @@ lv_obj_t *ui_WeatherImage;
 lv_obj_t *ui_WeatherCity;
 lv_obj_t *ui_WeatherTemperatureLbl;
 lv_obj_t *ui_WeatherBriefingLbl;
+lv_obj_t *ui_WeatherWindLabel;
+lv_obj_t *ui_WeatherHumidityLabel;
 lv_obj_t *ui_WeatherMiscLabel;
+lv_obj_t *ui_WeatherFeelsLikeLabel;
 lv_obj_t *ui_WeatherTimesLbl;
 lv_obj_t *ui_WeatherThirdTempLbl;
 lv_obj_t *ui_WeatherSecondTempLbl;
 lv_obj_t *ui_WeatherFourthTempLbl;
 lv_obj_t *ui_WeatherFirstTempLbl;
-lv_obj_t *ui_Label13;
+lv_obj_t *ui_WeatherSettingsBtn;
+lv_obj_t *ui_WeatherSettingsBtnLbl;
 // Weather Events
 void ui_event_Weather(lv_event_t *e);
 
@@ -333,6 +337,16 @@ void ui_event_SettingsHomeBtn(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         _ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+    }
+}
+void ui_event_WeatherSettingsBtn(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    if (event_code == LV_EVENT_CLICKED)
+    {
+        lastScreen = lv_event_get_user_data(e);
+        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 
@@ -768,14 +782,37 @@ void ui_Weather_screen_init(void)
     lv_obj_set_size(ui_WeatherBriefingLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 1
     lv_obj_set_pos(ui_WeatherBriefingLbl, 1, 39);
     lv_obj_set_align(ui_WeatherBriefingLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherBriefingLbl, "Feels like 12°C. Scattered clouds. Light breeze");
+    lv_label_set_text(ui_WeatherBriefingLbl, "Scattered clouds. Light breeze");
+
+    ui_WeatherWindLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherWindLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
+    lv_obj_set_pos(ui_WeatherWindLabel, 72, -96);
+    lv_obj_set_align(ui_WeatherWindLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherWindLabel, "3.1m/s WNW Gust: 2.3m/s");
+    lv_obj_set_style_text_font(ui_WeatherWindLabel, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
+    ui_WeatherHumidityLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherHumidityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
+    lv_obj_set_pos(ui_WeatherHumidityLabel, 72, -80);
+    lv_obj_set_align(ui_WeatherHumidityLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherHumidityLabel, "Humidity: 75%");
+    lv_obj_set_style_text_font(ui_WeatherHumidityLabel, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherMiscLabel = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherMiscLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
-    lv_obj_set_pos(ui_WeatherMiscLabel, 72, -96);
+    lv_obj_set_pos(ui_WeatherMiscLabel, 120, -60);
     lv_obj_set_align(ui_WeatherMiscLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherMiscLabel, " 3.1m/s WNW   Humidity: 62% Dew point: 6°C");
+    lv_label_set_long_mode(ui_WeatherMiscLabel, LV_LABEL_LONG_CLIP);
+    lv_label_set_text(ui_WeatherMiscLabel, "Visibility: 10.0km UV: 3");
     lv_obj_set_style_text_font(ui_WeatherMiscLabel, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_WeatherFeelsLikeLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherFeelsLikeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
+    lv_obj_set_pos(ui_WeatherFeelsLikeLabel, 140, -10);
+    lv_obj_set_align(ui_WeatherFeelsLikeLabel, LV_ALIGN_CENTER);
+    lv_label_set_long_mode(ui_WeatherFeelsLikeLabel, LV_LABEL_LONG_CLIP);
+    lv_label_set_text(ui_WeatherFeelsLikeLabel, "Feels like: 13°C");
+    lv_obj_set_style_text_font(ui_WeatherFeelsLikeLabel, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTimesLbl = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherTimesLbl, LV_SIZE_CONTENT,  LV_SIZE_CONTENT);  /// 1
@@ -807,15 +844,19 @@ void ui_Weather_screen_init(void)
     lv_obj_set_align(ui_WeatherFirstTempLbl, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherFirstTempLbl, "7°C	");
 
-    ui_Label13 = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_Label13, LV_SIZE_CONTENT, LV_SIZE_CONTENT);  /// 121
-    lv_obj_set_pos(ui_Label13, 131, -70);
-    lv_obj_set_align(ui_Label13, LV_ALIGN_CENTER);
-    lv_label_set_long_mode(ui_Label13, LV_LABEL_LONG_CLIP);
-    lv_label_set_text(ui_Label13, "Visibility: 10.0km UV: 3");
-    lv_obj_set_style_text_font(ui_Label13, &lv_font_montserrat_12, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_WeatherSettingsBtn = lv_btn_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherSettingsBtn, 35, 35);
+    lv_obj_set_pos(ui_WeatherSettingsBtn, 401, -6);
+    lv_obj_set_align(ui_WeatherSettingsBtn, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_style_bg_opa(ui_WeatherSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_WeatherSettingsBtnLbl = lv_label_create(ui_WeatherSettingsBtn);
+    lv_obj_set_align(ui_WeatherSettingsBtnLbl, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherSettingsBtnLbl, LV_SYMBOL_SETTINGS);
+    lv_obj_set_style_text_align(ui_WeatherSettingsBtnLbl, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Weather, ui_event_Weather, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb( ui_WeatherSettingsBtn, ui_event_WeatherSettingsBtn, LV_EVENT_ALL, ui_Weather);
 }
 
 void ui_init(void)

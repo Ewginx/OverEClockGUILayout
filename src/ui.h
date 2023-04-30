@@ -13,6 +13,7 @@ extern "C" {
 #include "lvgl.h"
 
 #include "ui_events.h"
+
 // Settings Screen Objects
 extern lv_obj_t * ui_SettingsScreen;
 extern lv_obj_t * ui_SettingsPanel;
@@ -87,7 +88,7 @@ void ui_event_AnalogSettingsBtn(lv_event_t * e);
 extern lv_obj_t * ui_DigitalClockScreen;
 extern lv_obj_t * ui_DigitalClockPanel;
 extern lv_obj_t * ui_DigitalClockLabel;
-extern lv_obj_t *ui_DigitalClockBatteryLbl;
+extern lv_obj_t * ui_DigitalClockBatteryLbl;
 extern lv_obj_t * ui_DigitalClockSecondLabel;
 extern lv_obj_t * ui_DigitalClockDateLabel;
 extern lv_obj_t * ui_DigitalClockSettingsBtn;
@@ -103,15 +104,20 @@ extern lv_obj_t * ui_WeatherImage;
 extern lv_obj_t * ui_WeatherCity;
 extern lv_obj_t * ui_WeatherTemperatureLbl;
 extern lv_obj_t * ui_WeatherBriefingLbl;
-extern lv_obj_t * ui_WeatherParamsLabel;
+extern lv_obj_t * ui_WeatherWindLabel;
+extern lv_obj_t * ui_WeatherHumidityLabel;
+extern lv_obj_t * ui_WeatherMiscLabel;
+extern lv_obj_t * ui_WeatherFeelsLikeLabel;
 extern lv_obj_t * ui_WeatherTimesLbl;
 extern lv_obj_t * ui_WeatherFirstTempLbl;
 extern lv_obj_t * ui_WeatherSecondTempLbl;
 extern lv_obj_t * ui_WeatherThirdTempLbl;
 extern lv_obj_t * ui_WeatherFourthTempLbl;
-extern lv_obj_t * ui_Label13;
+extern lv_obj_t * ui_WeatherSettingsBtn;
+extern lv_obj_t * ui_WeatherSettingsBtnLbl;
 // Weather Clock Events
 void ui_event_Weather(lv_event_t * e);
+void ui_event_WeatherSettingsBtn(lv_event_t * e);
 
 LV_IMG_DECLARE(ui_img_watchface240_png); 
 LV_IMG_DECLARE(ui_img_armhour_png);
