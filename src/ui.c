@@ -706,12 +706,13 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_text_font(ui_DigitalClockBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_size(ui_DigitalClockLabel, 270, 100);
-    lv_obj_set_pos(ui_DigitalClockLabel, 90, 75);
+    lv_obj_set_size(ui_DigitalClockLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT);
+    lv_obj_set_pos(ui_DigitalClockLabel, 70, 75);
     lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_TOP_LEFT);
+    lv_label_set_text(ui_DigitalClockLabel, "22:22");
 
     lv_obj_set_style_text_align(ui_DigitalClockLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_DigitalClockLabel, &ui_font_Technology120, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_DigitalClockLabel, &ui_font_Roboto120, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSecondLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockSecondLabel, 60, 50);
@@ -724,9 +725,9 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_size(ui_DigitalClockDateLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_DigitalClockDateLabel, 75, 215);
     lv_obj_set_align(ui_DigitalClockDateLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_DigitalClockDateLabel, "4th, April 2023");
+    lv_label_set_text(ui_DigitalClockDateLabel, "04.05.2023");
     lv_obj_set_style_text_align(ui_DigitalClockDateLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_40, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockSettingsBtn = lv_btn_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockSettingsBtn, 35, 35);
