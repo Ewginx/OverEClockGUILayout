@@ -129,7 +129,7 @@ LV_IMG_DECLARE(ui_img_day_clear_png);
 
 
 LV_FONT_DECLARE(ui_font_Roboto120);
-LV_FONT_DECLARE(ui_font_Technology60);
+LV_FONT_DECLARE(ui_font_Roboto45);
 
 
 void ui_init(void);
