@@ -715,7 +715,7 @@ void ui_DigitalClock_screen_init(void)
 
     ui_DigitalClockSecondLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockSecondLabel, 60, 40);
-    lv_obj_align_to(ui_DigitalClockSecondLabel, ui_DigitalClockLabel, LV_ALIGN_BOTTOM_RIGHT, 50, 0);
+    lv_obj_align_to(ui_DigitalClockSecondLabel, ui_DigitalClockLabel, LV_ALIGN_BOTTOM_RIGHT, 50, -3);
     lv_label_set_text( ui_DigitalClockSecondLabel, "");
     lv_obj_set_style_text_align(ui_DigitalClockSecondLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockSecondLabel, &ui_font_Roboto45, LV_PART_MAIN | LV_STATE_DEFAULT);
