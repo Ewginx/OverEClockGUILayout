@@ -14,7 +14,7 @@
 #define ONE_MINUTE_MS (60 * 1000)
 #define ONE_HOUR_MS (60 * 60 * 1000)
 #define TWELVE_HOUR_MS (12 * 60 * 60 * 1000)
-
+bool flag = true;
 Uint64 timeout;
 int day;
 int month;
@@ -118,8 +118,13 @@ void hal_loop(void)
             lv_label_set_text(ui_DigitalClockLabel, time_string);
             sprintf(second_string, "%02i", second);
             lv_label_set_text(ui_DigitalClockSecondLabel, second_string);
-            sprintf(date_string, "%02i.%02i.%i", day, month+1, year+1900);
+            sprintf(date_string, "%02i.%02i.%i", day, month + 1, year + 1900);
             lv_label_set_text(ui_DigitalClockDateLabel, date_string);
+            if (flag)
+            {
+                lv_img_set_src(ui_WeatherImage, "D:angry_clouds.png");
+                flag = false;
+            }
         }
     }
 }
