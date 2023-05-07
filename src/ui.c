@@ -65,7 +65,7 @@ void ui_event_Button6(lv_event_t *e);
 
 // Analog Clock Objects
 lv_obj_t *ui_AnalogClockScreen;
-lv_obj_t *ui_AnalogPanel;
+lv_obj_t *ui_AnalogClockPanel;
 lv_obj_t *ui_AnalogSettingsBtn;
 lv_obj_t *ui_AnalogSettingsLabel;
 lv_obj_t *ui_ImageWatchface;
@@ -621,14 +621,14 @@ void ui_AnalogClock_screen_init(void)
     ui_AnalogClockScreen = lv_obj_create(NULL);
     lv_obj_clear_flag(ui_AnalogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-    ui_AnalogPanel = lv_obj_create(ui_AnalogClockScreen);
-    lv_obj_set_size(ui_AnalogPanel, lv_pct(100), lv_pct(100));
-    lv_obj_set_align(ui_AnalogPanel, LV_ALIGN_TOP_LEFT);
-    lv_obj_clear_flag(ui_AnalogPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-    lv_obj_set_style_bg_color(ui_AnalogPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_AnalogPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_AnalogClockPanel = lv_obj_create(ui_AnalogClockScreen);
+    lv_obj_set_size(ui_AnalogClockPanel, lv_pct(100), lv_pct(100));
+    lv_obj_set_align(ui_AnalogClockPanel, LV_ALIGN_TOP_LEFT);
+    lv_obj_clear_flag(ui_AnalogClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+    lv_obj_set_style_bg_color(ui_AnalogClockPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(ui_AnalogClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_AnalogSettingsBtn = lv_btn_create(ui_AnalogPanel);
+    ui_AnalogSettingsBtn = lv_btn_create(ui_AnalogClockPanel);
     lv_obj_set_size(ui_AnalogSettingsBtn, 35, 35);
     lv_obj_set_pos(ui_AnalogSettingsBtn, 401, -6);
     lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_TOP_LEFT);
@@ -639,7 +639,7 @@ void ui_AnalogClock_screen_init(void)
     lv_label_set_text(ui_AnalogSettingsLabel, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_AnalogClockBatteryLbl = lv_label_create(ui_AnalogPanel);
+    ui_AnalogClockBatteryLbl = lv_label_create(ui_AnalogClockPanel);
     lv_obj_set_pos(ui_AnalogClockBatteryLbl, 20, 0);
     lv_obj_set_align(ui_AnalogClockBatteryLbl, LV_ALIGN_TOP_LEFT);
     lv_obj_set_size(ui_AnalogClockBatteryLbl, 40, 30);
