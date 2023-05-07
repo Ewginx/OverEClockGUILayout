@@ -93,6 +93,7 @@ lv_obj_t *ui_WeatherScreen;
 lv_obj_t *ui_WeatherPanel;
 lv_obj_t *ui_WeatherImage;
 lv_obj_t *ui_WeatherCity;
+lv_obj_t *ui_WeatherBatteryLbl;
 lv_obj_t *ui_WeatherTemperatureLbl;
 lv_obj_t *ui_WeatherBriefingLbl;
 lv_obj_t *ui_WeatherWindLabel;
@@ -778,6 +779,13 @@ void ui_Weather_screen_init(void)
     lv_obj_set_align(ui_WeatherCity, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherCity, "London, GB");
     lv_obj_set_style_text_font(ui_WeatherCity, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_WeatherBatteryLbl = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_pos(ui_WeatherBatteryLbl, 20, 0);
+    lv_obj_set_align(ui_WeatherBatteryLbl, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_size(ui_WeatherBatteryLbl, 40, 30);
+    lv_label_set_text(ui_WeatherBatteryLbl, LV_SYMBOL_BATTERY_2);
+    lv_obj_set_style_text_font(ui_WeatherBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTemperatureLbl = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherTemperatureLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
