@@ -72,6 +72,8 @@ lv_obj_t *ui_ImageWatchface;
 lv_obj_t *ui_ImageArmHour;
 lv_obj_t *ui_ImageArmMinute;
 lv_obj_t *ui_ImageArmSecond;
+lv_obj_t *ui_AnalogClockBatteryLbl;
+
 
 // Digital Clock Objects
 lv_obj_t *ui_DigitalClockScreen;
@@ -636,6 +638,13 @@ void ui_AnalogClock_screen_init(void)
     lv_obj_set_align(ui_AnalogSettingsLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_AnalogSettingsLabel, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_AnalogClockBatteryLbl = lv_label_create(ui_AnalogPanel);
+    lv_obj_set_pos(ui_AnalogClockBatteryLbl, 20, 0);
+    lv_obj_set_align(ui_AnalogClockBatteryLbl, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_size(ui_AnalogClockBatteryLbl, 40, 30);
+    lv_label_set_text(ui_AnalogClockBatteryLbl, LV_SYMBOL_BATTERY_2);
+    lv_obj_set_style_text_font(ui_AnalogClockBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_ImageWatchface = lv_img_create(ui_AnalogClockScreen);
     lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);

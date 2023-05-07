@@ -80,6 +80,7 @@ extern lv_obj_t * ui_ImageWatchface;
 extern lv_obj_t * ui_ImageArmHour;
 extern lv_obj_t * ui_ImageArmMinute;
 extern lv_obj_t * ui_ImageArmSecond;
+extern lv_obj_t *ui_AnalogClockBatteryLbl;
 // Analog Clock Events
 void ui_event_AnalogClockScreen(lv_event_t * e);
 void ui_event_AnalogSettingsBtn(lv_event_t * e);
