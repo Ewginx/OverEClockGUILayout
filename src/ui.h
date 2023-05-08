@@ -77,7 +77,6 @@ extern "C"
     extern lv_obj_t *ui_AnalogClockPanel;
     extern lv_obj_t *ui_AnalogSettingsBtn;
     extern lv_obj_t *ui_AnalogSettingsLabel;
-    extern lv_obj_t *ui_AnalogClockBatteryLbl;
     extern lv_obj_t *ui_ImageWatchface;
     extern lv_obj_t *ui_ImageArmHour;
     extern lv_obj_t *ui_ImageArmMinute;
@@ -90,7 +89,6 @@ extern "C"
     extern lv_obj_t *ui_DigitalClockScreen;
     extern lv_obj_t *ui_DigitalClockPanel;
     extern lv_obj_t *ui_DigitalClockLabel;
-    extern lv_obj_t *ui_DigitalClockBatteryLbl;
     extern lv_obj_t *ui_DigitalClockSecondLabel;
     extern lv_obj_t *ui_DigitalClockDateLabel;
     extern lv_obj_t *ui_DigitalClockSettingsBtn;
@@ -104,7 +102,6 @@ extern "C"
     extern lv_obj_t *ui_WeatherPanel;
     extern lv_obj_t *ui_WeatherImage;
     extern lv_obj_t *ui_WeatherCity;
-    extern lv_obj_t *ui_WeatherBatteryLbl;
     extern lv_obj_t *ui_WeatherTemperatureLbl;
     extern lv_obj_t *ui_WeatherBriefingLbl;
     extern lv_obj_t *ui_WeatherWindLabel;
@@ -118,9 +115,13 @@ extern "C"
     extern lv_obj_t *ui_WeatherFourthTempLbl;
     extern lv_obj_t *ui_WeatherSettingsBtn;
     extern lv_obj_t *ui_WeatherSettingsBtnLbl;
+    
+    extern lv_obj_t *ui_BatteryLabel;
     // Weather Clock Events
-    void ui_event_Weather(lv_event_t *e);
+    void ui_event_WeatherScreen(lv_event_t *e);
     void ui_event_WeatherSettingsBtn(lv_event_t *e);
+
+    void ui_create_battery_label(lv_obj_t *screen);
 
     LV_IMG_DECLARE(ui_img_watchface240_png);
     LV_IMG_DECLARE(ui_img_armhour_png);

@@ -72,13 +72,11 @@ lv_obj_t *ui_ImageWatchface;
 lv_obj_t *ui_ImageArmHour;
 lv_obj_t *ui_ImageArmMinute;
 lv_obj_t *ui_ImageArmSecond;
-lv_obj_t *ui_AnalogClockBatteryLbl;
 
 // Digital Clock Objects
 lv_obj_t *ui_DigitalClockScreen;
 lv_obj_t *ui_DigitalClockPanel;
 lv_obj_t *ui_DigitalClockLabel;
-lv_obj_t *ui_DigitalClockBatteryLbl;
 lv_obj_t *ui_DigitalClockSecondLabel;
 lv_obj_t *ui_DigitalClockDateLabel;
 lv_obj_t *ui_DigitalClockSettingsBtn;
@@ -92,7 +90,6 @@ lv_obj_t *ui_WeatherScreen;
 lv_obj_t *ui_WeatherPanel;
 lv_obj_t *ui_WeatherImage;
 lv_obj_t *ui_WeatherCity;
-lv_obj_t *ui_WeatherBatteryLbl;
 lv_obj_t *ui_WeatherTemperatureLbl;
 lv_obj_t *ui_WeatherBriefingLbl;
 lv_obj_t *ui_WeatherWindLabel;
@@ -106,8 +103,10 @@ lv_obj_t *ui_WeatherFourthTempLbl;
 lv_obj_t *ui_WeatherFirstTempLbl;
 lv_obj_t *ui_WeatherSettingsBtn;
 lv_obj_t *ui_WeatherSettingsBtnLbl;
+
+lv_obj_t *ui_BatteryLabel;
 // Weather Events
-void ui_event_Weather(lv_event_t *e);
+void ui_event_WeatherScreen(lv_event_t *e);
 
 lv_obj_t *ui____initial_actions0;
 
@@ -303,6 +302,7 @@ void ui_event_AlarmScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AnalogClockScreen, 0));
         ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
 }
@@ -312,19 +312,23 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
+        // lv_obj_set_parent(ui_BatteryLabel, ui_WeatherPanel);
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_WeatherScreen, 0));
         ui_screen_change(ui_WeatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AnalogClockScreen,0));
         ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
-void ui_event_Weather(lv_event_t *e)
+void ui_event_WeatherScreen(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_DigitalClockScreen, 0) );
         ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
@@ -334,10 +338,12 @@ void ui_event_AnalogClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_DigitalClockScreen, 0));
         ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AlarmScreen, 0));
         ui_screen_change(ui_AlarmScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
@@ -381,6 +387,11 @@ void ui_event_WeatherSettingsBtn(lv_event_t *e)
         lastScreen = lv_event_get_user_data(e);
         ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
+}
+
+void ui_move_battery_label(lv_obj_t *screen)
+{
+    lv_obj_set_parent(ui_BatteryLabel, screen);
 }
 
 ///////////////////// SCREENS INIT////////////////////
@@ -471,12 +482,6 @@ void ui_Settings_screen_init(void)
     lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
     lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    // ui_SettingsKeyboard = lv_keyboard_create(ui_SettingsScreen);
-    // lv_obj_set_size(ui_SettingsKeyboard, lv_pct(100), 150);
-    // lv_obj_set_pos(ui_SettingsKeyboard, 0, 0);
-    // lv_obj_set_align(ui_SettingsKeyboard, LV_ALIGN_BOTTOM_LEFT);
-    // lv_obj_add_flag(ui_SettingsKeyboard, LV_OBJ_FLAG_HIDDEN); /// Flags
-
     ui_SettingsHomeBtn = lv_btn_create(ui_SettingsPanel);
     lv_obj_set_size(ui_SettingsHomeBtn, 35, 35);
     lv_obj_set_pos(ui_SettingsHomeBtn, 401, -6);
@@ -492,7 +497,6 @@ void ui_Settings_screen_init(void)
     lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsHomeBtn, ui_event_SettingsHomeBtn, LV_EVENT_ALL, NULL);
-    // lv_obj_add_event_cb(ui_SettingsKeyboard, ui_event_SettingsKeyboard, LV_EVENT_ALL, NULL);
 }
 // ALARM SCREEN INIT
 void ui_Alarm_screen_init(void)
@@ -673,13 +677,6 @@ void ui_AnalogClock_screen_init(void)
     lv_label_set_text(ui_AnalogSettingsLabel, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_AnalogClockBatteryLbl = lv_label_create(ui_AnalogClockPanel);
-    lv_obj_set_pos(ui_AnalogClockBatteryLbl, 20, 0);
-    lv_obj_set_align(ui_AnalogClockBatteryLbl, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_size(ui_AnalogClockBatteryLbl, 40, 30);
-    lv_label_set_text(ui_AnalogClockBatteryLbl, LV_SYMBOL_BATTERY_2);
-    lv_obj_set_style_text_font(ui_AnalogClockBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_ImageWatchface = lv_img_create(ui_AnalogClockScreen);
     lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);
     lv_obj_set_width(ui_ImageWatchface, LV_SIZE_CONTENT);  /// 1
@@ -740,12 +737,12 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_align(ui_DigitalClockPanel, LV_ALIGN_TOP_LEFT);
     lv_obj_clear_flag(ui_DigitalClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-    ui_DigitalClockBatteryLbl = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_pos(ui_DigitalClockBatteryLbl, 20, 0);
-    lv_obj_set_align(ui_DigitalClockBatteryLbl, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_size(ui_DigitalClockBatteryLbl, 40, 30);
-    lv_label_set_text(ui_DigitalClockBatteryLbl, LV_SYMBOL_BATTERY_2);
-    lv_obj_set_style_text_font(ui_DigitalClockBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_BatteryLabel = lv_label_create(ui_DigitalClockPanel);
+    lv_obj_set_pos(ui_BatteryLabel, 20, 0);
+    lv_obj_set_align(ui_BatteryLabel, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_size(ui_BatteryLabel, 40, 30);
+    lv_label_set_text(ui_BatteryLabel, LV_SYMBOL_BATTERY_2);
+    lv_obj_set_style_text_font(ui_BatteryLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockLabel, 320, 100);
@@ -792,7 +789,7 @@ void ui_Weather_screen_init(void)
 
     ui_WeatherPanel = lv_obj_create(ui_WeatherScreen);
     lv_obj_set_size(ui_WeatherPanel, lv_pct(100), lv_pct(100));
-    lv_obj_set_pos(ui_WeatherPanel, 1, 4);
+    lv_obj_set_pos(ui_WeatherPanel, 0, 0);
     lv_obj_set_align(ui_WeatherPanel, LV_ALIGN_CENTER);
     lv_obj_clear_flag(ui_WeatherPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
     lv_obj_set_style_bg_color(ui_WeatherPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -812,13 +809,6 @@ void ui_Weather_screen_init(void)
     lv_obj_set_align(ui_WeatherCity, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherCity, "London, GB");
     lv_obj_set_style_text_font(ui_WeatherCity, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_WeatherBatteryLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_pos(ui_WeatherBatteryLbl, 20, 0);
-    lv_obj_set_align(ui_WeatherBatteryLbl, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_size(ui_WeatherBatteryLbl, 40, 30);
-    lv_label_set_text(ui_WeatherBatteryLbl, LV_SYMBOL_BATTERY_2);
-    lv_obj_set_style_text_font(ui_WeatherBatteryLbl, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTemperatureLbl = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherTemperatureLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
@@ -904,7 +894,7 @@ void ui_Weather_screen_init(void)
     lv_label_set_text(ui_WeatherSettingsBtnLbl, LV_SYMBOL_SETTINGS);
     lv_obj_set_style_text_align(ui_WeatherSettingsBtnLbl, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(ui_WeatherScreen, ui_event_Weather, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_WeatherScreen, ui_event_WeatherScreen, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_WeatherSettingsBtn, ui_event_WeatherSettingsBtn, LV_EVENT_ALL, ui_WeatherScreen);
 }
 
