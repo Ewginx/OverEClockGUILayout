@@ -62,8 +62,7 @@ extern "C"
     extern lv_obj_t *ui_Label15;
     extern lv_obj_t *ui_AlarmModalOkButton;
     extern lv_obj_t *ui_Label16;
-    extern lv_obj_t *ui_AlarmSettingsBtn;
-    extern lv_obj_t *ui_AlarmSettingsBtnLabel;
+
     // Alarm Screen Events
     void ui_event_AlarmModalOkButton(lv_event_t *e);
     void ui_event_AlarmModalCancelButton(lv_event_t *e);
@@ -75,15 +74,12 @@ extern "C"
     // Analog Clock Objects
     extern lv_obj_t *ui_AnalogClockScreen;
     extern lv_obj_t *ui_AnalogClockPanel;
-    extern lv_obj_t *ui_AnalogSettingsBtn;
-    extern lv_obj_t *ui_AnalogSettingsLabel;
     extern lv_obj_t *ui_ImageWatchface;
     extern lv_obj_t *ui_ImageArmHour;
     extern lv_obj_t *ui_ImageArmMinute;
     extern lv_obj_t *ui_ImageArmSecond;
     // Analog Clock Events
     void ui_event_AnalogClockScreen(lv_event_t *e);
-    void ui_event_AnalogSettingsBtn(lv_event_t *e);
 
     // Digital Clock Objects
     extern lv_obj_t *ui_DigitalClockScreen;
@@ -91,11 +87,8 @@ extern "C"
     extern lv_obj_t *ui_DigitalClockLabel;
     extern lv_obj_t *ui_DigitalClockSecondLabel;
     extern lv_obj_t *ui_DigitalClockDateLabel;
-    extern lv_obj_t *ui_DigitalClockSettingsBtn;
-    extern lv_obj_t *ui_DigitalClockSettingsBtnLabel;
     // Digital Clock Events
     void ui_event_DigitalClockScreen(lv_event_t *e);
-    void ui_event_DigitalClockSettingsBtn(lv_event_t *e);
 
     // Weather Clock Objects
     extern lv_obj_t *ui_WeatherScreen;
@@ -117,9 +110,12 @@ extern "C"
     extern lv_obj_t *ui_WeatherSettingsBtnLbl;
     
     extern lv_obj_t *ui_BatteryLabel;
+    extern lv_obj_t *ui_SettingsButton;
+    extern lv_obj_t *ui_SettingsButtonLabel;
     // Weather Clock Events
     void ui_event_WeatherScreen(lv_event_t *e);
-    void ui_event_WeatherSettingsBtn(lv_event_t *e);
+
+    void ui_event_SettingsButton(lv_event_t *e);
 
     void ui_create_battery_label(lv_obj_t *screen);
 
