@@ -28,8 +28,8 @@ extern "C"
     extern lv_obj_t *ui_SettingsPasswordLabel;
     extern lv_obj_t *ui_SettingsPasswordEdit;
     extern lv_obj_t *ui_SettingsKeyboard;
-    extern lv_obj_t *ui_SettingsHomeBtn;
-    extern lv_obj_t *ui_SettingsHomeBtnLabel;
+    extern lv_obj_t *ui_SettingsHomeButton;
+    extern lv_obj_t *ui_SettingsHomeButtonLabel;
     extern lv_obj_t *ui_SettingsAPLabel;
     extern lv_obj_t *ui_SettingsIPLabel;
     // Settings Screen Events
@@ -95,19 +95,17 @@ extern "C"
     extern lv_obj_t *ui_WeatherPanel;
     extern lv_obj_t *ui_WeatherImage;
     extern lv_obj_t *ui_WeatherCity;
-    extern lv_obj_t *ui_WeatherTemperatureLbl;
-    extern lv_obj_t *ui_WeatherBriefingLbl;
+    extern lv_obj_t *ui_WeatherTemperatureLabel;
+    extern lv_obj_t *ui_WeatherBriefingLabel;
     extern lv_obj_t *ui_WeatherWindLabel;
     extern lv_obj_t *ui_WeatherHumidityLabel;
     extern lv_obj_t *ui_WeatherMiscLabel;
     extern lv_obj_t *ui_WeatherFeelsLikeLabel;
-    extern lv_obj_t *ui_WeatherTimesLbl;
-    extern lv_obj_t *ui_WeatherFirstTempLbl;
-    extern lv_obj_t *ui_WeatherSecondTempLbl;
-    extern lv_obj_t *ui_WeatherThirdTempLbl;
-    extern lv_obj_t *ui_WeatherFourthTempLbl;
-    extern lv_obj_t *ui_WeatherSettingsBtn;
-    extern lv_obj_t *ui_WeatherSettingsBtnLbl;
+    extern lv_obj_t *ui_WeatherTimesLabel;
+    extern lv_obj_t *ui_WeatherFirstTempLabel;
+    extern lv_obj_t *ui_WeatherSecondTempLabel;
+    extern lv_obj_t *ui_WeatherThirdTempLabel;
+    extern lv_obj_t *ui_WeatherFourthTempLabel;
     
     extern lv_obj_t *ui_BatteryLabel;
     extern lv_obj_t *ui_SettingsButton;
