@@ -293,7 +293,7 @@ void ui_event_AlarmSettingsBtn(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lastScreen = lv_event_get_user_data(e);
-        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 // Screen change on GESTURES
@@ -303,7 +303,7 @@ void ui_event_AlarmScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        _ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
 }
 void ui_event_DigitalClockScreen(lv_event_t *e)
@@ -312,11 +312,11 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        _ui_screen_change(ui_WeatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        ui_screen_change(ui_WeatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        _ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+        ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 void ui_event_Weather(lv_event_t *e)
@@ -325,7 +325,7 @@ void ui_event_Weather(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        _ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+        ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 void ui_event_AnalogClockScreen(lv_event_t *e)
@@ -334,11 +334,11 @@ void ui_event_AnalogClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        _ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+        ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        _ui_screen_change(ui_AlarmScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+        ui_screen_change(ui_AlarmScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 
@@ -350,7 +350,7 @@ void ui_event_DigitalClockSettingsBtn(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lastScreen = lv_event_get_user_data(e);
-        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 void ui_event_AnalogSettingsBtn(lv_event_t *e)
@@ -360,7 +360,7 @@ void ui_event_AnalogSettingsBtn(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lastScreen = lv_event_get_user_data(e);
-        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 void ui_event_SettingsHomeBtn(lv_event_t *e)
@@ -369,7 +369,7 @@ void ui_event_SettingsHomeBtn(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        _ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 void ui_event_WeatherSettingsBtn(lv_event_t *e)
@@ -379,7 +379,7 @@ void ui_event_WeatherSettingsBtn(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lastScreen = lv_event_get_user_data(e);
-        _ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
 
