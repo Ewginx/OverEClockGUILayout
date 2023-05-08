@@ -28,7 +28,7 @@ lv_obj_t *ui_SettingsIPLabel;
 void ui_event_SettingsPasswordEdit(lv_event_t *e);
 void ui_event_SettingsSSIDEdit(lv_event_t *e);
 void ui_event_SettingsCityEdit(lv_event_t *e);
-void ui_event_SettingsHomeBtn(lv_event_t *e);
+void ui_event_SettingsHomeButton(lv_event_t *e);
 void ui_event_SettingsKeyboard(lv_event_t *e);
 
 // Alarm Screen Objects
@@ -147,7 +147,7 @@ void ui_delete_keyboard()
         ui_SettingsKeyboard = NULL;
     }
 }
-void ui_event_SettingsHomeBtn(lv_event_t *e)
+void ui_event_SettingsHomeButton(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t *target = lv_event_get_target(e);
@@ -491,7 +491,7 @@ void ui_Settings_screen_init(void)
     lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeButton, LV_EVENT_ALL, NULL);
 }
 // ALARM SCREEN INIT
 void ui_Alarm_screen_init(void)
