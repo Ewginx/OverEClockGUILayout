@@ -149,6 +149,16 @@ void ui_delete_keyboard()
         ui_SettingsKeyboard = NULL;
     }
 }
+void ui_event_SettingsHomeBtn(lv_event_t *e)
+{
+    lv_event_code_t event_code = lv_event_get_code(e);
+    lv_obj_t *target = lv_event_get_target(e);
+    if (event_code == LV_EVENT_CLICKED)
+    {   
+        lv_event_send(ui_SettingsKeyboard, LV_EVENT_CANCEL, NULL);
+        ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+    }
+}
 void ui_event_SettingsKeyboard(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -364,15 +374,7 @@ void ui_event_SettingsButton(lv_event_t *e)
         ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
-void ui_event_SettingsHomeBtn(lv_event_t *e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t *target = lv_event_get_target(e);
-    if (event_code == LV_EVENT_CLICKED)
-    {
-        ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
-    }
-}
+
 void ui_event_WeatherSettingsBtn(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
