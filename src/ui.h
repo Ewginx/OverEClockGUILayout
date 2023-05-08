@@ -10,6 +10,7 @@
 extern "C"
 {
 #endif
+#define SETTINGS_PANEL_HEIGHT 640
 
 #include "lvgl.h"
 
