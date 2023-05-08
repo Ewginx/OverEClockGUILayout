@@ -83,7 +83,6 @@ lv_obj_t *ui_DigitalClockSettingsBtn;
 lv_obj_t *ui_DigitalClockSettingsBtnLabel;
 // Digital Clock Events
 void ui_event_DigitalClockScreen(lv_event_t *e);
-void ui_event_DigitalClockSettingsBtn(lv_event_t *e);
 
 // Weather Objects
 lv_obj_t *ui_WeatherScreen;
@@ -105,6 +104,8 @@ lv_obj_t *ui_WeatherSettingsBtn;
 lv_obj_t *ui_WeatherSettingsBtnLbl;
 
 lv_obj_t *ui_BatteryLabel;
+lv_obj_t *ui_SettingsButton;
+lv_obj_t *ui_SettingsButtonLabel;
 // Weather Events
 void ui_event_WeatherScreen(lv_event_t *e);
 
@@ -222,10 +223,8 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
             lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_CYAN), lv_palette_main(LV_PALETTE_NONE),
                                                       false, LV_FONT_DEFAULT);
             lv_disp_set_theme(dispp, theme);
-            lv_obj_set_style_text_color(ui_DigitalClockSettingsBtnLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(ui_AnalogSettingsLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_shadow_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_shadow_opa(ui_AnalogSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_SettingsButtonLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_SettingsButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
         }
         else
         {
@@ -233,8 +232,7 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
             lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_CYAN), lv_palette_main(LV_PALETTE_NONE),
                                                       true, LV_FONT_DEFAULT);
             lv_disp_set_theme(dispp, theme);
-            lv_obj_set_style_text_color(ui_DigitalClockSettingsBtnLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
-            lv_obj_set_style_text_color(ui_AnalogSettingsLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_SettingsButtonLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
 }
@@ -302,6 +300,7 @@ void ui_event_AlarmScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_AnalogClockScreen, 0));
         lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AnalogClockScreen, 0));
         ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
@@ -312,13 +311,14 @@ void ui_event_DigitalClockScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
-        // lv_obj_set_parent(ui_BatteryLabel, ui_WeatherPanel);
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_WeatherScreen, 0));
         lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_WeatherScreen, 0));
         ui_screen_change(ui_WeatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AnalogClockScreen,0));
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_AnalogClockScreen, 0));
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AnalogClockScreen, 0));
         ui_screen_change(ui_AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
@@ -328,44 +328,39 @@ void ui_event_WeatherScreen(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
-        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_DigitalClockScreen, 0) );
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_DigitalClockScreen, 0));
+        lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_DigitalClockScreen, 0));
         ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
+
 void ui_event_AnalogClockScreen(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT)
     {
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_DigitalClockScreen, 0));
         lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_DigitalClockScreen, 0));
         ui_screen_change(ui_DigitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
     }
     else if (event_code == LV_EVENT_GESTURE && lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
     {
+        lv_obj_set_parent(ui_SettingsButton, lv_obj_get_child(ui_AlarmScreen, 0));
         lv_obj_set_parent(ui_BatteryLabel, lv_obj_get_child(ui_AlarmScreen, 0));
         ui_screen_change(ui_AlarmScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
     }
 }
 
 // Screen change on Button
-void ui_event_DigitalClockSettingsBtn(lv_event_t *e)
+
+void ui_event_SettingsButton(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        lastScreen = lv_event_get_user_data(e);
-        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
-    }
-}
-void ui_event_AnalogSettingsBtn(lv_event_t *e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t *target = lv_event_get_target(e);
-    if (event_code == LV_EVENT_CLICKED)
-    {
-        lastScreen = lv_event_get_user_data(e);
+        lastScreen = lv_scr_act();
         ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
@@ -651,7 +646,6 @@ void ui_Alarm_screen_init(void)
     lv_obj_add_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmScreen, ui_event_AlarmScreen, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_AlarmSettingsBtn, ui_event_AlarmSettingsBtn, LV_EVENT_ALL, ui_AlarmScreen);
 }
 
 void ui_AnalogClock_screen_init(void)
@@ -665,17 +659,6 @@ void ui_AnalogClock_screen_init(void)
     lv_obj_clear_flag(ui_AnalogClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
     lv_obj_set_style_bg_color(ui_AnalogClockPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(ui_AnalogClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_AnalogSettingsBtn = lv_btn_create(ui_AnalogClockPanel);
-    lv_obj_set_size(ui_AnalogSettingsBtn, 35, 35);
-    lv_obj_set_pos(ui_AnalogSettingsBtn, 401, -6);
-    lv_obj_set_align(ui_AnalogSettingsBtn, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_style_bg_opa(ui_AnalogSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_AnalogSettingsLabel = lv_label_create(ui_AnalogSettingsBtn);
-    lv_obj_set_align(ui_AnalogSettingsLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_AnalogSettingsLabel, LV_SYMBOL_SETTINGS);
-    lv_obj_set_style_text_align(ui_AnalogSettingsLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_ImageWatchface = lv_img_create(ui_AnalogClockScreen);
     lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);
@@ -721,7 +704,6 @@ void ui_AnalogClock_screen_init(void)
     lv_img_set_pivot(ui_ImageArmSecond, 5, 115);
     lv_img_set_angle(ui_ImageArmSecond, 3150);
 
-    lv_obj_add_event_cb(ui_AnalogSettingsBtn, ui_event_AnalogSettingsBtn, LV_EVENT_ALL, ui_AnalogClockScreen);
     lv_obj_add_event_cb(ui_AnalogClockScreen, ui_event_AnalogClockScreen, LV_EVENT_ALL, NULL);
 }
 // DIGITAL CLOCK SCREEN INIT
@@ -736,13 +718,6 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_bg_opa(ui_DigitalClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_align(ui_DigitalClockPanel, LV_ALIGN_TOP_LEFT);
     lv_obj_clear_flag(ui_DigitalClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-
-    ui_BatteryLabel = lv_label_create(ui_DigitalClockPanel);
-    lv_obj_set_pos(ui_BatteryLabel, 20, 0);
-    lv_obj_set_align(ui_BatteryLabel, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_size(ui_BatteryLabel, 40, 30);
-    lv_label_set_text(ui_BatteryLabel, LV_SYMBOL_BATTERY_2);
-    lv_obj_set_style_text_font(ui_BatteryLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockLabel, 320, 100);
@@ -768,19 +743,7 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_text_align(ui_DigitalClockDateLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_DigitalClockSettingsBtn = lv_btn_create(ui_DigitalClockPanel);
-    lv_obj_set_size(ui_DigitalClockSettingsBtn, 35, 35);
-    lv_obj_set_pos(ui_DigitalClockSettingsBtn, 401, -6);
-    lv_obj_set_align(ui_DigitalClockSettingsBtn, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_style_bg_opa(ui_DigitalClockSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_DigitalClockSettingsBtnLabel = lv_label_create(ui_DigitalClockSettingsBtn);
-    lv_obj_set_align(ui_DigitalClockSettingsBtnLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_DigitalClockSettingsBtnLabel, LV_SYMBOL_SETTINGS);
-    lv_obj_set_style_text_align(ui_DigitalClockSettingsBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_DigitalClockSettingsBtn, ui_event_DigitalClockSettingsBtn, LV_EVENT_ALL, ui_DigitalClockScreen);
 }
 void ui_Weather_screen_init(void)
 {
@@ -883,21 +846,31 @@ void ui_Weather_screen_init(void)
     lv_obj_set_align(ui_WeatherFirstTempLbl, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherFirstTempLbl, "7°C	");
 
-    ui_WeatherSettingsBtn = lv_btn_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherSettingsBtn, 35, 35);
-    lv_obj_set_pos(ui_WeatherSettingsBtn, 401, -6);
-    lv_obj_set_align(ui_WeatherSettingsBtn, LV_ALIGN_TOP_LEFT);
-    lv_obj_set_style_bg_opa(ui_WeatherSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_WeatherSettingsBtnLbl = lv_label_create(ui_WeatherSettingsBtn);
-    lv_obj_set_align(ui_WeatherSettingsBtnLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherSettingsBtnLbl, LV_SYMBOL_SETTINGS);
-    lv_obj_set_style_text_align(ui_WeatherSettingsBtnLbl, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     lv_obj_add_event_cb(ui_WeatherScreen, ui_event_WeatherScreen, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_WeatherSettingsBtn, ui_event_WeatherSettingsBtn, LV_EVENT_ALL, ui_WeatherScreen);
 }
+void ui_Dock_init()
+{
+    lv_obj_t *panel = lv_obj_get_child(lv_scr_act(), 0);
+    ui_BatteryLabel = lv_label_create(panel);
+    lv_obj_set_pos(ui_BatteryLabel, 20, 0);
+    lv_obj_set_align(ui_BatteryLabel, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_size(ui_BatteryLabel, 40, 30);
+    lv_label_set_text(ui_BatteryLabel, LV_SYMBOL_BATTERY_2);
+    lv_obj_set_style_text_font(ui_BatteryLabel, &lv_font_montserrat_20, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_SettingsButton = lv_btn_create(panel);
+    lv_obj_set_size(ui_SettingsButton, 35, 35);
+    lv_obj_set_pos(ui_SettingsButton, 401, -6);
+    lv_obj_set_align(ui_SettingsButton, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_style_bg_opa(ui_SettingsButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    ui_SettingsButtonLabel = lv_label_create(ui_SettingsButton);
+    lv_obj_set_align(ui_SettingsButtonLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsButtonLabel, LV_SYMBOL_SETTINGS);
+    lv_obj_set_style_text_align(ui_SettingsButtonLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    lv_obj_add_event_cb(ui_SettingsButton, ui_event_SettingsButton, LV_EVENT_ALL, NULL);
+}
 void ui_init(void)
 {
     lv_disp_t *dispp = lv_disp_get_default();
@@ -911,4 +884,5 @@ void ui_init(void)
     ui_Weather_screen_init();
     // ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_DigitalClockScreen);
+    ui_Dock_init();
 }
