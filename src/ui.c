@@ -20,8 +20,8 @@ lv_obj_t *ui_SettingsSSIDEdit;
 lv_obj_t *ui_SettingsPasswordLabel;
 lv_obj_t *ui_SettingsPasswordEdit;
 lv_obj_t *ui_SettingsKeyboard;
-lv_obj_t *ui_SettingsHomeBtn;
-lv_obj_t *ui_SettingsHomeBtnLabel;
+lv_obj_t *ui_SettingsHomeButton;
+lv_obj_t *ui_SettingsHomeButtonLabel;
 lv_obj_t *ui_SettingsAPLabel;
 lv_obj_t *ui_SettingsIPLabel;
 // Settings Screen Events
@@ -89,19 +89,17 @@ lv_obj_t *ui_WeatherScreen;
 lv_obj_t *ui_WeatherPanel;
 lv_obj_t *ui_WeatherImage;
 lv_obj_t *ui_WeatherCity;
-lv_obj_t *ui_WeatherTemperatureLbl;
-lv_obj_t *ui_WeatherBriefingLbl;
+lv_obj_t *ui_WeatherTemperatureLabel;
+lv_obj_t *ui_WeatherBriefingLabel;
 lv_obj_t *ui_WeatherWindLabel;
 lv_obj_t *ui_WeatherHumidityLabel;
 lv_obj_t *ui_WeatherMiscLabel;
 lv_obj_t *ui_WeatherFeelsLikeLabel;
-lv_obj_t *ui_WeatherTimesLbl;
-lv_obj_t *ui_WeatherThirdTempLbl;
-lv_obj_t *ui_WeatherSecondTempLbl;
-lv_obj_t *ui_WeatherFourthTempLbl;
-lv_obj_t *ui_WeatherFirstTempLbl;
-lv_obj_t *ui_WeatherSettingsBtn;
-lv_obj_t *ui_WeatherSettingsBtnLbl;
+lv_obj_t *ui_WeatherTimesLabel;
+lv_obj_t *ui_WeatherThirdTempLabel;
+lv_obj_t *ui_WeatherSecondTempLabel;
+lv_obj_t *ui_WeatherFourthTempLabel;
+lv_obj_t *ui_WeatherFirstTempLabel;
 
 lv_obj_t *ui_BatteryLabel;
 lv_obj_t *ui_SettingsButton;
@@ -479,21 +477,21 @@ void ui_Settings_screen_init(void)
     lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
     lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsHomeBtn = lv_btn_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsHomeBtn, 35, 35);
-    lv_obj_set_pos(ui_SettingsHomeBtn, 401, -6);
-    lv_obj_set_align(ui_SettingsHomeBtn, LV_ALIGN_TOP_LEFT);
+    ui_SettingsHomeButton = lv_btn_create(ui_SettingsPanel);
+    lv_obj_set_size(ui_SettingsHomeButton, 35, 35);
+    lv_obj_set_pos(ui_SettingsHomeButton, 401, -6);
+    lv_obj_set_align(ui_SettingsHomeButton, LV_ALIGN_TOP_LEFT);
 
-    ui_SettingsHomeBtnLabel = lv_label_create(ui_SettingsHomeBtn);
-    lv_obj_set_align(ui_SettingsHomeBtnLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsHomeBtnLabel, LV_SYMBOL_HOME);
-    lv_obj_set_style_text_align(ui_SettingsHomeBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_SettingsHomeButtonLabel = lv_label_create(ui_SettingsHomeButton);
+    lv_obj_set_align(ui_SettingsHomeButtonLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_SettingsHomeButtonLabel, LV_SYMBOL_HOME);
+    lv_obj_set_style_text_align(ui_SettingsHomeButtonLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsHomeBtn, ui_event_SettingsHomeBtn, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeBtn, LV_EVENT_ALL, NULL);
 }
 // ALARM SCREEN INIT
 void ui_Alarm_screen_init(void)
@@ -725,7 +723,7 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_size(ui_DigitalClockLabel, 320, 100);
     lv_obj_set_pos(ui_DigitalClockLabel, 70, 75);
     lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_DigitalClockLabel, "");
+    lv_label_set_text(ui_DigitalClockLabel, "00:00");
 
     lv_obj_set_style_text_align(ui_DigitalClockLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockLabel, &ui_font_Roboto120, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -733,7 +731,7 @@ void ui_DigitalClock_screen_init(void)
     ui_DigitalClockSecondLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockSecondLabel, 60, 40);
     lv_obj_align_to(ui_DigitalClockSecondLabel, ui_DigitalClockLabel, LV_ALIGN_BOTTOM_RIGHT, 50, -3);
-    lv_label_set_text(ui_DigitalClockSecondLabel, "");
+    lv_label_set_text(ui_DigitalClockSecondLabel, "00");
     lv_obj_set_style_text_align(ui_DigitalClockSecondLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockSecondLabel, &ui_font_Roboto45, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -775,18 +773,18 @@ void ui_Weather_screen_init(void)
     lv_label_set_text(ui_WeatherCity, "London, GB");
     lv_obj_set_style_text_font(ui_WeatherCity, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_WeatherTemperatureLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherTemperatureLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherTemperatureLbl, -5, -18);
-    lv_obj_set_align(ui_WeatherTemperatureLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherTemperatureLbl, "13°C");
-    lv_obj_set_style_text_font(ui_WeatherTemperatureLbl, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_WeatherTemperatureLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherTemperatureLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherTemperatureLabel, -5, -18);
+    lv_obj_set_align(ui_WeatherTemperatureLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherTemperatureLabel, "13°C");
+    lv_obj_set_style_text_font(ui_WeatherTemperatureLabel, &lv_font_montserrat_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_WeatherBriefingLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherBriefingLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherBriefingLbl, 1, 39);
-    lv_obj_set_align(ui_WeatherBriefingLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherBriefingLbl, "Scattered clouds. Light breeze");
+    ui_WeatherBriefingLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherBriefingLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherBriefingLabel, 1, 39);
+    lv_obj_set_align(ui_WeatherBriefingLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherBriefingLabel, "Scattered clouds. Light breeze");
 
     ui_WeatherWindLabel = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherWindLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 121
@@ -818,35 +816,35 @@ void ui_Weather_screen_init(void)
     lv_label_set_text(ui_WeatherFeelsLikeLabel, "Feels like: 13°C");
     lv_obj_set_style_text_font(ui_WeatherFeelsLikeLabel, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_WeatherTimesLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherTimesLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherTimesLbl, -12, 80);
-    lv_obj_set_align(ui_WeatherTimesLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherTimesLbl, "13:00       16:00      19:00       21:00");
+    ui_WeatherTimesLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherTimesLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherTimesLabel, -12, 80);
+    lv_obj_set_align(ui_WeatherTimesLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherTimesLabel, "13:00       16:00      19:00       21:00");
 
-    ui_WeatherThirdTempLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherThirdTempLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherThirdTempLbl, 125, 118);
-    lv_obj_set_align(ui_WeatherThirdTempLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherThirdTempLbl, "10°C");
+    ui_WeatherThirdTempLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherThirdTempLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherThirdTempLabel, 125, 118);
+    lv_obj_set_align(ui_WeatherThirdTempLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherThirdTempLabel, "10°C");
 
-    ui_WeatherSecondTempLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherSecondTempLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherSecondTempLbl, -50, 118);
-    lv_obj_set_align(ui_WeatherSecondTempLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherSecondTempLbl, "10°C	");
+    ui_WeatherSecondTempLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherSecondTempLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherSecondTempLabel, -50, 118);
+    lv_obj_set_align(ui_WeatherSecondTempLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherSecondTempLabel, "10°C	");
 
-    ui_WeatherFourthTempLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherFourthTempLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherFourthTempLbl, 38, 118);
-    lv_obj_set_align(ui_WeatherFourthTempLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherFourthTempLbl, "10°C	");
+    ui_WeatherFourthTempLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherFourthTempLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherFourthTempLabel, 38, 118);
+    lv_obj_set_align(ui_WeatherFourthTempLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherFourthTempLabel, "10°C	");
 
-    ui_WeatherFirstTempLbl = lv_label_create(ui_WeatherPanel);
-    lv_obj_set_size(ui_WeatherFirstTempLbl, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_WeatherFirstTempLbl, -141, 119);
-    lv_obj_set_align(ui_WeatherFirstTempLbl, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_WeatherFirstTempLbl, "7°C	");
+    ui_WeatherFirstTempLabel = lv_label_create(ui_WeatherPanel);
+    lv_obj_set_size(ui_WeatherFirstTempLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    lv_obj_set_pos(ui_WeatherFirstTempLabel, -141, 119);
+    lv_obj_set_align(ui_WeatherFirstTempLabel, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_WeatherFirstTempLabel, "7°C	");
 
     lv_obj_add_event_cb(ui_WeatherScreen, ui_event_WeatherScreen, LV_EVENT_ALL, NULL);
 }
