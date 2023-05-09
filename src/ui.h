@@ -11,9 +11,14 @@ extern "C"
 {
 #endif
 #define SETTINGS_PANEL_HEIGHT 640
+#define HOUR_COUNT 24
+#define MINUTE_COUNT 60
+
+#include <stdio.h>
+#include <string.h>
+
 
 #include "lvgl.h"
-
 #include "ui_events.h"
 
     // Settings Screen Objects
@@ -37,7 +42,7 @@ extern "C"
     void ui_event_SettingsSSIDEdit(lv_event_t *e);
     void ui_event_SettingsCityEdit(lv_event_t *e);
     void ui_event_DarkmodeSwitch(lv_event_t *e);
-    void ui_event_SettingsHomeBtn(lv_event_t *e);
+    void ui_event_SettingsHomeButton(lv_event_t *e);
     void ui_event_SettingsKeyboard(lv_event_t *e);
 
     // Alarm Screen Objects
@@ -59,9 +64,9 @@ extern "C"
     extern lv_obj_t *ui_AlarmHourRoller;
     extern lv_obj_t *ui_AlarmMinuteRoller;
     extern lv_obj_t *ui_AlarmModalCancelButton;
-    extern lv_obj_t *ui_Label15;
+    extern lv_obj_t *ui_AlarmModalCancelButtonLabel;
     extern lv_obj_t *ui_AlarmModalOkButton;
-    extern lv_obj_t *ui_Label16;
+    extern lv_obj_t *ui_AlarmModalOkButtonLabel;
 
     // Alarm Screen Events
     void ui_event_AlarmModalOkButton(lv_event_t *e);
