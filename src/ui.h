@@ -13,6 +13,8 @@ extern "C"
 #define SETTINGS_PANEL_HEIGHT 640
 #define HOUR_COUNT 24
 #define MINUTE_COUNT 60
+#define HOUR_LABEL 0
+#define MINUTE_LABEL 3
 
 #include <stdio.h>
 #include <stdlib.h> 

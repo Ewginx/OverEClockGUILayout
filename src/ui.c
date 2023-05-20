@@ -10,12 +10,6 @@
 lv_obj_t *lastScreen = NULL;
 lv_obj_t *pressed_alarm_button = NULL;
 
-char hour_count [HOUR_COUNT*3];
-char hour_buffer [3];
-char minute_count [MINUTE_COUNT*3];
-char minute_buffer [3];
-
-char alarm_buff [2];
 
 // Settings Screen Objects
 lv_obj_t *ui_SettingsScreen;
@@ -161,7 +155,7 @@ void ui_event_SettingsHomeButton(lv_event_t *e)
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
-    {   
+    {
         lv_event_send(ui_SettingsKeyboard, LV_EVENT_CANCEL, NULL);
         ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
@@ -253,28 +247,120 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
         }
     }
 }
-void parse_alarm_label(char* string, int pos){
+void parse_alarm_label(char *string, int pos, char *buff)
+{
     for (size_t i = 0; i < 2; i++)
     {
-        alarm_buff[i] = string[i+pos];
+        buff[i] = string[i + pos];
     }
-    
 }
-void ui_set_roller_time(const lv_obj_t * label){
-        parse_alarm_label(lv_label_get_text(label), 0);
-        lv_roller_set_selected(ui_AlarmHourRoller, atoi(alarm_buff), LV_ANIM_OFF); 
-        parse_alarm_label(lv_label_get_text(label), 3);
-        lv_roller_set_selected(ui_AlarmMinuteRoller, atoi(alarm_buff), LV_ANIM_OFF); 
+void ui_set_roller_time(const lv_obj_t *label)
+{
+    char alarm_buff[2];
+    parse_alarm_label(lv_label_get_text(label), HOUR_LABEL, alarm_buff);
+    lv_roller_set_selected(ui_AlarmHourRoller, atoi(alarm_buff), LV_ANIM_OFF);
+    parse_alarm_label(lv_label_get_text(label), MINUTE_LABEL, alarm_buff);
+    lv_roller_set_selected(ui_AlarmMinuteRoller, atoi(alarm_buff), LV_ANIM_OFF);
+}
+void ui_create_alarm_modal_panel(lv_obj_t *target_label)
+{
+
+    if (ui_AlarmModalPanel == NULL)
+    {
+        char hour_count[HOUR_COUNT * 3] = {0};
+        char hour_buffer[3] = {0};
+        char minute_count[MINUTE_COUNT * 3] = {0};
+        char minute_buffer[3] = {0};
+        ui_AlarmModalPanel = lv_obj_create(ui_AlarmScreen);
+        lv_obj_set_size(ui_AlarmModalPanel, 180, 160);
+        lv_obj_set_align(ui_AlarmModalPanel, LV_ALIGN_CENTER);
+        lv_obj_clear_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+        for (short int i = 0; i < HOUR_COUNT; i++)
+        {
+            if (i == HOUR_COUNT - 1)
+            {
+                sprintf(hour_buffer, "%2i", i);
+            }
+            else
+            {
+                sprintf(hour_buffer, "%02i\n", i);
+            }
+            strcat(hour_count, hour_buffer);
+        }
+        for (short int i = 0; i < MINUTE_COUNT; i++)
+        {
+            if (i == MINUTE_COUNT - 1)
+            {
+                sprintf(minute_buffer, "%02i", i);
+            }
+            else
+            {
+                sprintf(minute_buffer, "%02i\n", i);
+            }
+            strcat(minute_count, minute_buffer);
+        }
+        ui_AlarmHourRoller = lv_roller_create(ui_AlarmModalPanel);
+        lv_roller_set_options(ui_AlarmHourRoller,
+                              hour_count, LV_ROLLER_MODE_INFINITE);
+        lv_obj_set_size(ui_AlarmHourRoller, 60, 80);
+        lv_obj_set_pos(ui_AlarmHourRoller, -38, -20);
+        lv_obj_set_align(ui_AlarmHourRoller, LV_ALIGN_CENTER);
+
+        ui_AlarmMinuteRoller = lv_roller_create(ui_AlarmModalPanel);
+        lv_roller_set_options(ui_AlarmMinuteRoller,
+                              minute_count,
+                              LV_ROLLER_MODE_INFINITE);
+        lv_obj_set_size(ui_AlarmMinuteRoller, 60, 80);
+        lv_obj_align_to(ui_AlarmMinuteRoller, ui_AlarmHourRoller, LV_ALIGN_BOTTOM_LEFT, 60, 18);
+
+        ui_AlarmModalCancelButton = lv_btn_create(ui_AlarmModalPanel);
+        lv_obj_set_size(ui_AlarmModalCancelButton, 60, 35);
+        lv_obj_set_pos(ui_AlarmModalCancelButton, 5, 5);
+        lv_obj_set_align(ui_AlarmModalCancelButton, LV_ALIGN_BOTTOM_LEFT);
+
+        ui_AlarmModalCancelButtonLabel = lv_label_create(ui_AlarmModalCancelButton);
+        lv_obj_set_size(ui_AlarmModalCancelButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_align(ui_AlarmModalCancelButtonLabel, LV_ALIGN_CENTER);
+        lv_label_set_text(ui_AlarmModalCancelButtonLabel, "Cancel");
+
+        ui_AlarmModalOkButton = lv_btn_create(ui_AlarmModalPanel);
+        lv_obj_set_size(ui_AlarmModalOkButton, 60, 35);
+        lv_obj_align_to(ui_AlarmModalOkButton, ui_AlarmModalCancelButton, LV_ALIGN_BOTTOM_LEFT, 60, 10);
+
+        ui_AlarmModalOkButtonLabel = lv_label_create(ui_AlarmModalOkButton);
+        lv_obj_set_size(ui_AlarmModalOkButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_align(ui_AlarmModalOkButtonLabel, LV_ALIGN_CENTER);
+        lv_label_set_text(ui_AlarmModalOkButtonLabel, "OK");
+
+        lv_obj_add_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
+        lv_obj_add_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton, LV_EVENT_ALL, target_label);
+
+        ui_set_roller_time(target_label);
+    }
+}
+void ui_delete_alarm_modal_panel()
+{
+    if (ui_AlarmModalPanel != NULL)
+    {
+        lv_obj_remove_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton);
+        lv_obj_remove_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton);
+        lv_obj_del(ui_AlarmModalPanel);
+        ui_AlarmModalPanel = NULL;
+        ui_AlarmHourRoller = NULL;
+        ui_AlarmMinuteRoller = NULL;
+        ui_AlarmModalCancelButton = NULL;
+        ui_AlarmModalCancelButtonLabel = NULL;
+        ui_AlarmModalOkButton = NULL;
+        ui_AlarmModalOkButtonLabel = NULL;
+    }
 }
 void ui_event_WorkingDayButton(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t *target = lv_event_get_target(e); 
+    lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        pressed_alarm_button = ui_AlarmWorkingDayButton;
-        ui_set_roller_time(ui_AlarmWorkingDayButtonLabel);
+        ui_create_alarm_modal_panel(ui_AlarmWorkingDayButtonLabel);
     }
 }
 void ui_event_WeekendButton(lv_event_t *e)
@@ -283,9 +369,7 @@ void ui_event_WeekendButton(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        pressed_alarm_button = ui_AlarmWeekendDayButton;
-        ui_set_roller_time(ui_AlarmWeekendDayButtonLabel);
+        ui_create_alarm_modal_panel(ui_AlarmWeekendDayButtonLabel);
     }
 }
 
@@ -295,9 +379,7 @@ void ui_event_OneOffButton(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_REMOVE);
-        pressed_alarm_button = ui_AlarmOneOffButton;
-        ui_set_roller_time(ui_AlarmOneOffButtonLabel);
+        ui_create_alarm_modal_panel(ui_AlarmOneOffButtonLabel);
     }
 }
 void ui_event_AlarmModalCancelButton(lv_event_t *e)
@@ -306,7 +388,7 @@ void ui_event_AlarmModalCancelButton(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
+        ui_delete_alarm_modal_panel();
     }
 }
 void ui_event_AlarmModalOkButton(lv_event_t *e)
@@ -315,8 +397,8 @@ void ui_event_AlarmModalOkButton(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        ui_flag_modify(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN, _UI_MODIFY_FLAG_ADD);
-        lv_label_set_text_fmt(lv_obj_get_child(pressed_alarm_button, 0) , "%02i:%02i", lv_roller_get_selected(ui_AlarmHourRoller), lv_roller_get_selected(ui_AlarmMinuteRoller));
+        lv_label_set_text_fmt( e->user_data, "%02i:%02i", lv_roller_get_selected(ui_AlarmHourRoller), lv_roller_get_selected(ui_AlarmMinuteRoller));
+        ui_delete_alarm_modal_panel();
     }
 }
 void ui_event_AlarmSettingsBtn(lv_event_t *e)
@@ -543,8 +625,7 @@ void ui_Alarm_screen_init(void)
 
     ui_AlarmWorkingDayButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWorkingDayButton, 70, 41);
-    lv_obj_align_to(ui_AlarmWorkingDayButton, ui_AlarmWorkingDayLabel, LV_ALIGN_BOTTOM_LEFT, 230,15);
-    lv_obj_set_style_bg_color(ui_AlarmWorkingDayButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_align_to(ui_AlarmWorkingDayButton, ui_AlarmWorkingDayLabel, LV_ALIGN_BOTTOM_LEFT, 230, 15);
     lv_obj_set_style_bg_opa(ui_AlarmWorkingDayButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AlarmWorkingDayButtonLabel = lv_label_create(ui_AlarmWorkingDayButton);
@@ -554,17 +635,16 @@ void ui_Alarm_screen_init(void)
 
     ui_AlarmWorkingDaySwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWorkingDaySwitch, 50, 25);
-    lv_obj_align_to( ui_AlarmWorkingDaySwitch, ui_AlarmWorkingDayButton, LV_ALIGN_BOTTOM_LEFT, 100,0);
+    lv_obj_align_to(ui_AlarmWorkingDaySwitch, ui_AlarmWorkingDayButton, LV_ALIGN_BOTTOM_LEFT, 100, 0);
 
     ui_AlarmWeekendDayLabel = lv_label_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWeekendDayLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_align_to( ui_AlarmWeekendDayLabel, ui_AlarmWorkingDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -70,40);
+    lv_obj_align_to(ui_AlarmWeekendDayLabel, ui_AlarmWorkingDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -70, 40);
     lv_label_set_text(ui_AlarmWeekendDayLabel, "Alarm Clock Weekends");
 
     ui_AlarmWeekendDayButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWeekendDayButton, 70, 41);
-    lv_obj_align_to( ui_AlarmWeekendDayButton, ui_AlarmWorkingDayButton, LV_ALIGN_OUT_BOTTOM_MID, 0,20);
-    lv_obj_set_style_bg_color(ui_AlarmWeekendDayButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_align_to(ui_AlarmWeekendDayButton, ui_AlarmWorkingDayButton, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
     lv_obj_set_style_bg_opa(ui_AlarmWeekendDayButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AlarmWeekendDayButtonLabel = lv_label_create(ui_AlarmWeekendDayButton);
@@ -574,17 +654,16 @@ void ui_Alarm_screen_init(void)
 
     ui_AlarmWeekendDaySwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWeekendDaySwitch, 50, 25);
-    lv_obj_align_to( ui_AlarmWeekendDaySwitch, ui_AlarmWorkingDaySwitch, LV_ALIGN_OUT_BOTTOM_MID, 0,30);
+    lv_obj_align_to(ui_AlarmWeekendDaySwitch, ui_AlarmWorkingDaySwitch, LV_ALIGN_OUT_BOTTOM_MID, 0, 30);
 
     ui_AlarmOneOffLabel = lv_label_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_align_to( ui_AlarmOneOffLabel, ui_AlarmWeekendDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -70,40);
+    lv_obj_align_to(ui_AlarmOneOffLabel, ui_AlarmWeekendDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -70, 40);
     lv_label_set_text(ui_AlarmOneOffLabel, "Alarm Clock One Off");
 
     ui_AlarmOneOffButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffButton, 70, 41);
-    lv_obj_align_to( ui_AlarmOneOffButton, ui_AlarmWeekendDayButton, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
-    lv_obj_set_style_bg_color(ui_AlarmOneOffButton, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_align_to(ui_AlarmOneOffButton, ui_AlarmWeekendDayButton, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
     lv_obj_set_style_bg_opa(ui_AlarmOneOffButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_AlarmOneOffButtonLabel = lv_label_create(ui_AlarmOneOffButton);
@@ -594,70 +673,7 @@ void ui_Alarm_screen_init(void)
 
     ui_AlarmOneOffSwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffSwitch, 50, 25);
-    lv_obj_align_to( ui_AlarmOneOffSwitch, ui_AlarmWeekendDaySwitch, LV_ALIGN_OUT_BOTTOM_MID, 0,40);
-
-
-    ui_AlarmModalPanel = lv_obj_create(ui_AlarmScreen);
-    lv_obj_set_size(ui_AlarmModalPanel, 180, 160);
-    lv_obj_set_align(ui_AlarmModalPanel, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_HIDDEN);       /// Flags
-    lv_obj_clear_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-
-    for (short int i = 0; i < HOUR_COUNT; i++)
-    {
-        if(i==HOUR_COUNT-1){
-            sprintf(hour_buffer, "%02i", i);
-        }
-        else
-        {
-            sprintf(hour_buffer, "%02i\n", i);
-        }
-        strcat(hour_count, hour_buffer);
-    }
-    for (short int i = 0; i < MINUTE_COUNT; i++)
-    {
-        if(i==MINUTE_COUNT-1){
-            sprintf(minute_buffer, "%02i", i);
-        }
-        else
-        {
-            sprintf(minute_buffer, "%02i\n", i);
-        }
-        strcat(minute_count, minute_buffer);
-    }
-    ui_AlarmHourRoller = lv_roller_create(ui_AlarmModalPanel);
-    lv_roller_set_options(ui_AlarmHourRoller,
-                          hour_count, LV_ROLLER_MODE_INFINITE);
-    lv_obj_set_size(ui_AlarmHourRoller, 60, 80);
-    lv_obj_set_pos(ui_AlarmHourRoller, -38, -20);
-    lv_obj_set_align(ui_AlarmHourRoller, LV_ALIGN_CENTER);
-
-    ui_AlarmMinuteRoller = lv_roller_create(ui_AlarmModalPanel);
-    lv_roller_set_options(ui_AlarmMinuteRoller,
-                          minute_count,
-                          LV_ROLLER_MODE_INFINITE);
-    lv_obj_set_size(ui_AlarmMinuteRoller, 60, 80);
-    lv_obj_align_to(ui_AlarmMinuteRoller, ui_AlarmHourRoller,LV_ALIGN_BOTTOM_LEFT,60,18);
- 
-
-    ui_AlarmModalCancelButton = lv_btn_create(ui_AlarmModalPanel);
-    lv_obj_set_size(ui_AlarmModalCancelButton, 60, 35);
-    lv_obj_set_pos(ui_AlarmModalCancelButton, 5, 5);
-    lv_obj_set_align(ui_AlarmModalCancelButton, LV_ALIGN_BOTTOM_LEFT);
-
-    ui_AlarmModalCancelButtonLabel = lv_label_create(ui_AlarmModalCancelButton);
-    lv_obj_set_size(ui_AlarmModalCancelButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_align(ui_AlarmModalCancelButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_AlarmModalCancelButtonLabel, "Cancel");
-
-    ui_AlarmModalOkButton = lv_btn_create(ui_AlarmModalPanel);
-    lv_obj_set_size(ui_AlarmModalOkButton, 60, 35);
-    lv_obj_align_to(ui_AlarmModalOkButton, ui_AlarmModalCancelButton,LV_ALIGN_BOTTOM_LEFT,60,10);
-
-    ui_AlarmModalOkButtonLabel = lv_label_create(ui_AlarmModalOkButton);
-    lv_obj_set_size(ui_AlarmModalOkButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_align(ui_AlarmModalOkButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_AlarmModalOkButtonLabel, "OK");
+    lv_obj_align_to(ui_AlarmOneOffSwitch, ui_AlarmWeekendDaySwitch, LV_ALIGN_OUT_BOTTOM_MID, 0, 40);
 
     ui_AlarmSettingsBtn = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmSettingsBtn, 35, 35);
@@ -672,8 +688,6 @@ void ui_Alarm_screen_init(void)
     lv_obj_add_event_cb(ui_AlarmWorkingDayButton, ui_event_WorkingDayButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmWeekendDayButton, ui_event_WeekendButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmOneOffButton, ui_event_OneOffButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmScreen, ui_event_AlarmScreen, LV_EVENT_ALL, NULL);
 }
 
