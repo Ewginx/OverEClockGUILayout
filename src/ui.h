@@ -15,6 +15,7 @@ extern "C"
 #define MINUTE_COUNT 60
 
 #include <stdio.h>
+#include <stdlib.h> 
 #include <string.h>
 
 
@@ -48,18 +49,18 @@ extern "C"
     // Alarm Screen Objects
     extern lv_obj_t *ui_AlarmScreen;
     extern lv_obj_t *ui_AlarmPanel;
-    extern lv_obj_t *ui_Label1;
-    extern lv_obj_t *ui_Label2;
-    extern lv_obj_t *ui_Label3;
-    extern lv_obj_t *ui_Switch1;
-    extern lv_obj_t *ui_Switch2;
-    extern lv_obj_t *ui_Switch3;
-    extern lv_obj_t *ui_Button6;
-    extern lv_obj_t *ui_Label6;
-    extern lv_obj_t *ui_Button1;
-    extern lv_obj_t *ui_Label7;
-    extern lv_obj_t *ui_Button4;
-    extern lv_obj_t *ui_Label8;
+    extern lv_obj_t *ui_AlarmWorkingDayLabel;
+    extern lv_obj_t *ui_AlarmWeekendDayLabel;
+    extern lv_obj_t *ui_AlarmOneOffLabel;
+    extern lv_obj_t *ui_AlarmWorkingDaySwitch;
+    extern lv_obj_t *ui_AlarmWeekendDaySwitch;
+    extern lv_obj_t *ui_AlarmOneOffSwitch;
+    extern lv_obj_t *ui_AlarmWorkingDayButton;
+    extern lv_obj_t *ui_AlarmWorkingDayButtonLabel;
+    extern lv_obj_t *ui_AlarmWeekendDayButton;
+    extern lv_obj_t *ui_AlarmWeekendDayButtonLabel;
+    extern lv_obj_t *ui_AlarmOneOffButton;
+    extern lv_obj_t *ui_AlarmOneOffButtonLabel;
     extern lv_obj_t *ui_AlarmModalPanel;
     extern lv_obj_t *ui_AlarmHourRoller;
     extern lv_obj_t *ui_AlarmMinuteRoller;
@@ -71,9 +72,9 @@ extern "C"
     // Alarm Screen Events
     void ui_event_AlarmModalOkButton(lv_event_t *e);
     void ui_event_AlarmModalCancelButton(lv_event_t *e);
-    void ui_event_Button4(lv_event_t *e);
-    void ui_event_Button1(lv_event_t *e);
-    void ui_event_Button6(lv_event_t *e);
+    void ui_event_OneOffButton(lv_event_t *e);
+    void ui_event_WeekendButton(lv_event_t *e);
+    void ui_event_WorkingDayButton(lv_event_t *e);
     void ui_event_AlarmScreen(lv_event_t *e);
 
     // Analog Clock Objects

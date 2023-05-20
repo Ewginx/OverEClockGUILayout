@@ -53,7 +53,7 @@ void _ui_keyboard_set_target(lv_obj_t * keyboard, lv_obj_t * textarea);
 #define _UI_MODIFY_FLAG_ADD 0
 #define _UI_MODIFY_FLAG_REMOVE 1
 #define _UI_MODIFY_FLAG_TOGGLE 2
-void _ui_flag_modify(lv_obj_t * target, int32_t flag, int value);
+void ui_flag_modify(lv_obj_t * target, int32_t flag, int value);
 
 #define _UI_MODIFY_STATE_ADD 0
 #define _UI_MODIFY_STATE_REMOVE 1
