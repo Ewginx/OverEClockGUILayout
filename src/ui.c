@@ -236,14 +236,24 @@ void ui_event_DarkmodeSwitch(lv_event_t *e)
             lv_disp_set_theme(dispp, theme);
             lv_obj_set_style_text_color(ui_SettingsButtonLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
             lv_obj_set_style_shadow_opa(ui_SettingsButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_AlarmWorkingDayButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_AlarmWeekendDayButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_shadow_opa(ui_AlarmOneOffButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmWorkingDayButtonLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmWeekendDayButtonLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmOneOffButtonLabel, lv_color_black(), LV_PART_MAIN | LV_STATE_DEFAULT);
+
         }
         else
         {
             lv_disp_t *dispp = lv_disp_get_default();
-            lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_CYAN), lv_palette_main(LV_PALETTE_NONE),
+            lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_TEAL), lv_palette_main(LV_PALETTE_TEAL),
                                                       true, LV_FONT_DEFAULT);
             lv_disp_set_theme(dispp, theme);
             lv_obj_set_style_text_color(ui_SettingsButtonLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmWorkingDayButtonLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmWeekendDayButtonLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
+            lv_obj_set_style_text_color(ui_AlarmOneOffButtonLabel, lv_color_white(), LV_PART_MAIN | LV_STATE_DEFAULT);
         }
     }
 }
@@ -679,16 +689,6 @@ void ui_Alarm_screen_init(void)
     ui_AlarmOneOffSwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffSwitch, 50, 25);
     lv_obj_align_to(ui_AlarmOneOffSwitch, ui_AlarmWeekendDaySwitch, LV_ALIGN_OUT_BOTTOM_MID, 0, 40);
-
-    ui_AlarmSettingsBtn = lv_btn_create(ui_AlarmPanel);
-    lv_obj_set_size(ui_AlarmSettingsBtn, 35, 35);
-    lv_obj_set_pos(ui_AlarmSettingsBtn, 195, -130);
-    lv_obj_set_align(ui_AlarmSettingsBtn, LV_ALIGN_CENTER);
-    lv_obj_set_style_bg_opa(ui_AlarmSettingsBtn, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    ui_AlarmSettingsBtnLabel = lv_label_create(ui_AlarmSettingsBtn);
-    lv_obj_set_align(ui_AlarmSettingsBtnLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_AlarmSettingsBtnLabel, LV_SYMBOL_SETTINGS);
-    lv_obj_set_style_text_align(ui_AlarmSettingsBtnLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_AlarmWorkingDayButton, ui_event_WorkingDayButton, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_AlarmWeekendDayButton, ui_event_WeekendButton, LV_EVENT_ALL, NULL);
