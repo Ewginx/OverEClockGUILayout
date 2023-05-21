@@ -118,6 +118,136 @@ lv_obj_t *ui____initial_actions0;
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_create_settings_screen()
+{
+    if (ui_SettingsScreen == NULL)
+    {
+        ui_SettingsScreen = lv_obj_create(NULL);
+        lv_obj_add_flag(ui_SettingsScreen, LV_OBJ_FLAG_IGNORE_LAYOUT); /// Flags
+        lv_obj_set_scroll_dir(ui_SettingsScreen, LV_DIR_VER);
+        lv_obj_clear_flag(ui_SettingsScreen, LV_OBJ_FLAG_SCROLL_ELASTIC);
+
+        ui_SettingsPanel = lv_obj_create(ui_SettingsScreen);
+        lv_obj_set_size(ui_SettingsPanel, lv_pct(100), SETTINGS_PANEL_HEIGHT);
+        lv_obj_set_style_bg_color(ui_SettingsPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_bg_opa(ui_SettingsPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_clear_flag(ui_SettingsPanel, LV_OBJ_FLAG_SCROLL_ELASTIC);
+
+        ui_DarkmodeLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_DarkmodeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_DarkmodeLabel, 35, 15);
+        lv_obj_set_align(ui_DarkmodeLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_DarkmodeLabel, "Dark Mode");
+        lv_obj_set_style_text_font(ui_DarkmodeLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+
+        ui_DarkmodeSwitch = lv_switch_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_DarkmodeSwitch, 50, 25);
+        lv_obj_set_pos(ui_DarkmodeSwitch, 175, 15);
+        lv_obj_set_align(ui_DarkmodeSwitch, LV_ALIGN_TOP_LEFT);
+
+        ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
+        lv_obj_set_pos(ui_SettingsCityEdit, 180, SETTINGS_PANEL_HEIGHT / 5);
+        lv_obj_set_align(ui_SettingsCityEdit, LV_ALIGN_TOP_LEFT);
+        lv_textarea_set_max_length(ui_SettingsCityEdit, 100);
+        lv_textarea_set_placeholder_text(ui_SettingsCityEdit, "City, country code ISO-81118");
+        lv_textarea_set_one_line(ui_SettingsCityEdit, true);
+
+        ui_SettingsCityLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_SettingsCityLabel, 20, SETTINGS_PANEL_HEIGHT / 5);
+        lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_SettingsCityLabel, "City and\ncountry code");
+        lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        ui_SettingsSSIDEdit = lv_textarea_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsSSIDEdit, 250, LV_SIZE_CONTENT);
+        lv_obj_set_pos(ui_SettingsSSIDEdit, 180, SETTINGS_PANEL_HEIGHT / 5 + 60);
+        lv_obj_set_align(ui_SettingsSSIDEdit, LV_ALIGN_TOP_LEFT);
+        lv_textarea_set_max_length(ui_SettingsSSIDEdit, 50);
+        lv_textarea_set_placeholder_text(ui_SettingsSSIDEdit, "WiFi SSID");
+        lv_textarea_set_one_line(ui_SettingsSSIDEdit, true);
+
+        ui_SettingsSSIDLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_SettingsSSIDLabel, 40, SETTINGS_PANEL_HEIGHT / 5 + 70);
+        lv_obj_set_align(ui_SettingsSSIDLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_SettingsSSIDLabel, "WiFi SSID");
+        lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        ui_SettingsPasswordEdit = lv_textarea_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT); /// 33
+        lv_obj_set_pos(ui_SettingsPasswordEdit, 180, SETTINGS_PANEL_HEIGHT / 5 + 60 * 2);
+        lv_obj_set_align(ui_SettingsPasswordEdit, LV_ALIGN_TOP_LEFT);
+        lv_textarea_set_max_length(ui_SettingsPasswordEdit, 100);
+        lv_textarea_set_placeholder_text(ui_SettingsPasswordEdit, "WiFi Password");
+        lv_textarea_set_one_line(ui_SettingsPasswordEdit, true);
+        lv_textarea_set_password_mode(ui_SettingsPasswordEdit, true);
+
+        ui_SettingsPasswordLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsPasswordLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_SettingsPasswordLabel, 20, SETTINGS_PANEL_HEIGHT / 5 + 65 * 2);
+        lv_obj_set_align(ui_SettingsPasswordLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_SettingsPasswordLabel, "WiFi Password");
+        lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        ui_SettingsAPLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsAPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_SettingsAPLabel, 80, SETTINGS_PANEL_HEIGHT - 60);
+        lv_obj_set_align(ui_SettingsAPLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_SettingsAPLabel, "AccessPoint IP:");
+        lv_obj_set_style_text_font(ui_SettingsAPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        ui_SettingsIPLabel = lv_label_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsIPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+        lv_obj_set_pos(ui_SettingsIPLabel, 230, SETTINGS_PANEL_HEIGHT - 60);
+        lv_obj_set_align(ui_SettingsIPLabel, LV_ALIGN_TOP_LEFT);
+        lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
+        lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        ui_SettingsHomeButton = lv_btn_create(ui_SettingsPanel);
+        lv_obj_set_size(ui_SettingsHomeButton, 35, 35);
+        lv_obj_set_pos(ui_SettingsHomeButton, 401, -6);
+        lv_obj_set_align(ui_SettingsHomeButton, LV_ALIGN_TOP_LEFT);
+
+        ui_SettingsHomeButtonLabel = lv_label_create(ui_SettingsHomeButton);
+        lv_obj_set_align(ui_SettingsHomeButtonLabel, LV_ALIGN_CENTER);
+        lv_label_set_text(ui_SettingsHomeButtonLabel, LV_SYMBOL_HOME);
+        lv_obj_set_style_text_align(ui_SettingsHomeButtonLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+        lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
+        lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
+        lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
+        lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
+        lv_obj_add_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeButton, LV_EVENT_ALL, NULL);
+    }
+}
+void ui_delete_settings_screen()
+{
+    if (ui_SettingsScreen != NULL)
+    {
+        lv_obj_remove_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch);
+        lv_obj_remove_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit);
+        lv_obj_remove_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit);
+        lv_obj_remove_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit);
+        lv_obj_remove_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeButton);
+        ui_SettingsScreen = NULL;
+        ui_SettingsPanel = NULL;
+        ui_DarkmodeLabel = NULL;
+        ui_DarkmodeSwitch = NULL;
+        ui_SettingsCityEdit = NULL;
+        ui_SettingsCityLabel = NULL;
+        ui_SettingsSSIDEdit = NULL;
+        ui_SettingsSSIDLabel = NULL;
+        ui_SettingsPasswordEdit = NULL;
+        ui_SettingsPasswordLabel = NULL;
+        ui_SettingsAPLabel = NULL;
+        ui_SettingsIPLabel = NULL;
+        ui_SettingsHomeButton = NULL;
+        ui_SettingsHomeButtonLabel = NULL;
+    }
+}
 void ui_create_keyboard(lv_obj_t *target)
 {
     if (ui_SettingsKeyboard == NULL)
@@ -152,7 +282,8 @@ void ui_event_SettingsHomeButton(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lv_event_send(ui_SettingsKeyboard, LV_EVENT_CANCEL, NULL);
-        ui_screen_change(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
+        lv_scr_load_anim(lastScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, true);
+        ui_delete_settings_screen();
     }
 }
 void ui_event_SettingsKeyboard(lv_event_t *e)
@@ -410,16 +541,6 @@ void ui_event_AlarmModalOkButton(lv_event_t *e)
         ui_delete_alarm_modal_panel();
     }
 }
-void ui_event_AlarmSettingsBtn(lv_event_t *e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t *target = lv_event_get_target(e);
-    if (event_code == LV_EVENT_CLICKED)
-    {
-        lastScreen = lv_event_get_user_data(e);
-        ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
-    }
-}
 // Screen change on GESTURES
 void ui_event_AlarmScreen(lv_event_t *e)
 {
@@ -488,6 +609,7 @@ void ui_event_SettingsButton(lv_event_t *e)
     if (event_code == LV_EVENT_CLICKED)
     {
         lastScreen = lv_scr_act();
+        ui_create_settings_screen();
         ui_screen_change(ui_SettingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
     }
 }
@@ -509,109 +631,6 @@ void ui_move_battery_label(lv_obj_t *screen)
 }
 
 ///////////////////// SCREENS INIT////////////////////
-// SETTING SCREEN INIT
-void ui_Settings_screen_init(void)
-{
-    ui_SettingsScreen = lv_obj_create(NULL);
-    lv_obj_add_flag(ui_SettingsScreen, LV_OBJ_FLAG_IGNORE_LAYOUT); /// Flags
-    lv_obj_set_scroll_dir(ui_SettingsScreen, LV_DIR_VER);
-    lv_obj_clear_flag(ui_SettingsScreen, LV_OBJ_FLAG_SCROLL_ELASTIC);
-
-    ui_SettingsPanel = lv_obj_create(ui_SettingsScreen);
-    lv_obj_set_size(ui_SettingsPanel, lv_pct(100), SETTINGS_PANEL_HEIGHT);
-    lv_obj_set_style_bg_color(ui_SettingsPanel, lv_color_hex(0xFFFFFF), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(ui_SettingsPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_clear_flag(ui_SettingsPanel, LV_OBJ_FLAG_SCROLL_ELASTIC);
-
-    ui_DarkmodeLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_DarkmodeLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_DarkmodeLabel, 35, 15);
-    lv_obj_set_align(ui_DarkmodeLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_DarkmodeLabel, "Dark Mode");
-    lv_obj_set_style_text_font(ui_DarkmodeLabel, &lv_font_montserrat_18, LV_PART_MAIN);
-
-    ui_DarkmodeSwitch = lv_switch_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_DarkmodeSwitch, 50, 25);
-    lv_obj_set_pos(ui_DarkmodeSwitch, 175, 15);
-    lv_obj_set_align(ui_DarkmodeSwitch, LV_ALIGN_TOP_LEFT);
-
-    ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
-    lv_obj_set_pos(ui_SettingsCityEdit, 180, SETTINGS_PANEL_HEIGHT / 5);
-    lv_obj_set_align(ui_SettingsCityEdit, LV_ALIGN_TOP_LEFT);
-    lv_textarea_set_max_length(ui_SettingsCityEdit, 100);
-    lv_textarea_set_placeholder_text(ui_SettingsCityEdit, "City, country code ISO-81118");
-    lv_textarea_set_one_line(ui_SettingsCityEdit, true);
-
-    ui_SettingsCityLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsCityLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsCityLabel, 20, SETTINGS_PANEL_HEIGHT / 5);
-    lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_SettingsCityLabel, "City and\ncountry code");
-    lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_SettingsSSIDEdit = lv_textarea_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsSSIDEdit, 250, LV_SIZE_CONTENT);
-    lv_obj_set_pos(ui_SettingsSSIDEdit, 180, SETTINGS_PANEL_HEIGHT / 5 + 60);
-    lv_obj_set_align(ui_SettingsSSIDEdit, LV_ALIGN_TOP_LEFT);
-    lv_textarea_set_max_length(ui_SettingsSSIDEdit, 50);
-    lv_textarea_set_placeholder_text(ui_SettingsSSIDEdit, "WiFi SSID");
-    lv_textarea_set_one_line(ui_SettingsSSIDEdit, true);
-
-    ui_SettingsSSIDLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsSSIDLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsSSIDLabel, 40, SETTINGS_PANEL_HEIGHT / 5 + 70);
-    lv_obj_set_align(ui_SettingsSSIDLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_SettingsSSIDLabel, "WiFi SSID");
-    lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_SettingsPasswordEdit = lv_textarea_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT); /// 33
-    lv_obj_set_pos(ui_SettingsPasswordEdit, 180, SETTINGS_PANEL_HEIGHT / 5 + 60 * 2);
-    lv_obj_set_align(ui_SettingsPasswordEdit, LV_ALIGN_TOP_LEFT);
-    lv_textarea_set_max_length(ui_SettingsPasswordEdit, 100);
-    lv_textarea_set_placeholder_text(ui_SettingsPasswordEdit, "WiFi Password");
-    lv_textarea_set_one_line(ui_SettingsPasswordEdit, true);
-    lv_textarea_set_password_mode(ui_SettingsPasswordEdit, true);
-
-    ui_SettingsPasswordLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsPasswordLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsPasswordLabel, 20, SETTINGS_PANEL_HEIGHT / 5 + 65 * 2);
-    lv_obj_set_align(ui_SettingsPasswordLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_SettingsPasswordLabel, "WiFi Password");
-    lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_SettingsAPLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsAPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsAPLabel, 80, SETTINGS_PANEL_HEIGHT - 60);
-    lv_obj_set_align(ui_SettingsAPLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_SettingsAPLabel, "AccessPoint IP:");
-    lv_obj_set_style_text_font(ui_SettingsAPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_SettingsIPLabel = lv_label_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsIPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_SettingsIPLabel, 230, SETTINGS_PANEL_HEIGHT - 60);
-    lv_obj_set_align(ui_SettingsIPLabel, LV_ALIGN_TOP_LEFT);
-    lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
-    lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    ui_SettingsHomeButton = lv_btn_create(ui_SettingsPanel);
-    lv_obj_set_size(ui_SettingsHomeButton, 35, 35);
-    lv_obj_set_pos(ui_SettingsHomeButton, 401, -6);
-    lv_obj_set_align(ui_SettingsHomeButton, LV_ALIGN_TOP_LEFT);
-
-    ui_SettingsHomeButtonLabel = lv_label_create(ui_SettingsHomeButton);
-    lv_obj_set_align(ui_SettingsHomeButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsHomeButtonLabel, LV_SYMBOL_HOME);
-    lv_obj_set_style_text_align(ui_SettingsHomeButtonLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-
-    lv_obj_add_event_cb(ui_DarkmodeSwitch, ui_event_DarkmodeSwitch, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsCityEdit, ui_event_SettingsCityEdit, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeButton, LV_EVENT_ALL, NULL);
-}
 // ALARM SCREEN INIT
 void ui_Alarm_screen_init(void)
 {
@@ -919,12 +938,10 @@ void ui_init(void)
     lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_TEAL), lv_palette_main(LV_PALETTE_TEAL),
                                               true, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Settings_screen_init();
     ui_Alarm_screen_init();
     ui_AnalogClock_screen_init();
     ui_DigitalClock_screen_init();
     ui_Weather_screen_init();
-    // ui____initial_actions0 = lv_obj_create(NULL);
     lv_disp_load_scr(ui_DigitalClockScreen);
     ui_Dock_init();
 }
