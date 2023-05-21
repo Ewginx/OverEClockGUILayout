@@ -10,7 +10,6 @@
 lv_obj_t *lastScreen = NULL;
 lv_obj_t *pressed_alarm_button = NULL;
 
-
 // Settings Screen Objects
 lv_obj_t *ui_SettingsScreen;
 lv_obj_t *ui_SettingsPanel;
@@ -37,6 +36,7 @@ void ui_event_SettingsKeyboard(lv_event_t *e);
 // Alarm Screen Objects
 lv_obj_t *ui_AlarmScreen;
 lv_obj_t *ui_AlarmPanel;
+lv_obj_t *ui_AlarmDummyPanel;
 lv_obj_t *ui_AlarmWorkingDayLabel;
 lv_obj_t *ui_AlarmWeekendDayLabel;
 lv_obj_t *ui_AlarmOneOffLabel;
@@ -271,8 +271,12 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         char hour_buffer[3] = {0};
         char minute_count[MINUTE_COUNT * 3] = {0};
         char minute_buffer[3] = {0};
-        ui_AlarmModalPanel = lv_obj_create(ui_AlarmScreen);
-        lv_obj_set_size(ui_AlarmModalPanel, 180, 160);
+        ui_AlarmDummyPanel  = lv_obj_create(ui_AlarmScreen);
+        lv_obj_set_size(ui_AlarmDummyPanel, 480, 320);
+        lv_obj_set_align(ui_AlarmDummyPanel, LV_ALIGN_CENTER);
+        lv_obj_set_style_bg_opa(ui_AlarmDummyPanel, 200, LV_PART_MAIN | LV_STATE_DEFAULT);
+        ui_AlarmModalPanel = lv_obj_create(ui_AlarmDummyPanel);
+        lv_obj_set_size(ui_AlarmModalPanel, 200, 170);
         lv_obj_set_align(ui_AlarmModalPanel, LV_ALIGN_CENTER);
         lv_obj_clear_flag(ui_AlarmModalPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
         for (short int i = 0; i < HOUR_COUNT; i++)
@@ -302,7 +306,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         ui_AlarmHourRoller = lv_roller_create(ui_AlarmModalPanel);
         lv_roller_set_options(ui_AlarmHourRoller,
                               hour_count, LV_ROLLER_MODE_INFINITE);
-        lv_obj_set_size(ui_AlarmHourRoller, 60, 80);
+        lv_obj_set_size(ui_AlarmHourRoller, 70, 90);
         lv_obj_set_pos(ui_AlarmHourRoller, -38, -20);
         lv_obj_set_align(ui_AlarmHourRoller, LV_ALIGN_CENTER);
 
@@ -310,12 +314,12 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         lv_roller_set_options(ui_AlarmMinuteRoller,
                               minute_count,
                               LV_ROLLER_MODE_INFINITE);
-        lv_obj_set_size(ui_AlarmMinuteRoller, 60, 80);
+        lv_obj_set_size(ui_AlarmMinuteRoller, 70, 90);
         lv_obj_align_to(ui_AlarmMinuteRoller, ui_AlarmHourRoller, LV_ALIGN_BOTTOM_LEFT, 60, 18);
 
         ui_AlarmModalCancelButton = lv_btn_create(ui_AlarmModalPanel);
-        lv_obj_set_size(ui_AlarmModalCancelButton, 60, 35);
-        lv_obj_set_pos(ui_AlarmModalCancelButton, 5, 5);
+        lv_obj_set_size(ui_AlarmModalCancelButton, 70, 35);
+        lv_obj_set_pos(ui_AlarmModalCancelButton, 10, 5);
         lv_obj_set_align(ui_AlarmModalCancelButton, LV_ALIGN_BOTTOM_LEFT);
 
         ui_AlarmModalCancelButtonLabel = lv_label_create(ui_AlarmModalCancelButton);
@@ -324,7 +328,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         lv_label_set_text(ui_AlarmModalCancelButtonLabel, "Cancel");
 
         ui_AlarmModalOkButton = lv_btn_create(ui_AlarmModalPanel);
-        lv_obj_set_size(ui_AlarmModalOkButton, 60, 35);
+        lv_obj_set_size(ui_AlarmModalOkButton, 70, 35);
         lv_obj_align_to(ui_AlarmModalOkButton, ui_AlarmModalCancelButton, LV_ALIGN_BOTTOM_LEFT, 60, 10);
 
         ui_AlarmModalOkButtonLabel = lv_label_create(ui_AlarmModalOkButton);
@@ -340,11 +344,12 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
 }
 void ui_delete_alarm_modal_panel()
 {
-    if (ui_AlarmModalPanel != NULL)
+    if (ui_AlarmDummyPanel != NULL)
     {
         lv_obj_remove_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton);
         lv_obj_remove_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton);
-        lv_obj_del(ui_AlarmModalPanel);
+        lv_obj_del(ui_AlarmDummyPanel);
+        ui_AlarmDummyPanel = NULL;
         ui_AlarmModalPanel = NULL;
         ui_AlarmHourRoller = NULL;
         ui_AlarmMinuteRoller = NULL;
@@ -397,7 +402,7 @@ void ui_event_AlarmModalOkButton(lv_event_t *e)
     lv_obj_t *target = lv_event_get_target(e);
     if (event_code == LV_EVENT_CLICKED)
     {
-        lv_label_set_text_fmt( e->user_data, "%02i:%02i", lv_roller_get_selected(ui_AlarmHourRoller), lv_roller_get_selected(ui_AlarmMinuteRoller));
+        lv_label_set_text_fmt(e->user_data, "%02i:%02i", lv_roller_get_selected(ui_AlarmHourRoller), lv_roller_get_selected(ui_AlarmMinuteRoller));
         ui_delete_alarm_modal_panel();
     }
 }
