@@ -403,7 +403,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
     if (ui_AlarmModalPanel == NULL)
     {
         char hour_count[HOUR_COUNT * 3] = {0};
-        char hour_buffer[3] = {0};
+        char hour_buffer[4] = {0};
         char minute_count[MINUTE_COUNT * 3] = {0};
         char minute_buffer[3] = {0};
         ui_AlarmDummyPanel = lv_obj_create(ui_AlarmScreen);
