@@ -651,7 +651,7 @@ void ui_Alarm_screen_init(void)
 
     ui_AlarmWorkingDayLabel = lv_label_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWorkingDayLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_AlarmWorkingDayLabel, 10, 60);
+    lv_obj_set_pos(ui_AlarmWorkingDayLabel, 10, 65);
     lv_obj_set_align(ui_AlarmWorkingDayLabel, LV_ALIGN_TOP_LEFT);
     lv_label_set_text(ui_AlarmWorkingDayLabel, "Alarm Clock Working Day");
     lv_obj_set_style_text_font(ui_AlarmWorkingDayLabel, &lv_font_montserrat_18, LV_PART_MAIN);
