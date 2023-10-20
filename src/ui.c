@@ -21,6 +21,9 @@ lv_obj_t *ui_SettingsHomeButton;
 lv_obj_t *ui_SettingsHomeButtonLabel;
 lv_obj_t *ui_SettingsAPLabel;
 lv_obj_t *ui_SettingsIPLabel;
+lv_obj_t *brightnessSlider;
+lv_obj_t *autoBrightnessCheckbox;
+
 // Settings Screen Events
 void ui_event_SettingsPasswordEdit(lv_event_t *e);
 void ui_event_SettingsSSIDEdit(lv_event_t *e);
@@ -145,6 +148,14 @@ void ui_create_settings_screen()
         lv_obj_set_pos(ui_DarkmodeSwitch, 175, 15);
         lv_obj_set_align(ui_DarkmodeSwitch, LV_ALIGN_TOP_LEFT);
 
+        brightnessSlider = lv_slider_create(ui_SettingsPanel);
+        lv_obj_align_to(brightnessSlider,  ui_DarkmodeLabel, LV_ALIGN_OUT_BOTTOM_LEFT, 10, 35);
+        lv_slider_set_range(brightnessSlider, 0 , 255);
+
+        autoBrightnessCheckbox = lv_checkbox_create(ui_SettingsPanel);
+        lv_obj_align_to(autoBrightnessCheckbox, brightnessSlider, LV_ALIGN_OUT_RIGHT_MID, 50, 0);
+        lv_checkbox_set_text(autoBrightnessCheckbox, "Auto");
+
         ui_SettingsCityEdit = lv_textarea_create(ui_SettingsPanel);
         lv_obj_set_size(ui_SettingsCityEdit, 250, LV_SIZE_CONTENT); /// 33
         lv_obj_set_pos(ui_SettingsCityEdit, 180, SETTINGS_PANEL_HEIGHT / 5);
@@ -232,6 +243,7 @@ void ui_delete_settings_screen()
         lv_obj_remove_event_cb(ui_SettingsSSIDEdit, ui_event_SettingsSSIDEdit);
         lv_obj_remove_event_cb(ui_SettingsPasswordEdit, ui_event_SettingsPasswordEdit);
         lv_obj_remove_event_cb(ui_SettingsHomeButton, ui_event_SettingsHomeButton);
+        // lv_obj_del(ui_SettingsScreen);
         ui_SettingsScreen = NULL;
         ui_SettingsPanel = NULL;
         ui_DarkmodeLabel = NULL;
@@ -605,7 +617,11 @@ void ui_event_AnalogClockScreen(lv_event_t *e)
 }
 
 // Screen change on Button
-
+void screen_load_event_cb(lv_event_t *e){
+    // if(ui_SettingsScreen != NULL){
+    // lv_obj_del(ui_SettingsScreen);
+    // }
+}
 void ui_event_SettingsButton(lv_event_t *e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
@@ -816,6 +832,7 @@ void ui_DigitalClock_screen_init(void)
     lv_obj_set_style_text_align(ui_DigitalClockDateLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    lv_obj_add_event_cb(ui_DigitalClockScreen, screen_load_event_cb, LV_EVENT_SCREEN_LOADED, NULL);
     lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL, NULL);
 }
 void ui_Weather_screen_init(void)

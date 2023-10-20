@@ -39,7 +39,9 @@ extern "C"
     extern lv_obj_t *ui_SettingsHomeButton;
     extern lv_obj_t *ui_SettingsHomeButtonLabel;
     extern lv_obj_t *ui_SettingsAPLabel;
-    extern lv_obj_t *ui_SettingsIPLabel;
+    extern lv_obj_t *brightnessSlider;
+    extern lv_obj_t *autoBrightnessCheckbox;
+
     // Settings Screen Events
     void ui_event_SettingsPasswordEdit(lv_event_t *e);
     void ui_event_SettingsSSIDEdit(lv_event_t *e);
