@@ -80,6 +80,7 @@ lv_obj_t *ui_DigitalClockPanel;
 lv_obj_t *ui_DigitalClockLabel;
 lv_obj_t *ui_DigitalClockSecondLabel;
 lv_obj_t *ui_DigitalClockDateLabel;
+lv_obj_t *ui_DigitalClockDayLabel;
 lv_obj_t *ui_DigitalClockSettingsBtn;
 lv_obj_t *ui_DigitalClockSettingsBtnLabel;
 // Digital Clock Events
@@ -141,7 +142,7 @@ void ui_create_settings_screen()
         lv_obj_set_pos(ui_DarkmodeLabel, 35, 15);
         lv_obj_set_align(ui_DarkmodeLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_DarkmodeLabel, "Dark Mode");
-        lv_obj_set_style_text_font(ui_DarkmodeLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+        lv_obj_set_style_text_font(ui_DarkmodeLabel, &montserrat_18, LV_PART_MAIN);
 
         ui_DarkmodeSwitch = lv_switch_create(ui_SettingsPanel);
         lv_obj_set_size(ui_DarkmodeSwitch, 50, 25);
@@ -169,7 +170,7 @@ void ui_create_settings_screen()
         lv_obj_set_pos(ui_SettingsCityLabel, 20, SETTINGS_PANEL_HEIGHT / 5);
         lv_obj_set_align(ui_SettingsCityLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_SettingsCityLabel, "City and\ncountry code");
-        lv_obj_set_style_text_font(ui_SettingsCityLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui_SettingsCityLabel, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_set_style_text_align(ui_SettingsCityLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         ui_SettingsSSIDEdit = lv_textarea_create(ui_SettingsPanel);
@@ -185,7 +186,7 @@ void ui_create_settings_screen()
         lv_obj_set_pos(ui_SettingsSSIDLabel, 40, SETTINGS_PANEL_HEIGHT / 5 + 70);
         lv_obj_set_align(ui_SettingsSSIDLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_SettingsSSIDLabel, "WiFi SSID");
-        lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui_SettingsSSIDLabel, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         ui_SettingsPasswordEdit = lv_textarea_create(ui_SettingsPanel);
         lv_obj_set_size(ui_SettingsPasswordEdit, 250, LV_SIZE_CONTENT); /// 33
@@ -201,21 +202,21 @@ void ui_create_settings_screen()
         lv_obj_set_pos(ui_SettingsPasswordLabel, 20, SETTINGS_PANEL_HEIGHT / 5 + 65 * 2);
         lv_obj_set_align(ui_SettingsPasswordLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_SettingsPasswordLabel, "WiFi Password");
-        lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui_SettingsPasswordLabel, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         ui_SettingsAPLabel = lv_label_create(ui_SettingsPanel);
         lv_obj_set_size(ui_SettingsAPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
         lv_obj_set_pos(ui_SettingsAPLabel, 80, SETTINGS_PANEL_HEIGHT - 60);
         lv_obj_set_align(ui_SettingsAPLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_SettingsAPLabel, "AccessPoint IP:");
-        lv_obj_set_style_text_font(ui_SettingsAPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui_SettingsAPLabel, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         ui_SettingsIPLabel = lv_label_create(ui_SettingsPanel);
         lv_obj_set_size(ui_SettingsIPLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
         lv_obj_set_pos(ui_SettingsIPLabel, 230, SETTINGS_PANEL_HEIGHT - 60);
         lv_obj_set_align(ui_SettingsIPLabel, LV_ALIGN_TOP_LEFT);
         lv_label_set_text(ui_SettingsIPLabel, "192.120.12.99");
-        lv_obj_set_style_text_font(ui_SettingsIPLabel, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+        lv_obj_set_style_text_font(ui_SettingsIPLabel, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
         ui_SettingsHomeButton = lv_btn_create(ui_SettingsPanel);
         lv_obj_set_size(ui_SettingsHomeButton, 35, 35);
@@ -456,7 +457,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         lv_obj_set_size(ui_AlarmHourRoller, 90, 110);
         lv_obj_set_pos(ui_AlarmHourRoller, -50, -35);
         lv_obj_set_align(ui_AlarmHourRoller, LV_ALIGN_CENTER);
-        lv_obj_set_style_text_font(ui_AlarmHourRoller, &lv_font_montserrat_18, LV_PART_MAIN);
+        lv_obj_set_style_text_font(ui_AlarmHourRoller, &montserrat_18, LV_PART_MAIN);
 
         ui_AlarmMinuteRoller = lv_roller_create(ui_AlarmModalPanel);
         lv_roller_set_options(ui_AlarmMinuteRoller,
@@ -464,7 +465,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
                               LV_ROLLER_MODE_INFINITE);
         lv_obj_set_size(ui_AlarmMinuteRoller, 90, 110);
         lv_obj_align_to(ui_AlarmMinuteRoller, ui_AlarmHourRoller, LV_ALIGN_BOTTOM_LEFT, 83, 18);
-        lv_obj_set_style_text_font(ui_AlarmMinuteRoller, &lv_font_montserrat_18, LV_PART_MAIN);
+        lv_obj_set_style_text_font(ui_AlarmMinuteRoller, &montserrat_18, LV_PART_MAIN);
 
         ui_AlarmModalCancelButton = lv_btn_create(ui_AlarmModalPanel);
         lv_obj_set_size(ui_AlarmModalCancelButton, 90, 45);
@@ -475,7 +476,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         lv_obj_set_size(ui_AlarmModalCancelButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
         lv_obj_set_align(ui_AlarmModalCancelButtonLabel, LV_ALIGN_CENTER);
         lv_label_set_text(ui_AlarmModalCancelButtonLabel, "Cancel");
-        lv_obj_set_style_text_font(ui_AlarmModalCancelButtonLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+        lv_obj_set_style_text_font(ui_AlarmModalCancelButtonLabel, &montserrat_18, LV_PART_MAIN);
 
         ui_AlarmModalOkButton = lv_btn_create(ui_AlarmModalPanel);
         lv_obj_set_size(ui_AlarmModalOkButton, 90, 45);
@@ -485,7 +486,7 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label)
         lv_obj_set_size(ui_AlarmModalOkButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
         lv_obj_set_align(ui_AlarmModalOkButtonLabel, LV_ALIGN_CENTER);
         lv_label_set_text(ui_AlarmModalOkButtonLabel, "OK");
-        lv_obj_set_style_text_font(ui_AlarmModalOkButtonLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+        lv_obj_set_style_text_font(ui_AlarmModalOkButtonLabel, &montserrat_18, LV_PART_MAIN);
 
         lv_obj_add_event_cb(ui_AlarmModalCancelButton, ui_event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
         lv_obj_add_event_cb(ui_AlarmModalOkButton, ui_event_AlarmModalOkButton, LV_EVENT_ALL, target_label);
@@ -670,7 +671,7 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_pos(ui_AlarmWorkingDayLabel, 10, 65);
     lv_obj_set_align(ui_AlarmWorkingDayLabel, LV_ALIGN_TOP_LEFT);
     lv_label_set_text(ui_AlarmWorkingDayLabel, "Alarm Clock Working Day");
-    lv_obj_set_style_text_font(ui_AlarmWorkingDayLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmWorkingDayLabel, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmWorkingDayButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWorkingDayButton, 70, 41);
@@ -681,7 +682,7 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_size(ui_AlarmWorkingDayButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_align(ui_AlarmWorkingDayButtonLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_AlarmWorkingDayButtonLabel, "08:15");
-    lv_obj_set_style_text_font(ui_AlarmWorkingDayButtonLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmWorkingDayButtonLabel, &montserrat_18, LV_PART_MAIN);
 
 
     ui_AlarmWorkingDaySwitch = lv_switch_create(ui_AlarmPanel);
@@ -692,19 +693,19 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_size(ui_AlarmWeekendDayLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_align_to(ui_AlarmWeekendDayLabel, ui_AlarmWorkingDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -105, 40);
     lv_label_set_text(ui_AlarmWeekendDayLabel, "Alarm Clock Weekends");
-    lv_obj_set_style_text_font(ui_AlarmWeekendDayLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmWeekendDayLabel, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmWeekendDayButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWeekendDayButton, 70, 41);
     lv_obj_align_to(ui_AlarmWeekendDayButton, ui_AlarmWorkingDayButton, LV_ALIGN_OUT_BOTTOM_MID, 0, 20);
     lv_obj_set_style_bg_opa(ui_AlarmWeekendDayButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_AlarmWeekendDayButton, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmWeekendDayButton, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmWeekendDayButtonLabel = lv_label_create(ui_AlarmWeekendDayButton);
     lv_obj_set_size(ui_AlarmWeekendDayButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_align(ui_AlarmWeekendDayButtonLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_AlarmWeekendDayButtonLabel, "15:23");
-    lv_obj_set_style_text_font(ui_AlarmWeekendDayButtonLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmWeekendDayButtonLabel, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmWeekendDaySwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmWeekendDaySwitch, 50, 25);
@@ -714,7 +715,7 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_size(ui_AlarmOneOffLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_align_to(ui_AlarmOneOffLabel, ui_AlarmWeekendDayLabel, LV_ALIGN_OUT_BOTTOM_MID, -90, 40);
     lv_label_set_text(ui_AlarmOneOffLabel, "Alarm Clock One Off");
-    lv_obj_set_style_text_font(ui_AlarmOneOffLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmOneOffLabel, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmOneOffButton = lv_btn_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffButton, 70, 41);
@@ -725,7 +726,7 @@ void ui_Alarm_screen_init(void)
     lv_obj_set_size(ui_AlarmOneOffButtonLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_align(ui_AlarmOneOffButtonLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_AlarmOneOffButtonLabel, "12:03");
-    lv_obj_set_style_text_font(ui_AlarmOneOffButtonLabel, &lv_font_montserrat_18, LV_PART_MAIN);
+    lv_obj_set_style_text_font(ui_AlarmOneOffButtonLabel, &montserrat_18, LV_PART_MAIN);
 
     ui_AlarmOneOffSwitch = lv_switch_create(ui_AlarmPanel);
     lv_obj_set_size(ui_AlarmOneOffSwitch, 50, 25);
@@ -810,8 +811,8 @@ void ui_DigitalClock_screen_init(void)
 
     ui_DigitalClockLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockLabel, 320, 100);
-    lv_obj_set_pos(ui_DigitalClockLabel, 70, 75);
-    lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_pos(ui_DigitalClockLabel, 0, -30);
+    lv_obj_set_align(ui_DigitalClockLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DigitalClockLabel, "00:00");
 
     lv_obj_set_style_text_align(ui_DigitalClockLabel, LV_TEXT_ALIGN_LEFT, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -826,12 +827,20 @@ void ui_DigitalClock_screen_init(void)
 
     ui_DigitalClockDateLabel = lv_label_create(ui_DigitalClockPanel);
     lv_obj_set_size(ui_DigitalClockDateLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-    lv_obj_set_pos(ui_DigitalClockDateLabel, 75, 215);
-    lv_obj_set_align(ui_DigitalClockDateLabel, LV_ALIGN_TOP_LEFT);
+    lv_obj_set_pos(ui_DigitalClockDateLabel, 0, 80);
+    lv_obj_set_align(ui_DigitalClockDateLabel, LV_ALIGN_CENTER);
     lv_label_set_text(ui_DigitalClockDateLabel, "04.05.2023");
     lv_obj_set_style_text_align(ui_DigitalClockDateLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &lv_font_montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_DigitalClockDateLabel, &montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_DigitalClockDayLabel = lv_label_create(ui_DigitalClockPanel);
+    lv_obj_set_size(ui_DigitalClockDayLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
+    // lv_obj_set_pos(ui_DigitalClockDayLabel, 0, 115);
+    lv_obj_align_to(ui_DigitalClockDayLabel,ui_DigitalClockDateLabel, LV_ALIGN_OUT_RIGHT_MID, 10,-10);
+    lv_label_set_text(ui_DigitalClockDayLabel, "Вс");
+    lv_obj_set_style_text_align(ui_DigitalClockDayLabel, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_DigitalClockDayLabel, &montserrat_32, LV_PART_MAIN | LV_STATE_DEFAULT);
+    
     lv_obj_add_event_cb(ui_DigitalClockScreen, screen_load_event_cb, LV_EVENT_SCREEN_LOADED, NULL);
     lv_obj_add_event_cb(ui_DigitalClockScreen, ui_event_DigitalClockScreen, LV_EVENT_ALL, NULL);
 }
@@ -849,19 +858,17 @@ void ui_Weather_screen_init(void)
     lv_obj_set_style_bg_opa(ui_WeatherPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherImage = lv_img_create(ui_WeatherPanel);
-    lv_img_set_src(ui_WeatherImage, &ui_img_day_clear_png);
+    lv_img_set_src(ui_WeatherImage, &ui_img_day_rain_png);
     lv_obj_set_size(ui_WeatherImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 128
     lv_obj_set_pos(ui_WeatherImage, -140, -71);
-    lv_obj_set_align(ui_WeatherImage, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_WeatherImage, LV_OBJ_FLAG_ADV_HITTEST);  /// Flags
-    lv_obj_clear_flag(ui_WeatherImage, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+    lv_obj_set_align(ui_WeatherImage, LV_ALIGN_CENTER); /// Flags
 
     ui_WeatherCity = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherCity, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
     lv_obj_set_pos(ui_WeatherCity, 0, -126);
     lv_obj_set_align(ui_WeatherCity, LV_ALIGN_CENTER);
     lv_label_set_text(ui_WeatherCity, "London, GB");
-    lv_obj_set_style_text_font(ui_WeatherCity, &lv_font_montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_WeatherCity, &montserrat_18, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTemperatureLabel = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherTemperatureLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
@@ -904,7 +911,7 @@ void ui_Weather_screen_init(void)
     lv_obj_set_align(ui_WeatherFeelsLikeLabel, LV_ALIGN_CENTER);
     lv_label_set_long_mode(ui_WeatherFeelsLikeLabel, LV_LABEL_LONG_CLIP);
     lv_label_set_text(ui_WeatherFeelsLikeLabel, "Feels like: 13°C");
-    lv_obj_set_style_text_font(ui_WeatherFeelsLikeLabel, &lv_font_montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_font(ui_WeatherFeelsLikeLabel, &montserrat_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_WeatherTimesLabel = lv_label_create(ui_WeatherPanel);
     lv_obj_set_size(ui_WeatherTimesLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1

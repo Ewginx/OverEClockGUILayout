@@ -97,6 +97,7 @@ extern "C"
     extern lv_obj_t *ui_DigitalClockLabel;
     extern lv_obj_t *ui_DigitalClockSecondLabel;
     extern lv_obj_t *ui_DigitalClockDateLabel;
+    extern lv_obj_t *ui_DigitalClockDayLabel;
     // Digital Clock Events
     void ui_event_DigitalClockScreen(lv_event_t *e);
 
@@ -134,6 +135,9 @@ extern "C"
     LV_IMG_DECLARE(ui_img_day_rain_png);
     LV_IMG_DECLARE(ui_img_day_clear_png);
 
+    LV_FONT_DECLARE(montserrat_32);
+    LV_FONT_DECLARE(montserrat_18);
+    LV_FONT_DECLARE(montserrat_14);
     LV_FONT_DECLARE(ui_font_Roboto120);
     LV_FONT_DECLARE(ui_font_Roboto45);
 

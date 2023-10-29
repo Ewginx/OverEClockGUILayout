@@ -118,7 +118,7 @@ void hal_loop(void)
             lv_label_set_text(ui_DigitalClockLabel, time_string);
             sprintf(second_string, "%02i", second);
             lv_label_set_text(ui_DigitalClockSecondLabel, second_string);
-            sprintf(date_string, "%02i.%02i.%i", day, month + 1, year + 1900);
+            sprintf(date_string, "%02i.%02i.%i,", day, month + 1, year + 1900);
             lv_label_set_text(ui_DigitalClockDateLabel, date_string);
             if (flag)
             {
