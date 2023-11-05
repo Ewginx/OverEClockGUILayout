@@ -909,7 +909,7 @@ void weather_screen_init(void) {
   lv_obj_set_pos(weatherTemperatureLabel, -15, -60);
   lv_obj_set_align(weatherTemperatureLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherTemperatureLabel, "-13°C");
-  lv_obj_set_style_text_font(weatherTemperatureLabel, &lv_font_montserrat_48,
+  lv_obj_set_style_text_font(weatherTemperatureLabel, &montserrat_48,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherFeelsLikeLabel = lv_label_create(weatherPanel);

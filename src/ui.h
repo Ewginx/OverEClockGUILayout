@@ -140,6 +140,7 @@ LV_FONT_DECLARE(montserrat_32);
 LV_FONT_DECLARE(montserrat_18);
 LV_FONT_DECLARE(montserrat_14);
 LV_FONT_DECLARE(montserrat_12);
+LV_FONT_DECLARE(montserrat_48);
 LV_FONT_DECLARE(ui_font_Roboto120);
 LV_FONT_DECLARE(ui_font_Roboto45);
 
