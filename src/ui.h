@@ -7,8 +7,7 @@
 #define _OVERECLOCKS_UI_H
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 #define SETTINGS_PANEL_HEIGHT 640
 #define HOUR_COUNT 24
@@ -17,136 +16,134 @@ extern "C"
 #define MINUTE_LABEL 3
 
 #include <stdio.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <string.h>
-
 
 #include "lvgl.h"
 #include "ui_events.h"
 
-    // Settings Screen Objects
-    extern lv_obj_t *ui_SettingsScreen;
-    extern lv_obj_t *ui_SettingsPanel;
-    extern lv_obj_t *ui_DarkmodeLabel;
-    extern lv_obj_t *ui_DarkmodeSwitch;
-    extern lv_obj_t *ui_SettingsCityEdit;
-    extern lv_obj_t *ui_SettingsCityLabel;
-    extern lv_obj_t *ui_SettingsSSIDLabel;
-    extern lv_obj_t *ui_SettingsSSIDEdit;
-    extern lv_obj_t *ui_SettingsPasswordLabel;
-    extern lv_obj_t *ui_SettingsPasswordEdit;
-    extern lv_obj_t *ui_SettingsKeyboard;
-    extern lv_obj_t *ui_SettingsHomeButton;
-    extern lv_obj_t *ui_SettingsHomeButtonLabel;
-    extern lv_obj_t *ui_SettingsAPLabel;
-    extern lv_obj_t *brightnessSlider;
-    extern lv_obj_t *autoBrightnessCheckbox;
+// Settings Screen Objects
+extern lv_obj_t *ui_SettingsScreen;
+extern lv_obj_t *ui_SettingsPanel;
+extern lv_obj_t *ui_DarkmodeLabel;
+extern lv_obj_t *ui_DarkmodeSwitch;
+extern lv_obj_t *ui_SettingsCityEdit;
+extern lv_obj_t *ui_SettingsCityLabel;
+extern lv_obj_t *ui_SettingsSSIDLabel;
+extern lv_obj_t *ui_SettingsSSIDEdit;
+extern lv_obj_t *ui_SettingsPasswordLabel;
+extern lv_obj_t *ui_SettingsPasswordEdit;
+extern lv_obj_t *ui_SettingsKeyboard;
+extern lv_obj_t *ui_SettingsHomeButton;
+extern lv_obj_t *ui_SettingsHomeButtonLabel;
+extern lv_obj_t *ui_SettingsAPLabel;
+extern lv_obj_t *brightnessSlider;
+extern lv_obj_t *autoBrightnessCheckbox;
 
-    // Settings Screen Events
-    void ui_event_SettingsPasswordEdit(lv_event_t *e);
-    void ui_event_SettingsSSIDEdit(lv_event_t *e);
-    void ui_event_SettingsCityEdit(lv_event_t *e);
-    void ui_event_DarkmodeSwitch(lv_event_t *e);
-    void ui_event_SettingsHomeButton(lv_event_t *e);
-    void ui_event_SettingsKeyboard(lv_event_t *e);
+// Settings Screen Events
+void ui_event_SettingsPasswordEdit(lv_event_t *e);
+void ui_event_SettingsSSIDEdit(lv_event_t *e);
+void ui_event_SettingsCityEdit(lv_event_t *e);
+void ui_event_DarkmodeSwitch(lv_event_t *e);
+void ui_event_SettingsHomeButton(lv_event_t *e);
+void ui_event_SettingsKeyboard(lv_event_t *e);
 
-    // Alarm Screen Objects
-    extern lv_obj_t *ui_AlarmScreen;
-    extern lv_obj_t *ui_AlarmPanel;
-    extern lv_obj_t *ui_AlarmWorkingDayLabel;
-    extern lv_obj_t *ui_AlarmWeekendDayLabel;
-    extern lv_obj_t *ui_AlarmOneOffLabel;
-    extern lv_obj_t *ui_AlarmWorkingDaySwitch;
-    extern lv_obj_t *ui_AlarmWeekendDaySwitch;
-    extern lv_obj_t *ui_AlarmOneOffSwitch;
-    extern lv_obj_t *ui_AlarmWorkingDayButton;
-    extern lv_obj_t *ui_AlarmWorkingDayButtonLabel;
-    extern lv_obj_t *ui_AlarmWeekendDayButton;
-    extern lv_obj_t *ui_AlarmWeekendDayButtonLabel;
-    extern lv_obj_t *ui_AlarmOneOffButton;
-    extern lv_obj_t *ui_AlarmOneOffButtonLabel;
-    extern lv_obj_t *ui_AlarmModalPanel;
-    extern lv_obj_t *ui_AlarmHourRoller;
-    extern lv_obj_t *ui_AlarmMinuteRoller;
-    extern lv_obj_t *ui_AlarmModalCancelButton;
-    extern lv_obj_t *ui_AlarmModalCancelButtonLabel;
-    extern lv_obj_t *ui_AlarmModalOkButton;
-    extern lv_obj_t *ui_AlarmModalOkButtonLabel;
+// Alarm Screen Objects
+extern lv_obj_t *ui_AlarmScreen;
+extern lv_obj_t *ui_AlarmPanel;
+extern lv_obj_t *ui_AlarmWorkingDayLabel;
+extern lv_obj_t *ui_AlarmWeekendDayLabel;
+extern lv_obj_t *ui_AlarmOneOffLabel;
+extern lv_obj_t *ui_AlarmWorkingDaySwitch;
+extern lv_obj_t *ui_AlarmWeekendDaySwitch;
+extern lv_obj_t *ui_AlarmOneOffSwitch;
+extern lv_obj_t *ui_AlarmWorkingDayButton;
+extern lv_obj_t *ui_AlarmWorkingDayButtonLabel;
+extern lv_obj_t *ui_AlarmWeekendDayButton;
+extern lv_obj_t *ui_AlarmWeekendDayButtonLabel;
+extern lv_obj_t *ui_AlarmOneOffButton;
+extern lv_obj_t *ui_AlarmOneOffButtonLabel;
+extern lv_obj_t *ui_AlarmModalPanel;
+extern lv_obj_t *ui_AlarmHourRoller;
+extern lv_obj_t *ui_AlarmMinuteRoller;
+extern lv_obj_t *ui_AlarmModalCancelButton;
+extern lv_obj_t *ui_AlarmModalCancelButtonLabel;
+extern lv_obj_t *ui_AlarmModalOkButton;
+extern lv_obj_t *ui_AlarmModalOkButtonLabel;
 
-    // Alarm Screen Events
-    void ui_event_AlarmModalOkButton(lv_event_t *e);
-    void ui_event_AlarmModalCancelButton(lv_event_t *e);
-    void ui_event_OneOffButton(lv_event_t *e);
-    void ui_event_WeekendButton(lv_event_t *e);
-    void ui_event_WorkingDayButton(lv_event_t *e);
-    void ui_event_AlarmScreen(lv_event_t *e);
+// Alarm Screen Events
+void ui_event_AlarmModalOkButton(lv_event_t *e);
+void ui_event_AlarmModalCancelButton(lv_event_t *e);
+void ui_event_OneOffButton(lv_event_t *e);
+void ui_event_WeekendButton(lv_event_t *e);
+void ui_event_WorkingDayButton(lv_event_t *e);
+void ui_event_AlarmScreen(lv_event_t *e);
 
-    // Analog Clock Objects
-    extern lv_obj_t *ui_AnalogClockScreen;
-    extern lv_obj_t *ui_AnalogClockPanel;
-    extern lv_obj_t *ui_ImageWatchface;
-    extern lv_obj_t *ui_ImageArmHour;
-    extern lv_obj_t *ui_ImageArmMinute;
-    extern lv_obj_t *ui_ImageArmSecond;
-    // Analog Clock Events
-    void ui_event_AnalogClockScreen(lv_event_t *e);
+// Analog Clock Objects
+extern lv_obj_t *ui_AnalogClockScreen;
+extern lv_obj_t *ui_AnalogClockPanel;
+extern lv_obj_t *ui_ImageWatchface;
+extern lv_obj_t *ui_ImageArmHour;
+extern lv_obj_t *ui_ImageArmMinute;
+extern lv_obj_t *ui_ImageArmSecond;
+// Analog Clock Events
+void ui_event_AnalogClockScreen(lv_event_t *e);
 
-    // Digital Clock Objects
-    extern lv_obj_t *ui_DigitalClockScreen;
-    extern lv_obj_t *ui_DigitalClockPanel;
-    extern lv_obj_t *ui_DigitalClockLabel;
-    extern lv_obj_t *ui_DigitalClockSecondLabel;
-    extern lv_obj_t *ui_DigitalClockDateLabel;
-    extern lv_obj_t *ui_DigitalClockDayLabel;
-    // Digital Clock Events
-    void ui_event_DigitalClockScreen(lv_event_t *e);
+// Digital Clock Objects
+extern lv_obj_t *ui_DigitalClockScreen;
+extern lv_obj_t *ui_DigitalClockPanel;
+extern lv_obj_t *ui_DigitalClockLabel;
+extern lv_obj_t *ui_DigitalClockSecondLabel;
+extern lv_obj_t *ui_DigitalClockDateLabel;
+extern lv_obj_t *ui_DigitalClockDayLabel;
+// Digital Clock Events
+void ui_event_DigitalClockScreen(lv_event_t *e);
 
-    // Weather Clock Objects
-    extern lv_obj_t *ui_WeatherScreen;
-    extern lv_obj_t *ui_WeatherPanel;
-    extern lv_obj_t *ui_WeatherImage;
-    extern lv_obj_t *ui_WeatherCity;
-    extern lv_obj_t *ui_WeatherTemperatureLabel;
-    extern lv_obj_t *ui_WeatherBriefingLabel;
-    extern lv_obj_t *ui_WeatherWindLabel;
-    extern lv_obj_t *ui_WeatherHumidityLabel;
-    extern lv_obj_t *ui_WeatherPressureLabel;
-    extern lv_obj_t *ui_WeatherFeelsLikeLabel;
-    extern lv_obj_t *ui_WeatherTimesLabel;
-    extern lv_obj_t *ui_WeatherMaxTempLabel;
-    extern lv_obj_t *ui_WeatherMinTempLabel;
-    extern lv_obj_t *ui_WeatherRainProbabLabel;
-    extern lv_obj_t *ui_WeatherFirstTempLabel;
-    extern lv_obj_t *ui_WeatherSecondTempLabel;
-    extern lv_obj_t *ui_WeatherThirdTempLabel;
-    extern lv_obj_t *ui_WeatherFourthTempLabel;
+// Weather Clock Objects
+extern lv_obj_t *ui_WeatherScreen;
+extern lv_obj_t *ui_WeatherPanel;
+extern lv_obj_t *ui_WeatherImage;
+extern lv_obj_t *ui_WeatherCity;
+extern lv_obj_t *ui_WeatherTemperatureLabel;
+extern lv_obj_t *ui_WeatherBriefingLabel;
+extern lv_obj_t *ui_WeatherWindLabel;
+extern lv_obj_t *ui_WeatherHumidityLabel;
+extern lv_obj_t *ui_WeatherPressureLabel;
+extern lv_obj_t *ui_WeatherFeelsLikeLabel;
+extern lv_obj_t *ui_WeatherTimesLabel;
+extern lv_obj_t *ui_WeatherMaxTempLabel;
+extern lv_obj_t *ui_WeatherMinTempLabel;
+extern lv_obj_t *ui_WeatherRainProbabLabel;
+extern lv_obj_t *ui_WeatherFirstTempLabel;
+extern lv_obj_t *ui_WeatherSecondTempLabel;
+extern lv_obj_t *ui_WeatherThirdTempLabel;
+extern lv_obj_t *ui_WeatherFourthTempLabel;
 
-    
-    extern lv_obj_t *ui_BatteryLabel;
-    extern lv_obj_t *ui_SettingsButton;
-    extern lv_obj_t *ui_SettingsButtonLabel;
-    // Weather Clock Events
-    void ui_event_WeatherScreen(lv_event_t *e);
+extern lv_obj_t *ui_BatteryLabel;
+extern lv_obj_t *ui_SettingsButton;
+extern lv_obj_t *ui_SettingsButtonLabel;
+// Weather Clock Events
+void ui_event_WeatherScreen(lv_event_t *e);
 
-    void ui_event_SettingsButton(lv_event_t *e);
+void ui_event_SettingsButton(lv_event_t *e);
 
-    void ui_create_battery_label(lv_obj_t *screen);
+void ui_create_battery_label(lv_obj_t *screen);
 
-    LV_IMG_DECLARE(ui_img_watchface240_png);
-    LV_IMG_DECLARE(ui_img_armhour_png);
-    LV_IMG_DECLARE(ui_img_armminute_png);
-    LV_IMG_DECLARE(ui_img_armsecond_png);
-    // LV_IMG_DECLARE(ui_img_day_rain_png);
-    LV_IMG_DECLARE(ui_img_day_clear_png);
+LV_IMG_DECLARE(ui_img_watchface240_png);
+LV_IMG_DECLARE(ui_img_armhour_png);
+LV_IMG_DECLARE(ui_img_armminute_png);
+LV_IMG_DECLARE(ui_img_armsecond_png);
+// LV_IMG_DECLARE(ui_img_day_rain_png);
+LV_IMG_DECLARE(ui_img_day_clear_png);
 
-    LV_FONT_DECLARE(montserrat_32);
-    LV_FONT_DECLARE(montserrat_18);
-    LV_FONT_DECLARE(montserrat_14);
-    LV_FONT_DECLARE(montserrat_12);
-    LV_FONT_DECLARE(ui_font_Roboto120);
-    LV_FONT_DECLARE(ui_font_Roboto45);
+LV_FONT_DECLARE(montserrat_32);
+LV_FONT_DECLARE(montserrat_18);
+LV_FONT_DECLARE(montserrat_14);
+LV_FONT_DECLARE(montserrat_12);
+LV_FONT_DECLARE(ui_font_Roboto120);
+LV_FONT_DECLARE(ui_font_Roboto45);
 
-    void ui_init(void);
+void ui_init(void);
 
 #ifdef __cplusplus
 } /*extern "C"*/
