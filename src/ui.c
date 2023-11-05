@@ -136,8 +136,7 @@ void ui_create_settings_screen() {
     lv_obj_set_size(settingsPanel, lv_pct(100), SETTINGS_PANEL_HEIGHT);
     lv_obj_set_style_bg_color(settingsPanel, lv_color_hex(0xFFFFFF),
                               LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_opa(settingsPanel, 0,
-                            LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_opa(settingsPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_clear_flag(settingsPanel, LV_OBJ_FLAG_SCROLL_ELASTIC);
 
     darkmodeLabel = lv_label_create(settingsPanel);
@@ -153,8 +152,8 @@ void ui_create_settings_screen() {
     lv_obj_set_align(darkmodeSwitch, LV_ALIGN_TOP_LEFT);
 
     brightnessSlider = lv_slider_create(settingsPanel);
-    lv_obj_align_to(brightnessSlider, darkmodeLabel,
-                    LV_ALIGN_OUT_BOTTOM_LEFT, 10, 35);
+    lv_obj_align_to(brightnessSlider, darkmodeLabel, LV_ALIGN_OUT_BOTTOM_LEFT,
+                    10, 35);
     lv_slider_set_range(brightnessSlider, 0, 255);
 
     autoBrightnessCheckbox = lv_checkbox_create(settingsPanel);
@@ -243,16 +242,15 @@ void ui_create_settings_screen() {
     settingsHomeButtonLabel = lv_label_create(settingsHomeButton);
     lv_obj_set_align(settingsHomeButtonLabel, LV_ALIGN_CENTER);
     lv_label_set_text(settingsHomeButtonLabel, LV_SYMBOL_HOME);
-    lv_obj_set_style_text_align(settingsHomeButtonLabel,
-                                LV_TEXT_ALIGN_CENTER,
+    lv_obj_set_style_text_align(settingsHomeButtonLabel, LV_TEXT_ALIGN_CENTER,
                                 LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    lv_obj_add_event_cb(darkmodeSwitch, event_DarkmodeSwitch,
-                        LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(settingsCityEdit, event_SettingsCityEdit,
-                        LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(settingsSSIDEdit, event_SettingsSSIDEdit,
-                        LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(darkmodeSwitch, event_DarkmodeSwitch, LV_EVENT_ALL,
+                        NULL);
+    lv_obj_add_event_cb(settingsCityEdit, event_SettingsCityEdit, LV_EVENT_ALL,
+                        NULL);
+    lv_obj_add_event_cb(settingsSSIDEdit, event_SettingsSSIDEdit, LV_EVENT_ALL,
+                        NULL);
     lv_obj_add_event_cb(settingsPasswordEdit, event_SettingsPasswordEdit,
                         LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(settingsHomeButton, event_SettingsHomeButton,
@@ -264,8 +262,7 @@ void ui_delete_settings_screen() {
     lv_obj_remove_event_cb(darkmodeSwitch, event_DarkmodeSwitch);
     lv_obj_remove_event_cb(settingsCityEdit, event_SettingsCityEdit);
     lv_obj_remove_event_cb(settingsSSIDEdit, event_SettingsSSIDEdit);
-    lv_obj_remove_event_cb(settingsPasswordEdit,
-                           event_SettingsPasswordEdit);
+    lv_obj_remove_event_cb(settingsPasswordEdit, event_SettingsPasswordEdit);
     lv_obj_remove_event_cb(settingsHomeButton, event_SettingsHomeButton);
     // lv_obj_del(SettingsScreen);
     settingsScreen = NULL;
@@ -291,8 +288,8 @@ void ui_create_keyboard(lv_obj_t *target) {
     lv_obj_set_pos(settingsKeyboard, 0, 0);
     lv_obj_set_align(settingsKeyboard, LV_ALIGN_BOTTOM_LEFT);
     lv_keyboard_set_textarea(settingsKeyboard, target);
-    lv_obj_add_event_cb(settingsKeyboard, event_SettingsKeyboard,
-                        LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(settingsKeyboard, event_SettingsKeyboard, LV_EVENT_ALL,
+                        NULL);
   } else {
     lv_keyboard_set_textarea(settingsKeyboard, target);
   }
@@ -392,11 +389,9 @@ void event_DarkmodeSwitch(lv_event_t *e) {
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_shadow_opa(alarmOneOffButton, 0,
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_set_style_text_color(alarmWorkingDayButtonLabel,
-                                  lv_color_black(),
+      lv_obj_set_style_text_color(alarmWorkingDayButtonLabel, lv_color_black(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_set_style_text_color(alarmWeekendDayButtonLabel,
-                                  lv_color_black(),
+      lv_obj_set_style_text_color(alarmWeekendDayButtonLabel, lv_color_black(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_text_color(alarmOneOffButtonLabel, lv_color_black(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -408,11 +403,9 @@ void event_DarkmodeSwitch(lv_event_t *e) {
       lv_disp_set_theme(dispp, theme);
       lv_obj_set_style_text_color(settingsButtonLabel, lv_color_white(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_set_style_text_color(alarmWorkingDayButtonLabel,
-                                  lv_color_white(),
+      lv_obj_set_style_text_color(alarmWorkingDayButtonLabel, lv_color_white(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_set_style_text_color(alarmWeekendDayButtonLabel,
-                                  lv_color_white(),
+      lv_obj_set_style_text_color(alarmWeekendDayButtonLabel, lv_color_white(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_set_style_text_color(alarmOneOffButtonLabel, lv_color_white(),
                                   LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -464,22 +457,19 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label) {
       strcat(minute_count, minute_buffer);
     }
     alarmHourRoller = lv_roller_create(alarmModalPanel);
-    lv_roller_set_options(alarmHourRoller, hour_count,
-                          LV_ROLLER_MODE_INFINITE);
+    lv_roller_set_options(alarmHourRoller, hour_count, LV_ROLLER_MODE_INFINITE);
     lv_obj_set_size(alarmHourRoller, 90, 110);
     lv_obj_set_pos(alarmHourRoller, -50, -35);
     lv_obj_set_align(alarmHourRoller, LV_ALIGN_CENTER);
-    lv_obj_set_style_text_font(alarmHourRoller, &montserrat_18,
-                               LV_PART_MAIN);
+    lv_obj_set_style_text_font(alarmHourRoller, &montserrat_18, LV_PART_MAIN);
 
     alarmMinuteRoller = lv_roller_create(alarmModalPanel);
     lv_roller_set_options(alarmMinuteRoller, minute_count,
                           LV_ROLLER_MODE_INFINITE);
     lv_obj_set_size(alarmMinuteRoller, 90, 110);
-    lv_obj_align_to(alarmMinuteRoller, alarmHourRoller,
-                    LV_ALIGN_BOTTOM_LEFT, 83, 18);
-    lv_obj_set_style_text_font(alarmMinuteRoller, &montserrat_18,
-                               LV_PART_MAIN);
+    lv_obj_align_to(alarmMinuteRoller, alarmHourRoller, LV_ALIGN_BOTTOM_LEFT,
+                    83, 18);
+    lv_obj_set_style_text_font(alarmMinuteRoller, &montserrat_18, LV_PART_MAIN);
 
     alarmModalCancelButton = lv_btn_create(alarmModalPanel);
     lv_obj_set_size(alarmModalCancelButton, 90, 45);
@@ -507,8 +497,8 @@ void ui_create_alarm_modal_panel(lv_obj_t *target_label) {
     lv_obj_set_style_text_font(alarmModalOkButtonLabel, &montserrat_18,
                                LV_PART_MAIN);
 
-    lv_obj_add_event_cb(alarmModalCancelButton,
-                        event_AlarmModalCancelButton, LV_EVENT_ALL, NULL);
+    lv_obj_add_event_cb(alarmModalCancelButton, event_AlarmModalCancelButton,
+                        LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(alarmModalOkButton, event_AlarmModalOkButton,
                         LV_EVENT_ALL, target_label);
 
@@ -576,10 +566,8 @@ void event_AlarmScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-    lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(analogClockScreen, 0));
-    lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(analogClockScreen, 0));
+    lv_obj_set_parent(settingsButton, lv_obj_get_child(analogClockScreen, 0));
+    lv_obj_set_parent(batteryLabel, lv_obj_get_child(analogClockScreen, 0));
     ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
   }
 }
@@ -593,10 +581,8 @@ void event_DigitalClockScreen(lv_event_t *e) {
     ui_screen_change(weatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
   } else if (event_code == LV_EVENT_GESTURE &&
              lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-    lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(analogClockScreen, 0));
-    lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(analogClockScreen, 0));
+    lv_obj_set_parent(settingsButton, lv_obj_get_child(analogClockScreen, 0));
+    lv_obj_set_parent(batteryLabel, lv_obj_get_child(analogClockScreen, 0));
     ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
   }
 }
@@ -605,12 +591,9 @@ void event_WeatherScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-    lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(digitalClockScreen, 0));
-    lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(digitalClockScreen, 0));
-    ui_screen_change(digitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500,
-                     0);
+    lv_obj_set_parent(settingsButton, lv_obj_get_child(digitalClockScreen, 0));
+    lv_obj_set_parent(batteryLabel, lv_obj_get_child(digitalClockScreen, 0));
+    ui_screen_change(digitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
   }
 }
 
@@ -619,10 +602,8 @@ void event_AnalogClockScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-    lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(digitalClockScreen, 0));
-    lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(digitalClockScreen, 0));
+    lv_obj_set_parent(settingsButton, lv_obj_get_child(digitalClockScreen, 0));
+    lv_obj_set_parent(batteryLabel, lv_obj_get_child(digitalClockScreen, 0));
     ui_screen_change(digitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
   } else if (event_code == LV_EVENT_GESTURE &&
              lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
@@ -663,7 +644,7 @@ void ui_move_battery_label(lv_obj_t *screen) {
 
 ///////////////////// SCREENS INIT////////////////////
 // ALARM SCREEN INIT
-void ui_Alarm_screen_init(void) {
+void alarm_screen_init(void) {
   alarmScreen = lv_obj_create(NULL);
   lv_obj_clear_flag(alarmScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
@@ -765,14 +746,14 @@ void ui_Alarm_screen_init(void) {
 
   lv_obj_add_event_cb(alarmWorkingDayButton, event_WorkingDayButton,
                       LV_EVENT_ALL, NULL);
-  lv_obj_add_event_cb(alarmWeekendDayButton, event_WeekendButton,
-                      LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(alarmWeekendDayButton, event_WeekendButton, LV_EVENT_ALL,
+                      NULL);
   lv_obj_add_event_cb(alarmOneOffButton, event_OneOffButton, LV_EVENT_ALL,
                       NULL);
   lv_obj_add_event_cb(alarmScreen, event_AlarmScreen, LV_EVENT_ALL, NULL);
 }
 
-void ui_AnalogClock_screen_init(void) {
+void analogClock_screen_init(void) {
   analogClockScreen = lv_obj_create(NULL);
   lv_obj_clear_flag(analogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
@@ -782,8 +763,7 @@ void ui_AnalogClock_screen_init(void) {
   lv_obj_clear_flag(analogClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
   lv_obj_set_style_bg_color(analogClockPanel, lv_color_hex(0xFFFFFF),
                             LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_style_bg_opa(analogClockPanel, 0,
-                          LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_bg_opa(analogClockPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   ui_ImageWatchface = lv_img_create(analogClockScreen);
   lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);
@@ -829,11 +809,11 @@ void ui_AnalogClock_screen_init(void) {
   lv_img_set_pivot(ui_ImageArmSecond, 5, 115);
   lv_img_set_angle(ui_ImageArmSecond, 3150);
 
-  lv_obj_add_event_cb(analogClockScreen, event_AnalogClockScreen,
-                      LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(analogClockScreen, event_AnalogClockScreen, LV_EVENT_ALL,
+                      NULL);
 }
 // DIGITAL CLOCK SCREEN INIT
-void ui_DigitalClock_screen_init(void) {
+void digitalClock_screen_init(void) {
   digitalClockScreen = lv_obj_create(NULL);
   lv_obj_clear_flag(digitalClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
@@ -895,7 +875,7 @@ void ui_DigitalClock_screen_init(void) {
   lv_obj_add_event_cb(digitalClockScreen, event_DigitalClockScreen,
                       LV_EVENT_ALL, NULL);
 }
-void ui_Weather_screen_init(void) {
+void weather_screen_init(void) {
   weatherScreen = lv_obj_create(NULL);
   lv_obj_clear_flag(weatherScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
@@ -954,8 +934,8 @@ void ui_Weather_screen_init(void) {
   lv_obj_set_size(weatherHumidityLabel, LV_SIZE_CONTENT,
                   LV_SIZE_CONTENT); /// 121
   // lv_obj_set_pos(weatherHumidityLabel, 140, -50);
-  lv_obj_align_to(weatherHumidityLabel, weatherWindLabel,
-                  LV_ALIGN_BOTTOM_LEFT, 0, 25);
+  lv_obj_align_to(weatherHumidityLabel, weatherWindLabel, LV_ALIGN_BOTTOM_LEFT,
+                  0, 25);
   lv_label_set_text(weatherHumidityLabel, "Влажность: 75%");
   lv_obj_set_style_text_font(weatherHumidityLabel, &montserrat_14,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -1044,10 +1024,9 @@ void ui_Weather_screen_init(void) {
                   LV_ALIGN_OUT_RIGHT_TOP, 65, 0);
   lv_label_set_text(weatherFourthTempLabel, "-18°C");
 
-  lv_obj_add_event_cb(weatherScreen, event_WeatherScreen, LV_EVENT_ALL,
-                      NULL);
+  lv_obj_add_event_cb(weatherScreen, event_WeatherScreen, LV_EVENT_ALL, NULL);
 }
-void ui_Dock_init() {
+void dock_init() {
   lv_obj_t *panel = lv_obj_get_child(lv_scr_act(), 0);
   batteryLabel = lv_label_create(panel);
   lv_obj_set_pos(batteryLabel, 20, 0);
@@ -1061,8 +1040,7 @@ void ui_Dock_init() {
   lv_obj_set_size(settingsButton, 35, 35);
   lv_obj_set_pos(settingsButton, 401, -6);
   lv_obj_set_align(settingsButton, LV_ALIGN_TOP_LEFT);
-  lv_obj_set_style_bg_opa(settingsButton, 0,
-                          LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_bg_opa(settingsButton, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   settingsButtonLabel = lv_label_create(settingsButton);
   lv_obj_set_align(settingsButtonLabel, LV_ALIGN_CENTER);
@@ -1070,8 +1048,7 @@ void ui_Dock_init() {
   lv_obj_set_style_text_align(settingsButtonLabel, LV_TEXT_ALIGN_CENTER,
                               LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  lv_obj_add_event_cb(settingsButton, event_SettingsButton, LV_EVENT_ALL,
-                      NULL);
+  lv_obj_add_event_cb(settingsButton, event_SettingsButton, LV_EVENT_ALL, NULL);
 }
 void ui_init(void) {
   lv_disp_t *dispp = lv_disp_get_default();
@@ -1079,10 +1056,10 @@ void ui_init(void) {
       dispp, lv_palette_main(LV_PALETTE_TEAL), lv_palette_main(LV_PALETTE_TEAL),
       true, LV_FONT_DEFAULT);
   lv_disp_set_theme(dispp, theme);
-  ui_Alarm_screen_init();
-  ui_AnalogClock_screen_init();
-  ui_DigitalClock_screen_init();
-  ui_Weather_screen_init();
+  alarm_screen_init();
+  analogClock_screen_init();
+  digitalClock_screen_init();
+  weather_screen_init();
   lv_disp_load_scr(digitalClockScreen);
-  ui_Dock_init();
+  dock_init();
 }
