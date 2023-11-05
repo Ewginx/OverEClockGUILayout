@@ -115,14 +115,14 @@ void hal_loop(void)
             printf("Time: %i:%i:%i \n", hour, minute, second);
             fflush(stdout);
             sprintf(time_string, "%02i:%02i", hour, minute);
-            lv_label_set_text(ui_DigitalClockLabel, time_string);
+            lv_label_set_text(digitalClockLabel, time_string);
             sprintf(second_string, "%02i", second);
-            lv_label_set_text(ui_DigitalClockSecondLabel, second_string);
+            lv_label_set_text(digitalClockSecondLabel, second_string);
             sprintf(date_string, "%02i.%02i.%i,", day, month + 1, year + 1900);
-            lv_label_set_text(ui_DigitalClockDateLabel, date_string);
+            lv_label_set_text(digitalClockDateLabel, date_string);
             // if (flag)
             // {
-            //     lv_img_set_src(ui_WeatherImage, "D:angry_clouds.png");
+            //     lv_img_set_src(weatherImage, "D:angry_clouds.png");
             //     flag = false;
             // }
         }
