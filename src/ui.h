@@ -136,14 +136,6 @@ LV_IMG_DECLARE(ui_img_armsecond_png);
 // LV_IMG_DECLARE(ui_img_day_rain_png);
 LV_IMG_DECLARE(ui_img_day_clear_png);
 
-LV_FONT_DECLARE(montserrat_32);
-LV_FONT_DECLARE(montserrat_18);
-LV_FONT_DECLARE(montserrat_14);
-LV_FONT_DECLARE(montserrat_12);
-LV_FONT_DECLARE(montserrat_48);
-LV_FONT_DECLARE(ui_font_Roboto120);
-LV_FONT_DECLARE(ui_font_Roboto45);
-
 void ui_init(void);
 
 #ifdef __cplusplus

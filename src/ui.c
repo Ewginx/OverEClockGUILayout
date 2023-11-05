@@ -834,7 +834,7 @@ void digitalClock_screen_init(void) {
 
   lv_obj_set_style_text_align(digitalClockLabel, LV_TEXT_ALIGN_LEFT,
                               LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_style_text_font(digitalClockLabel, &ui_font_Roboto120,
+  lv_obj_set_style_text_font(digitalClockLabel, &font_Roboto120,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   digitalClockSecondLabel = lv_label_create(digitalClockPanel);
@@ -844,7 +844,7 @@ void digitalClock_screen_init(void) {
   lv_label_set_text(digitalClockSecondLabel, "00");
   lv_obj_set_style_text_align(digitalClockSecondLabel, LV_TEXT_ALIGN_LEFT,
                               LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_style_text_font(digitalClockSecondLabel, &ui_font_Roboto45,
+  lv_obj_set_style_text_font(digitalClockSecondLabel, &font_Roboto45,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   digitalClockDateLabel = lv_label_create(digitalClockPanel);
