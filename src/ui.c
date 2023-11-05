@@ -65,8 +65,8 @@ void event_WeekendButton(lv_event_t *e);
 void event_WorkingDayButton(lv_event_t *e);
 
 // Analog Clock Objects
-lv_obj_t *AnalogClockScreen;
-lv_obj_t *AnalogClockPanel;
+lv_obj_t *analogClockScreen;
+lv_obj_t *analogClockPanel;
 lv_obj_t *ui_AnalogSettingsBtn;
 lv_obj_t *ui_AnalogSettingsLabel;
 lv_obj_t *ui_ImageWatchface;
@@ -577,10 +577,10 @@ void event_AlarmScreen(lv_event_t *e) {
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
     lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(AnalogClockScreen, 0));
+                      lv_obj_get_child(analogClockScreen, 0));
     lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(AnalogClockScreen, 0));
-    ui_screen_change(AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+                      lv_obj_get_child(analogClockScreen, 0));
+    ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
   }
 }
 void event_DigitalClockScreen(lv_event_t *e) {
@@ -594,10 +594,10 @@ void event_DigitalClockScreen(lv_event_t *e) {
   } else if (event_code == LV_EVENT_GESTURE &&
              lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
     lv_obj_set_parent(settingsButton,
-                      lv_obj_get_child(AnalogClockScreen, 0));
+                      lv_obj_get_child(analogClockScreen, 0));
     lv_obj_set_parent(batteryLabel,
-                      lv_obj_get_child(AnalogClockScreen, 0));
-    ui_screen_change(AnalogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+                      lv_obj_get_child(analogClockScreen, 0));
+    ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
   }
 }
 void event_WeatherScreen(lv_event_t *e) {
@@ -773,19 +773,19 @@ void ui_Alarm_screen_init(void) {
 }
 
 void ui_AnalogClock_screen_init(void) {
-  AnalogClockScreen = lv_obj_create(NULL);
-  lv_obj_clear_flag(AnalogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+  analogClockScreen = lv_obj_create(NULL);
+  lv_obj_clear_flag(analogClockScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-  AnalogClockPanel = lv_obj_create(AnalogClockScreen);
-  lv_obj_set_size(AnalogClockPanel, lv_pct(100), lv_pct(100));
-  lv_obj_set_align(AnalogClockPanel, LV_ALIGN_TOP_LEFT);
-  lv_obj_clear_flag(AnalogClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
-  lv_obj_set_style_bg_color(AnalogClockPanel, lv_color_hex(0xFFFFFF),
+  analogClockPanel = lv_obj_create(analogClockScreen);
+  lv_obj_set_size(analogClockPanel, lv_pct(100), lv_pct(100));
+  lv_obj_set_align(analogClockPanel, LV_ALIGN_TOP_LEFT);
+  lv_obj_clear_flag(analogClockPanel, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+  lv_obj_set_style_bg_color(analogClockPanel, lv_color_hex(0xFFFFFF),
                             LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_style_bg_opa(AnalogClockPanel, 0,
+  lv_obj_set_style_bg_opa(analogClockPanel, 0,
                           LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  ui_ImageWatchface = lv_img_create(AnalogClockScreen);
+  ui_ImageWatchface = lv_img_create(analogClockScreen);
   lv_img_set_src(ui_ImageWatchface, &ui_img_watchface240_png);
   lv_obj_set_width(ui_ImageWatchface, LV_SIZE_CONTENT);  /// 1
   lv_obj_set_height(ui_ImageWatchface, LV_SIZE_CONTENT); /// 1
@@ -793,7 +793,7 @@ void ui_AnalogClock_screen_init(void) {
   lv_obj_add_flag(ui_ImageWatchface, LV_OBJ_FLAG_ADV_HITTEST);  /// Flags
   lv_obj_clear_flag(ui_ImageWatchface, LV_OBJ_FLAG_SCROLLABLE); /// Flags
 
-  ui_ImageArmHour = lv_img_create(AnalogClockScreen);
+  ui_ImageArmHour = lv_img_create(analogClockScreen);
   lv_img_set_src(ui_ImageArmHour, &ui_img_armhour_png);
   lv_obj_set_width(ui_ImageArmHour, LV_SIZE_CONTENT);  /// 1
   lv_obj_set_height(ui_ImageArmHour, LV_SIZE_CONTENT); /// 1
@@ -805,7 +805,7 @@ void ui_AnalogClock_screen_init(void) {
   lv_img_set_pivot(ui_ImageArmHour, 9, 77);
   lv_img_set_angle(ui_ImageArmHour, 450);
 
-  ui_ImageArmMinute = lv_img_create(AnalogClockScreen);
+  ui_ImageArmMinute = lv_img_create(analogClockScreen);
   lv_img_set_src(ui_ImageArmMinute, &ui_img_armminute_png);
   lv_obj_set_width(ui_ImageArmMinute, LV_SIZE_CONTENT);  /// 1
   lv_obj_set_height(ui_ImageArmMinute, LV_SIZE_CONTENT); /// 1
@@ -817,7 +817,7 @@ void ui_AnalogClock_screen_init(void) {
   lv_img_set_pivot(ui_ImageArmMinute, 9, 105);
   lv_img_set_angle(ui_ImageArmMinute, 1800);
 
-  ui_ImageArmSecond = lv_img_create(AnalogClockScreen);
+  ui_ImageArmSecond = lv_img_create(analogClockScreen);
   lv_img_set_src(ui_ImageArmSecond, &ui_img_armsecond_png);
   lv_obj_set_width(ui_ImageArmSecond, LV_SIZE_CONTENT);  /// 1
   lv_obj_set_height(ui_ImageArmSecond, LV_SIZE_CONTENT); /// 1
@@ -829,7 +829,7 @@ void ui_AnalogClock_screen_init(void) {
   lv_img_set_pivot(ui_ImageArmSecond, 5, 115);
   lv_img_set_angle(ui_ImageArmSecond, 3150);
 
-  lv_obj_add_event_cb(AnalogClockScreen, event_AnalogClockScreen,
+  lv_obj_add_event_cb(analogClockScreen, event_AnalogClockScreen,
                       LV_EVENT_ALL, NULL);
 }
 // DIGITAL CLOCK SCREEN INIT

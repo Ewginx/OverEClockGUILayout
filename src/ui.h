@@ -80,8 +80,8 @@ void event_WorkingDayButton(lv_event_t *e);
 void event_AlarmScreen(lv_event_t *e);
 
 // Analog Clock Objects
-extern lv_obj_t *AnalogClockScreen;
-extern lv_obj_t *AnalogClockPanel;
+extern lv_obj_t *analogClockScreen;
+extern lv_obj_t *analogClockPanel;
 extern lv_obj_t *ui_ImageWatchface;
 extern lv_obj_t *ui_ImageArmHour;
 extern lv_obj_t *ui_ImageArmMinute;
