@@ -110,13 +110,17 @@ extern "C"
     extern lv_obj_t *ui_WeatherBriefingLabel;
     extern lv_obj_t *ui_WeatherWindLabel;
     extern lv_obj_t *ui_WeatherHumidityLabel;
-    extern lv_obj_t *ui_WeatherMiscLabel;
+    extern lv_obj_t *ui_WeatherPressureLabel;
     extern lv_obj_t *ui_WeatherFeelsLikeLabel;
     extern lv_obj_t *ui_WeatherTimesLabel;
+    extern lv_obj_t *ui_WeatherMaxTempLabel;
+    extern lv_obj_t *ui_WeatherMinTempLabel;
+    extern lv_obj_t *ui_WeatherRainProbabLabel;
     extern lv_obj_t *ui_WeatherFirstTempLabel;
     extern lv_obj_t *ui_WeatherSecondTempLabel;
     extern lv_obj_t *ui_WeatherThirdTempLabel;
     extern lv_obj_t *ui_WeatherFourthTempLabel;
+
     
     extern lv_obj_t *ui_BatteryLabel;
     extern lv_obj_t *ui_SettingsButton;
@@ -132,12 +136,13 @@ extern "C"
     LV_IMG_DECLARE(ui_img_armhour_png);
     LV_IMG_DECLARE(ui_img_armminute_png);
     LV_IMG_DECLARE(ui_img_armsecond_png);
-    LV_IMG_DECLARE(ui_img_day_rain_png);
+    // LV_IMG_DECLARE(ui_img_day_rain_png);
     LV_IMG_DECLARE(ui_img_day_clear_png);
 
     LV_FONT_DECLARE(montserrat_32);
     LV_FONT_DECLARE(montserrat_18);
     LV_FONT_DECLARE(montserrat_14);
+    LV_FONT_DECLARE(montserrat_12);
     LV_FONT_DECLARE(ui_font_Roboto120);
     LV_FONT_DECLARE(ui_font_Roboto45);
 
