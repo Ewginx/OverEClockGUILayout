@@ -120,11 +120,11 @@ void hal_loop(void)
             lv_label_set_text(ui_DigitalClockSecondLabel, second_string);
             sprintf(date_string, "%02i.%02i.%i,", day, month + 1, year + 1900);
             lv_label_set_text(ui_DigitalClockDateLabel, date_string);
-            if (flag)
-            {
-                lv_img_set_src(ui_WeatherImage, "D:angry_clouds.png");
-                flag = false;
-            }
+            // if (flag)
+            // {
+            //     lv_img_set_src(ui_WeatherImage, "D:angry_clouds.png");
+            //     flag = false;
+            // }
         }
     }
 }
