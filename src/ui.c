@@ -67,8 +67,6 @@ void event_WorkingDayButton(lv_event_t *e);
 // Analog Clock Objects
 lv_obj_t *analogClockScreen;
 lv_obj_t *analogClockPanel;
-lv_obj_t *ui_AnalogSettingsBtn;
-lv_obj_t *ui_AnalogSettingsLabel;
 lv_obj_t *ui_ImageWatchface;
 lv_obj_t *ui_ImageArmHour;
 lv_obj_t *ui_ImageArmMinute;
@@ -888,42 +886,24 @@ void weather_screen_init(void) {
   lv_obj_set_style_bg_opa(weatherPanel, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherImage = lv_img_create(weatherPanel);
-  lv_img_set_src(weatherImage, &ui_img_day_clear_png);
+  lv_img_set_src(weatherImage, &ui_img_day_rain_png);
   lv_obj_set_size(weatherImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 128
-  lv_obj_set_pos(weatherImage, 0, 30);
+  lv_obj_set_pos(weatherImage, 10, 30);
   lv_obj_set_align(weatherImage, LV_ALIGN_TOP_LEFT); /// Flags
 
   weatherCity = lv_label_create(weatherPanel);
   lv_obj_set_size(weatherCity, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherCity, 0, 15);
+  lv_obj_set_pos(weatherCity, 0, 30);
   lv_obj_set_align(weatherCity, LV_ALIGN_TOP_MID);
   lv_label_set_text(weatherCity, "Khabarovsk, RU");
   lv_label_set_long_mode(weatherCity, LV_LABEL_LONG_CLIP);
-  lv_obj_set_style_text_font(weatherCity, &montserrat_18,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
-
-  weatherTemperatureLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherTemperatureLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherTemperatureLabel, -15, -60);
-  lv_obj_set_align(weatherTemperatureLabel, LV_ALIGN_CENTER);
-  lv_label_set_text(weatherTemperatureLabel, "-13°C");
-  lv_obj_set_style_text_font(weatherTemperatureLabel, &montserrat_48,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
-
-  weatherFeelsLikeLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherFeelsLikeLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 121
-  lv_obj_set_pos(weatherFeelsLikeLabel, 0, -5);
-  lv_obj_set_align(weatherFeelsLikeLabel, LV_ALIGN_CENTER);
-  lv_label_set_text(weatherFeelsLikeLabel, "Ощущается как: -24°C");
-  lv_obj_set_style_text_font(weatherFeelsLikeLabel, &montserrat_14,
+  lv_obj_set_style_text_font(weatherCity, &montserrat_14,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherWindLabel = lv_label_create(weatherPanel);
   lv_obj_set_size(weatherWindLabel, LV_SIZE_CONTENT,
                   LV_SIZE_CONTENT); /// 121
-  lv_obj_set_pos(weatherWindLabel, 140, -90);
+  lv_obj_set_pos(weatherWindLabel, 140, -75);
   lv_obj_set_align(weatherWindLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherWindLabel, "Ветер: 14.1 км/ч ЗСЗ");
   lv_obj_set_style_text_font(weatherWindLabel, &montserrat_14,
@@ -934,7 +914,7 @@ void weather_screen_init(void) {
                   LV_SIZE_CONTENT); /// 121
   // lv_obj_set_pos(weatherHumidityLabel, 140, -50);
   lv_obj_align_to(weatherHumidityLabel, weatherWindLabel, LV_ALIGN_BOTTOM_LEFT,
-                  0, 25);
+                  0, 20);
   lv_label_set_text(weatherHumidityLabel, "Влажность: 75%");
   lv_obj_set_style_text_font(weatherHumidityLabel, &montserrat_14,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -943,15 +923,33 @@ void weather_screen_init(void) {
   lv_obj_set_size(weatherPressureLabel, LV_SIZE_CONTENT,
                   LV_SIZE_CONTENT); /// 121
   lv_obj_align_to(weatherPressureLabel, weatherHumidityLabel,
-                  LV_ALIGN_BOTTOM_LEFT, 0, 25);
+                  LV_ALIGN_BOTTOM_LEFT, 0, 20);
   lv_label_set_text(weatherPressureLabel, "Давление: 1027 мбар");
   lv_obj_set_style_text_font(weatherPressureLabel, &montserrat_14,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  weatherTemperatureLabel = lv_label_create(weatherPanel);
+  lv_obj_set_size(weatherTemperatureLabel, LV_SIZE_CONTENT,
+                  LV_SIZE_CONTENT); /// 1
+  lv_obj_set_pos(weatherTemperatureLabel, -10, -45);
+  lv_obj_set_align(weatherTemperatureLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(weatherTemperatureLabel, "-13°C");
+  lv_obj_set_style_text_font(weatherTemperatureLabel, &montserrat_48,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  weatherFeelsLikeLabel = lv_label_create(weatherPanel);
+  lv_obj_set_size(weatherFeelsLikeLabel, LV_SIZE_CONTENT,
+                  LV_SIZE_CONTENT); /// 121
+  lv_obj_set_pos(weatherFeelsLikeLabel, 40, 5);
+  lv_obj_set_align(weatherFeelsLikeLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(weatherFeelsLikeLabel, "Ощущается как: -24°C");
+  lv_obj_set_style_text_font(weatherFeelsLikeLabel, &montserrat_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherBriefingLabel = lv_label_create(weatherPanel);
   lv_obj_set_size(weatherBriefingLabel, LV_SIZE_CONTENT,
                   LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherBriefingLabel, 0, 30);
+  lv_obj_set_pos(weatherBriefingLabel, 0, 35);
   lv_obj_set_align(weatherBriefingLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherBriefingLabel,
                     "Переменная облачность. Возможен дождь.");
@@ -987,7 +985,7 @@ void weather_screen_init(void) {
 
   weatherTimesLabel = lv_label_create(weatherPanel);
   lv_obj_set_size(weatherTimesLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherTimesLabel, 0, 95);
+  lv_obj_set_pos(weatherTimesLabel, 0, 93);
   lv_obj_set_align(weatherTimesLabel, LV_ALIGN_CENTER);
   lv_label_set_text(
       weatherTimesLabel,
@@ -1029,11 +1027,36 @@ void dock_init() {
 
   lv_obj_t *panel = lv_obj_get_child(lv_scr_act(), 0);
   batteryLabel = lv_label_create(panel);
-  lv_obj_set_pos(batteryLabel, 20, 0);
+  lv_obj_set_pos(batteryLabel, 10, 0);
   lv_obj_set_align(batteryLabel, LV_ALIGN_TOP_LEFT);
   lv_obj_set_size(batteryLabel, 40, 30);
   lv_label_set_text(batteryLabel, LV_SYMBOL_BATTERY_2);
   lv_obj_set_style_text_font(batteryLabel, &lv_font_montserrat_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  dockWiFiLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockWiFiLabel, 45, 0);
+  lv_obj_set_align(dockWiFiLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockWiFiLabel, 40, 30);
+  lv_label_set_text(dockWiFiLabel, WIFI_CONNECTED_SYMBOL);
+  lv_obj_set_style_text_font(dockWiFiLabel, &wifi_symbols_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+
+  dockTemperatureLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockTemperatureLabel, 75, 0);
+  lv_obj_set_align(dockTemperatureLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockTemperatureLabel, 60, 30);
+  lv_label_set_text(dockTemperatureLabel, "20 °C");
+  lv_obj_set_style_text_font(dockTemperatureLabel, &lv_font_montserrat_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  dockHumidityLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockHumidityLabel, 135, 0);
+  lv_obj_set_align(dockHumidityLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockHumidityLabel, 60, 30);
+  lv_label_set_text(dockHumidityLabel, "80%");
+  lv_obj_set_style_text_font(dockHumidityLabel, &lv_font_montserrat_20,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   settingsButton = lv_btn_create(panel);
@@ -1048,29 +1071,7 @@ void dock_init() {
   lv_obj_set_style_text_align(settingsButtonLabel, LV_TEXT_ALIGN_CENTER,
                               LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  dockHumidityLabel = lv_label_create(panel);
-  lv_obj_set_pos(dockHumidityLabel, 160, 0);
-  lv_obj_set_align(dockHumidityLabel, LV_ALIGN_TOP_LEFT);
-  lv_obj_set_size(dockHumidityLabel, 60, 30);
-  lv_label_set_text(dockHumidityLabel, "80%");
-  lv_obj_set_style_text_font(dockHumidityLabel, &lv_font_montserrat_20,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
 
-  dockTemperatureLabel = lv_label_create(panel);
-  lv_obj_set_pos(dockTemperatureLabel, 100, 0);
-  lv_obj_set_align(dockTemperatureLabel, LV_ALIGN_TOP_LEFT);
-  lv_obj_set_size(dockTemperatureLabel, 60, 30);
-  lv_label_set_text(dockTemperatureLabel, "20 °C");
-  lv_obj_set_style_text_font(dockTemperatureLabel, &lv_font_montserrat_20,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
-
-  dockWiFiLabel = lv_label_create(panel);
-  lv_obj_set_pos(dockWiFiLabel, 60, 0);
-  lv_obj_set_align(dockWiFiLabel, LV_ALIGN_TOP_LEFT);
-  lv_obj_set_size(dockWiFiLabel, 40, 30);
-  lv_label_set_text(dockWiFiLabel, WIFI_CONNECTED_SYMBOL);
-  lv_obj_set_style_text_font(dockWiFiLabel, &wifi_symbols_20,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
 
   lv_obj_add_event_cb(settingsButton, event_SettingsButton, LV_EVENT_ALL, NULL);
 }

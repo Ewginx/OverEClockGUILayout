@@ -139,7 +139,7 @@ LV_IMG_DECLARE(ui_img_watchface240_png);
 LV_IMG_DECLARE(ui_img_armhour_png);
 LV_IMG_DECLARE(ui_img_armminute_png);
 LV_IMG_DECLARE(ui_img_armsecond_png);
-// LV_IMG_DECLARE(ui_img_day_rain_png);
+LV_IMG_DECLARE(ui_img_day_rain_png);
 LV_IMG_DECLARE(ui_img_day_clear_png);
 
 void ui_init(void);
