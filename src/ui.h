@@ -14,6 +14,8 @@ extern "C" {
 #define MINUTE_COUNT 60
 #define HOUR_LABEL 0
 #define MINUTE_LABEL 3
+#define WIFI_CONNECTED_SYMBOL "\uE63E"
+#define WIFI_DISCONNECTED_SYMBOL "\uE648"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -122,6 +124,10 @@ extern lv_obj_t *weatherFourthTempLabel;
 extern lv_obj_t *batteryLabel;
 extern lv_obj_t *settingsButton;
 extern lv_obj_t *settingsButtonLabel;
+extern lv_obj_t *dockTemperatureLabel;
+extern lv_obj_t *dockHumidityLabel;
+extern lv_obj_t *dockWiFiLabel;
+
 // Weather Clock Events
 void event_WeatherScreen(lv_event_t *e);
 

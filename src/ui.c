@@ -109,10 +109,11 @@ lv_obj_t *weatherFirstTempLabel;
 lv_obj_t *batteryLabel;
 lv_obj_t *settingsButton;
 lv_obj_t *settingsButtonLabel;
+lv_obj_t *dockTemperatureLabel;
+lv_obj_t *dockHumidityLabel;
+lv_obj_t *dockWiFiLabel;
 // Weather Events
 void event_WeatherScreen(lv_event_t *e);
-
-lv_obj_t *ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
@@ -560,15 +561,22 @@ void event_AlarmModalOkButton(lv_event_t *e) {
     ui_delete_alarm_modal_panel();
   }
 }
+
+void dock_change_parent(lv_obj_t *screen) {
+  lv_obj_set_parent(settingsButton, lv_obj_get_child(screen, 0));
+  lv_obj_set_parent(batteryLabel, lv_obj_get_child(screen, 0));
+  lv_obj_set_parent(dockHumidityLabel, lv_obj_get_child(screen, 0));
+  lv_obj_set_parent(dockTemperatureLabel, lv_obj_get_child(screen, 0));
+  lv_obj_set_parent(dockWiFiLabel, lv_obj_get_child(screen, 0));
+}
 // Screen change on GESTURES
 void event_AlarmScreen(lv_event_t *e) {
   lv_event_code_t event_code = lv_event_get_code(e);
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(analogClockScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(analogClockScreen, 0));
     ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+    dock_change_parent(analogClockScreen);
   }
 }
 void event_DigitalClockScreen(lv_event_t *e) {
@@ -576,14 +584,12 @@ void event_DigitalClockScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(weatherScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(weatherScreen, 0));
     ui_screen_change(weatherScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+    dock_change_parent(weatherScreen);
   } else if (event_code == LV_EVENT_GESTURE &&
              lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(analogClockScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(analogClockScreen, 0));
     ui_screen_change(analogClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+    dock_change_parent(analogClockScreen);
   }
 }
 void event_WeatherScreen(lv_event_t *e) {
@@ -591,9 +597,8 @@ void event_WeatherScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(digitalClockScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(digitalClockScreen, 0));
     ui_screen_change(digitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+    dock_change_parent(digitalClockScreen);
   }
 }
 
@@ -602,14 +607,12 @@ void event_AnalogClockScreen(lv_event_t *e) {
   lv_obj_t *target = lv_event_get_target(e);
   if (event_code == LV_EVENT_GESTURE &&
       lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(digitalClockScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(digitalClockScreen, 0));
     ui_screen_change(digitalClockScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+    dock_change_parent(digitalClockScreen);
   } else if (event_code == LV_EVENT_GESTURE &&
              lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT) {
-    lv_obj_set_parent(settingsButton, lv_obj_get_child(alarmScreen, 0));
-    lv_obj_set_parent(batteryLabel, lv_obj_get_child(alarmScreen, 0));
     ui_screen_change(alarmScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
+    dock_change_parent(alarmScreen);
   }
 }
 
@@ -636,10 +639,6 @@ void ui_event_WeatherSettingsBtn(lv_event_t *e) {
     lastScreen = lv_event_get_user_data(e);
     ui_screen_change(settingsScreen, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0);
   }
-}
-
-void ui_move_battery_label(lv_obj_t *screen) {
-  lv_obj_set_parent(batteryLabel, screen);
 }
 
 ///////////////////// SCREENS INIT////////////////////
@@ -1027,6 +1026,7 @@ void weather_screen_init(void) {
   lv_obj_add_event_cb(weatherScreen, event_WeatherScreen, LV_EVENT_ALL, NULL);
 }
 void dock_init() {
+
   lv_obj_t *panel = lv_obj_get_child(lv_scr_act(), 0);
   batteryLabel = lv_label_create(panel);
   lv_obj_set_pos(batteryLabel, 20, 0);
@@ -1047,6 +1047,30 @@ void dock_init() {
   lv_label_set_text(settingsButtonLabel, LV_SYMBOL_SETTINGS);
   lv_obj_set_style_text_align(settingsButtonLabel, LV_TEXT_ALIGN_CENTER,
                               LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  dockHumidityLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockHumidityLabel, 160, 0);
+  lv_obj_set_align(dockHumidityLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockHumidityLabel, 60, 30);
+  lv_label_set_text(dockHumidityLabel, "80%");
+  lv_obj_set_style_text_font(dockHumidityLabel, &lv_font_montserrat_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  dockTemperatureLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockTemperatureLabel, 100, 0);
+  lv_obj_set_align(dockTemperatureLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockTemperatureLabel, 60, 30);
+  lv_label_set_text(dockTemperatureLabel, "20 °C");
+  lv_obj_set_style_text_font(dockTemperatureLabel, &lv_font_montserrat_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
+  dockWiFiLabel = lv_label_create(panel);
+  lv_obj_set_pos(dockWiFiLabel, 60, 0);
+  lv_obj_set_align(dockWiFiLabel, LV_ALIGN_TOP_LEFT);
+  lv_obj_set_size(dockWiFiLabel, 40, 30);
+  lv_label_set_text(dockWiFiLabel, WIFI_CONNECTED_SYMBOL);
+  lv_obj_set_style_text_font(dockWiFiLabel, &wifi_symbols_20,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
 
   lv_obj_add_event_cb(settingsButton, event_SettingsButton, LV_EVENT_ALL, NULL);
 }
