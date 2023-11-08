@@ -901,37 +901,31 @@ void weather_screen_init(void) {
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherWindLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherWindLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 121
-  lv_obj_set_pos(weatherWindLabel, 140, -75);
-  lv_obj_set_align(weatherWindLabel, LV_ALIGN_CENTER);
-  lv_label_set_text(weatherWindLabel, "Ветер: 14.1 км/ч ЗСЗ");
+  lv_label_set_text(weatherWindLabel, "14.1 км/ч ЗСЗ");
   lv_obj_set_style_text_font(weatherWindLabel, &montserrat_14,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_pos(weatherWindLabel, 170, -75);
+  lv_obj_set_align(weatherWindLabel, LV_ALIGN_CENTER);
+
 
   weatherHumidityLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherHumidityLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 121
-  // lv_obj_set_pos(weatherHumidityLabel, 140, -50);
-  lv_obj_align_to(weatherHumidityLabel, weatherWindLabel, LV_ALIGN_BOTTOM_LEFT,
-                  0, 20);
-  lv_label_set_text(weatherHumidityLabel, "Влажность: 75%");
-  lv_obj_set_style_text_font(weatherHumidityLabel, &montserrat_14,
+  lv_label_set_text(weatherHumidityLabel, HUMIDITY_SYMBOL);
+  lv_obj_set_style_text_font(weatherHumidityLabel, &weather_icon_font_20,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_align_to(weatherHumidityLabel, weatherWindLabel, LV_ALIGN_CENTER,
+                  0, 20);
+
 
   weatherPressureLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherPressureLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 121
-  lv_obj_align_to(weatherPressureLabel, weatherHumidityLabel,
-                  LV_ALIGN_BOTTOM_LEFT, 0, 20);
-  lv_label_set_text(weatherPressureLabel, "Давление: 1027 мбар");
+  lv_label_set_text(weatherPressureLabel, "1027 мбар");
   lv_obj_set_style_text_font(weatherPressureLabel, &montserrat_14,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_align_to(weatherPressureLabel, weatherHumidityLabel,
+                  LV_ALIGN_CENTER, 0, 20);
+
 
   weatherTemperatureLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherTemperatureLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherTemperatureLabel, -10, -45);
+  lv_obj_set_pos(weatherTemperatureLabel, 0, -45);
   lv_obj_set_align(weatherTemperatureLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherTemperatureLabel, "-13°C");
   lv_obj_set_style_text_font(weatherTemperatureLabel, &montserrat_48,
