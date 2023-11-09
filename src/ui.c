@@ -887,53 +887,34 @@ void weather_screen_init(void) {
 
   weatherImage = lv_img_create(weatherPanel);
   lv_img_set_src(weatherImage, &ui_img_day_rain_png);
-  lv_obj_set_size(weatherImage, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 128
   lv_obj_set_pos(weatherImage, 10, 30);
   lv_obj_set_align(weatherImage, LV_ALIGN_TOP_LEFT); /// Flags
 
   weatherCity = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherCity, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherCity, 0, 30);
+  lv_obj_set_size(weatherCity, 200, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_pos(weatherCity, 20, 35);
   lv_obj_set_align(weatherCity, LV_ALIGN_TOP_MID);
-  lv_label_set_text(weatherCity, "Khabarovsk, RU");
-  lv_label_set_long_mode(weatherCity, LV_LABEL_LONG_CLIP);
-  lv_obj_set_style_text_font(weatherCity, &montserrat_14,
+  lv_label_set_long_mode(weatherCity, LV_LABEL_LONG_SCROLL_CIRCULAR);
+  lv_label_set_text(weatherCity, "Saint-Petersburg, Russia");
+  lv_obj_set_style_text_font(weatherCity, &montserrat_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherWindLabel = lv_label_create(weatherPanel);
-  lv_label_set_text(weatherWindLabel, "14.1 км/ч ЗСЗ");
-  lv_obj_set_style_text_font(weatherWindLabel, &montserrat_14,
+  lv_label_set_text_fmt(weatherWindLabel, WIND_SYMBOL" %.1f км/ч " SW_WIND_SYMBOL, 15.1);
+  lv_obj_set_style_text_font(weatherWindLabel, &weather_icon_font_full_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_set_pos(weatherWindLabel, 170, -75);
+  lv_obj_set_pos(weatherWindLabel, 150, -40);
   lv_obj_set_align(weatherWindLabel, LV_ALIGN_CENTER);
 
 
-  weatherHumidityLabel = lv_label_create(weatherPanel);
-  lv_label_set_text(weatherHumidityLabel, HUMIDITY_SYMBOL);
-  lv_obj_set_style_text_font(weatherHumidityLabel, &weather_icon_font_20,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_align_to(weatherHumidityLabel, weatherWindLabel, LV_ALIGN_CENTER,
-                  0, 20);
-
-
-  weatherPressureLabel = lv_label_create(weatherPanel);
-  lv_label_set_text(weatherPressureLabel, "1027 мбар");
-  lv_obj_set_style_text_font(weatherPressureLabel, &montserrat_14,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
-  lv_obj_align_to(weatherPressureLabel, weatherHumidityLabel,
-                  LV_ALIGN_CENTER, 0, 20);
-
-
   weatherTemperatureLabel = lv_label_create(weatherPanel);
-  lv_obj_set_pos(weatherTemperatureLabel, 0, -45);
+  lv_obj_set_pos(weatherTemperatureLabel, 20, -45);
   lv_obj_set_align(weatherTemperatureLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherTemperatureLabel, "-13°C");
   lv_obj_set_style_text_font(weatherTemperatureLabel, &montserrat_48,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherFeelsLikeLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherFeelsLikeLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 121
   lv_obj_set_pos(weatherFeelsLikeLabel, 40, 5);
   lv_obj_set_align(weatherFeelsLikeLabel, LV_ALIGN_CENTER);
   lv_label_set_text(weatherFeelsLikeLabel, "Ощущается как: -24°C");
@@ -941,41 +922,52 @@ void weather_screen_init(void) {
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherBriefingLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherBriefingLabel, LV_SIZE_CONTENT,
+  lv_obj_set_size(weatherBriefingLabel, 320,
                   LV_SIZE_CONTENT); /// 1
   lv_obj_set_pos(weatherBriefingLabel, 0, 35);
   lv_obj_set_align(weatherBriefingLabel, LV_ALIGN_CENTER);
+  lv_label_set_long_mode(weatherBriefingLabel, LV_LABEL_LONG_SCROLL_CIRCULAR);
   lv_label_set_text(weatherBriefingLabel,
                     "Переменная облачность. Возможен дождь.");
-  lv_obj_set_style_text_font(weatherBriefingLabel, &montserrat_14,
+  lv_obj_set_style_text_font(weatherBriefingLabel, &montserrat_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
 
   weatherMaxTempLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherMaxTempLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 1
-  lv_obj_set_pos(weatherMaxTempLabel, -150, 65);
-  lv_obj_set_align(weatherMaxTempLabel, LV_ALIGN_CENTER);
-  lv_label_set_text(weatherMaxTempLabel, "Макс. t: -12°C");
-  lv_obj_set_style_text_font(weatherMaxTempLabel, &montserrat_14,
+  lv_label_set_text_fmt(weatherMaxTempLabel, TEMP_UP_SYMBOL" %d°C", -8);
+  lv_obj_set_style_text_font(weatherMaxTempLabel, &weather_icon_font_full_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_pos(weatherMaxTempLabel, -170, 65);
+  lv_obj_set_align(weatherMaxTempLabel, LV_ALIGN_CENTER);
+
 
   weatherMinTempLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherMinTempLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 1
+  lv_label_set_text_fmt(weatherMinTempLabel, TEMP_DOWN_SYMBOL" %d°C", -19);
+  lv_obj_set_style_text_font(weatherMinTempLabel, &weather_icon_font_full_18,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_align_to(weatherMinTempLabel, weatherMaxTempLabel,
                   LV_ALIGN_OUT_RIGHT_MID, 15, -1);
-  lv_label_set_text(weatherMinTempLabel, "Мин. t: -20°C");
-  lv_obj_set_style_text_font(weatherMinTempLabel, &montserrat_14,
-                             LV_PART_MAIN | LV_STATE_DEFAULT);
+
 
   weatherRainProbabLabel = lv_label_create(weatherPanel);
-  lv_obj_set_size(weatherRainProbabLabel, LV_SIZE_CONTENT,
-                  LV_SIZE_CONTENT); /// 1
+  lv_label_set_text_fmt(weatherRainProbabLabel, SNOWFLAKE_SYMBOL" %d%%", 53);
+  lv_obj_set_style_text_font(weatherRainProbabLabel, &weather_icon_font_full_18,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_align_to(weatherRainProbabLabel, weatherMinTempLabel,
                   LV_ALIGN_OUT_RIGHT_MID, 15, -1);
-  lv_label_set_text(weatherRainProbabLabel, "Вероятность осадков: 0%");
-  lv_obj_set_style_text_font(weatherRainProbabLabel, &montserrat_14,
+
+  weatherHumidityLabel = lv_label_create(weatherPanel);
+  lv_label_set_text_fmt(weatherHumidityLabel, HUMIDITY_SYMBOL" %d%%", 76);
+  lv_obj_set_style_text_font(weatherHumidityLabel, &weather_icon_font_full_18,
                              LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_align_to(weatherHumidityLabel, weatherRainProbabLabel, LV_ALIGN_OUT_RIGHT_MID, 15, -1);
+
+
+  weatherPressureLabel = lv_label_create(weatherPanel);
+  lv_label_set_text_fmt(weatherPressureLabel, PRESSURE_SYMBOL" %d мбар", 1027);
+  lv_obj_set_style_text_font(weatherPressureLabel, &weather_icon_font_full_18,
+                             LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_align_to(weatherPressureLabel, weatherHumidityLabel,
+                  LV_ALIGN_OUT_RIGHT_MID, 15, -1);
 
   weatherTimesLabel = lv_label_create(weatherPanel);
   lv_obj_set_size(weatherTimesLabel, LV_SIZE_CONTENT, LV_SIZE_CONTENT); /// 1
